@@ -2,8 +2,8 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('users',function(table) {
     table.increments();
-    table.string('email').unique();
-    table.string('username').unique();
+    table.string('email').unique().notNullable();
+    table.string('username').unique().notNullable();
     table.string('password').notNullable();
     table.boolean('isGod').defaultTo(false);
     table.string('firstname');
