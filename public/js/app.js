@@ -45,7 +45,8 @@ app.filter("mapUrl", $sce => input => {
   return $sce.trustAsResourceUrl(`https://www.google.com/maps/embed/v1/place?${map.type}&${map.key}&${map.zoom}&q=${input}`);
 });
 
-app.controller("BodyController", $scope => {
+app.controller("BodyController", makeBodyController);
+function makeBodyController($scope,UsersService) {
   $scope.togglePosts = () => {
     $scope.showPosts = !$scope.showPosts;
     $scope.showNewPost = false;
@@ -61,5 +62,24 @@ app.controller("BodyController", $scope => {
   };
   $scope.submitSign = () => {
     // send data to server
+    UsersService.authenticate($scope.sign.email,$scope.sign.password);
+  };
+};
+makeBodyController.$inject = ['$scope','UsersService'];
+
+
+app.factory('UsersService',function($http) {
+  return {
+    authenticate: function(email,password) {
+      var req = {
+        url: '/users/signin',
+        method: "POST",
+        data: {
+          email: email,
+          password: password
+        }
+      };
+      return $http(req);
+    }
   };
 });
