@@ -4,6 +4,11 @@ https://www.pivotaltracker.com/n/projects/1674691
 
 https://s3-us-west-2.amazonaws.com/divideyourself.com/images/MVPLite-Mockup.png
 
+I set up the Git master to automatically deploy to:
+https://divideq3.herokuapp.com/
+
+database is called dividedb
+
 ## MVP-Lite
 
 
