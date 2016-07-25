@@ -10,7 +10,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
   <script src="js/app.js"></script>
 </head>
-<body ng-controller="BodyController" ng-class="{showPosts: showPosts}">
+<body ng-controller="BodyController" ng-class="{showPosts: showPosts, showNewPost: showNewPost}">
   <nav>
     <div class="nav-link" ui-sref="home">Divide Yourself</div>
     <form class="sign" ng-submit="submitSign()" ng-class="{open: !!sign.type}">
@@ -23,7 +23,7 @@
   </nav>
   <main ui-view></main>
   <footer>
-    <div ng-click="newPost()">New Post</div>
+    <div ng-click="toggleNewPost()">New Post</div>
     <div ng-click="togglePosts()">Top Posts</div>
   </footer>
 </body>

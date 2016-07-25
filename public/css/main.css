@@ -91,6 +91,52 @@ main {
   z-index: 2;
 }
 
+.newPost {
+  font-size: 0;
+  transition: .2s all;
+  position: fixed;
+  top: 200px;
+  width: 100%;
+  transform: translate3d(0,100vh,0);
+}
+.showNewPost .newPost {
+  transform: translate3d(0,0,0);
+  z-index: 2;
+}
+.newPost form {
+  margin: 0 auto;
+  width: 90%;
+  max-width: 600px;
+}
+.newPost input, .newPost textarea {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px;
+}
+.newPost button {
+  border: 0;
+  box-sizing: border-box;
+  padding: 10px;
+  width: 50%;
+}
+.newPost .cancel {
+  color: white;
+  background: red;
+}
+.newPost .submit {
+  color: white;
+  background: green;
+}
+
+.newPost h2 {
+  font-size: 24px;
+  background: rgb(20,20,20);
+  color: white;
+  margin: 0;
+  padding: 10px;
+  text-align: center;
+}
+
 /* Posts */
 .post {
   border-radius: 5px;
@@ -129,10 +175,14 @@ main {
 
 /* Footer */
 footer {
+  bottom: 0;
+  width: 100%;
+  position: fixed;
   background: rgb(20,20,20);
   box-sizing: border-box;
   font-size: 0;
   height: 40px;
+  z-index: 3;
 }
 footer div {
   border-right: 1px solid white;
