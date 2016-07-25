@@ -2,7 +2,7 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('tribes', function(table) {
     table.increments();
-    table.string('name').unique();
+    table.string('name').unique().notNullable();
     table.text('description');
   });
 };
