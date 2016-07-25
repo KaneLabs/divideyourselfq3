@@ -11,7 +11,7 @@ exports.up = function(knex, Promise) {
     table.decimal('lat', 15, 3).notNullable();
     table.decimal('lng', 15, 3).notNullable();
     table.bigInteger('timestamp').notNullable();
-  })
+  });
 };
 
 exports.down = function(knex, Promise) {
