@@ -7,7 +7,7 @@ https://s3-us-west-2.amazonaws.com/divideyourself.com/images/MVPLite-Mockup.png
 ## MVP-Lite
 
 
-#### JWT Auth
+### JWT Auth
 
 /Signup:
 - create signup route
@@ -29,7 +29,7 @@ https://s3-us-west-2.amazonaws.com/divideyourself.com/images/MVPLite-Mockup.png
 - not sure about the specifics with JWT
 - redirect to a "goodbye" page
 
-#### POSTING
+### POSTING
 
 API Interface = [
   {
@@ -101,7 +101,7 @@ Post must include:
 - description
 
 
-#### REVIEWS COMMENTS AND UPVOTES
+### REVIEWS COMMENTS AND UPVOTES
 
 Reviews:
 - add 5 circles for leaving reviews to each post
@@ -120,7 +120,7 @@ Upvotes:
 - -5 to +5 on Reviews
 - -1 to +1 on comments
 
-#### Design
+### Design
 
 Material Design Philosophy:
 - Everything has 1px shadow for depth
