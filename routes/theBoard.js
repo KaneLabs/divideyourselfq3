@@ -3,11 +3,10 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
+
+  // send sitewide popular content
   res.send('respond with a resource');
-});
-
-router.get('/:username', function (req, res, next) {
-
+  
 });
 
 module.exports = router;
