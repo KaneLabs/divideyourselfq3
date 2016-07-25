@@ -29,7 +29,8 @@ exports.seed = function(knex, Promise) {
           username: 'conor',
           password: 'conor',
           email: 'conor@divideyourself.com'
-        })
+        }),
+        knex.raw('ALTER SEQUENCE users_id_seq RESTART WITH 6;')
       ]);
     });
 };
