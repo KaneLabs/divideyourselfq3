@@ -47,4 +47,12 @@ app.filter("mapUrl", $sce => input => {
 
 app.controller("BodyController", $scope => {
   $scope.togglePosts = () => $scope.showPosts = !$scope.showPosts;
+  $scope.sign = {};
+  $scope.openSign = type => {
+    if($scope.sign.type === type) $scope.sign.type = "";
+    else $scope.sign.type = type;
+  };
+  $scope.submitSign = () => {
+    // send data to server
+  };
 });

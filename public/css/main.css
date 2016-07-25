@@ -15,23 +15,60 @@ body {
 nav {
   height: 40px;
   background: rgb(20,20,20);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 3;
 }
 .nav-link {
   color: white;
   cursor: pointer;
   display: inline-block;
-  padding: 9px 20px;
+  padding: 10px;
+}
+.nav-link:first-child {
+  padding: 10px 20px;
+}
+
+.sign {
+  float: right;
+  font-size: 0;
+  height: 40px;
+  overflow: hidden;
+  transition: .2s all;
+  width: 200px;
+}
+.sign.open {
+  height: 160px;
+}
+
+.sign .nav-link {
+  padding: 12px;
+  text-align: center;
+  width: 50%;
+}
+.sign input, .sign button, .sign div {
+  box-sizing: border-box;
+  font-size: 14px;
+  height: 40px;
+}
+
+.sign input, .sign button {
+  box-sizing: border-box;
+  padding: 10px;
+  width: 100%;
 }
 
 /* Main */
 main {
-  height: calc(100% - 100px);
+  height: calc(100% - 80px);
   overflow-y: scroll;
   position: relative;
+  margin-top: 40px;
 }
 
 #map {
-  height: calc(100% - 100px);
+  height: calc(100% - 80px);
   width: 100%;
   position: fixed;
   transition: .3s all;
@@ -95,15 +132,14 @@ footer {
   background: rgb(20,20,20);
   box-sizing: border-box;
   font-size: 0;
-  font-weight: 500;
-  height: 60px;
+  height: 40px;
 }
 footer div {
   border-right: 1px solid white;
   color: white;
   cursor: pointer;
   display: inline-block;
-  font-size: 30px;
+  font-size: 16px;
   height: 100%;
   padding: 10px;
 }
