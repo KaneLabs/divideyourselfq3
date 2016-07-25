@@ -15,7 +15,7 @@ https://s3-us-west-2.amazonaws.com/divideyourself.com/images/MVPLite-Mockup.png
 - get last location with geolocation API
 - email and username need to be unique
 - Encrypt password with bcrypt
-- store in email, username, pass and lastLocLat, lastLocLng
+- store in email, username, pass and lastLat, lastLng
 - redirect to users profile upon success
 
 /Signin:
@@ -101,7 +101,7 @@ Post must include:
 - description
 
 
-### REVIEWS COMMENTS AND UPVOTES
+### REVIEWS COMMENTS AND RESPECT
 
 Reviews:
 - add 5 circles for leaving reviews to each post
@@ -116,9 +116,18 @@ Comments:
 - upvote or downvote comments (-1 to +1)
 - comments sorted by popularity
 
-Upvotes:
+Respect:
 - -5 to +5 on Reviews
 - -1 to +1 on comments
+
+### User Profiles
+- display latest posts
+- display profile image
+- display respect
+- display tribe name
+
+### Grabbing Posts
+- save grabbed posts to /:username/myknowledge
 
 ### Design
 
