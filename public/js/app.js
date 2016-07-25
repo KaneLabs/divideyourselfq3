@@ -62,7 +62,11 @@ function makeBodyController($scope,UsersService) {
   };
   $scope.submitSign = () => {
     // send data to server
-    UsersService.authenticate($scope.sign.email,$scope.sign.password);
+    if ($scope.sign.type === 'in') {
+      UsersService.signIn($scope.sign.email,$scope.sign.password);
+    } else {
+      UsersService.signUp($scope.sign.email,$scope.sign.password);
+    };
   };
 };
 makeBodyController.$inject = ['$scope','UsersService'];
@@ -70,10 +74,21 @@ makeBodyController.$inject = ['$scope','UsersService'];
 
 app.factory('UsersService',function($http) {
   return {
-    authenticate: function(email,password) {
+    signIn: function(email,password) {
       var req = {
         url: '/users/signin',
         method: "POST",
+        data: {
+          email: email,
+          password: password
+        }
+      };
+      return $http(req);
+    },
+    signUp: function(email,password) {
+      var req = {
+        method: "POST",
+        url: "/users/signup",
         data: {
           email: email,
           password: password
