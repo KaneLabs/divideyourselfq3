@@ -2,7 +2,7 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('users',function(table) {
     table.increments();
-    table.integer('tribe_id').references('id').inTable('tribe');
+    // table.integer('tribe_id').references('id').inTable('tribe');
     table.string('email').unique().notNullable();
     table.string('username').unique().notNullable();
     table.string('password').notNullable();
