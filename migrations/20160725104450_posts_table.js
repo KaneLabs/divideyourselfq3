@@ -7,7 +7,6 @@ exports.up = function(knex, Promise) {
     table.string('type');
     table.text('body').notNullable();
     table.text('media_url').notNullable();
-    table.integer('respect');
     table.decimal('lat', 15, 3).notNullable();
     table.decimal('lng', 15, 3).notNullable();
     table.bigInteger('timestamp').notNullable();
