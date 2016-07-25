@@ -4,7 +4,6 @@ exports.up = function(knex, Promise) {
     table.increments();
     table.integer('user_id').notNullable().references('id').inTable('users');
     table.integer('post_id').notNullable().references('id').inTable('posts');
-    table.integer('respect');
     table.text('comment').notNullable();
     table.bigInteger('timestamp').notNullable();
   });
