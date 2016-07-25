@@ -28,7 +28,7 @@ app.use('/users', users);
 app.use('/theboard', theBoard);
 app.use("/api", api);
 
-app.use("*", (req, res) => res.sendFile(__dirname + "/pubic/index.html"));
+app.use("*", (req, res) => res.sendFile(__dirname + "/public/index.html"));
 
 // MVPlus
 // app.use('/knowledge', knowledge);
@@ -44,7 +44,7 @@ app.use(function(req, res, next) {
 
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.render('error', {message: err.message, error: err});
+  res.json({message: err.message, error: err});
 });
 
 app.listen(process.env.PORT || 3000);
