@@ -1,0 +1,40 @@
+.newProfile {
+  font-size: 0;
+  position: fixed;
+  top: 200px;
+  width: 100%;
+  z-index: 2;
+}
+.newProfile form {
+  margin: 0 auto;
+  pointer-events: auto;
+  width: 90%;
+  max-width: 600px;
+}
+.newProfile input, .newProfile textarea {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px;
+}
+.newProfile button {
+  border: 0;
+  box-sizing: border-box;
+  padding: 10px;
+  width: 50%;
+}
+.newProfile .cancel {
+  color: white;
+  background: red;
+}
+.newProfile .submit {
+  color: white;
+  background: green;
+}
+.newProfile h2 {
+  font-size: 24px;
+  background: rgb(20,20,20);
+  color: white;
+  margin: 0;
+  padding: 10px;
+  text-align: center;
+}
