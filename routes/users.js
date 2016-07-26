@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var knex = require('../db/knex');
 var bcrypt = require('bcrypt');
+var jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -21,9 +23,11 @@ router.post('/signin', function (req, res, next) {
       } else {
         // check password
         if (bcrypt.compareSync(req.body.password,user.password,8)) {
-          // log user in with JWT
+          // sign token with user info
+          token = jwt.sign({user: user}, process.env.SECRET);
+          // console.log("THE TOKEN! ", token);
           console.log('user authorized');
-          res.json('user authorized');
+          res.json(token);
         } else {
           // handle incorrect login password
           console.log('user NOT authorized');
