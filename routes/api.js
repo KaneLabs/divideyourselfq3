@@ -9,6 +9,7 @@ router.get("/:state/:city", (req, res) => {
 
 // use db for this
 function getCityData(obj){
+
   return {
     state: obj.state,
     city: obj.city,
