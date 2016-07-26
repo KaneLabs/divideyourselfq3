@@ -40,7 +40,7 @@ app.filter("mapUrl", $sce => input => {
   var map = {
     key: "key=AIzaSyBBQxTdpV5zVD6Yt-DufELYVrJrnz7JuMo",
     type: "maptype=satellite",
-    zoom: "zoom=13"
+    zoom: "zoom=20"
   };
   return $sce.trustAsResourceUrl(`https://www.google.com/maps/embed/v1/place?${map.type}&${map.key}&${map.zoom}&q=${input}`);
 });
