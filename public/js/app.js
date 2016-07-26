@@ -21,6 +21,11 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider){
       templateUrl: "partials/home.html",
       controller: LocationController
     })
+    // .state("profile", {
+    //   url: "/users/:userId",
+    //   templateUrl: "partials/profile.html",
+    //   controller: ProfileController
+    // })
     .state("state", {
       url: "/:state",
       templateUrl: "partials/home.html",
@@ -63,6 +68,11 @@ app.filter("mapUrl", $sce => input => {
   };
   return $sce.trustAsResourceUrl(`https://www.google.com/maps/embed/v1/place?${map.type}&${map.key}&${map.zoom}&q=${input}`);
 });
+
+// app.controller("ProfileController", makeProfileController);
+// function makeProfileController($scope, UserService) {
+//   $scope.user = {};
+// }
 
 app.controller("BodyController", makeBodyController);
 function makeBodyController($scope, UsersService){
