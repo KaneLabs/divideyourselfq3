@@ -17,7 +17,8 @@ router.post('/signin', (req, res) => {
     .first()
     .then(user => {
       // If user doesn't exist, or password doesnt match, return false token.
-      if(!user || !bcrypt.compareSync(req.body.password, user.password, 8)) return res.json({token: false});
+      if(!user) return res.json({token: false, message: "no user"});
+      if(!bcrypt.compareSync(req.body.password, user.password, 8)) return res.json({token: false, message: "wrong pw"});
       // log user in with JWT
       token = jwt.sign({user: user}, process.env.SECRET);
       console.log('user authorized');
@@ -25,7 +26,7 @@ router.post('/signin', (req, res) => {
     })
     .catch(err => {
       console.log(err);
-      res.json({token: false});
+      res.json({token: false, message: "knex error"});
     });
 });
 
@@ -35,13 +36,13 @@ router.post('/signup', (req, res) => {
     .orWhere('username', req.body.username)
     .first()
     .then(data => {
-      if(data) return res.json({token: false});
+      if(data) return res.json({token: false, message: "user exists"});
       var hashedPassword = bcrypt.hashSync(req.body.password,8);
       console.log(hashedPassword);
       knex('users')
         .insert({
           email: req.body.email,
-          username: req.body.email,
+          username: req.body.username,
           password: hashedPassword,
         })
         .then(data => {
