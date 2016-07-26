@@ -1,0 +1,40 @@
+.newAccount {
+  font-size: 0;
+  position: fixed;
+  top: 200px;
+  width: 100%;
+  z-index: 2;
+}
+.newAccount form {
+  margin: 0 auto;
+  pointer-events: auto;
+  width: 90%;
+  max-width: 600px;
+}
+.newAccount input, .newAccount textarea {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px;
+}
+.newAccount button {
+  border: 0;
+  box-sizing: border-box;
+  padding: 10px;
+  width: 50%;
+}
+.newAccount .cancel {
+  color: white;
+  background: red;
+}
+.newAccount .submit {
+  color: white;
+  background: green;
+}
+.newAccount h2 {
+  font-size: 24px;
+  background: rgb(20,20,20);
+  color: white;
+  margin: 0;
+  padding: 10px;
+  text-align: center;
+}

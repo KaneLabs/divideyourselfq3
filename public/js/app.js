@@ -108,6 +108,12 @@ function makeBodyController($scope, UsersService){
     localStorage.userToken = data.token;
     $scope.user = data.user;
   }
+
+  $scope.signup = {};
+  $scope.signup.showNewAccount = false;
+  $scope.signup.toggleNewAccount = function() {
+    $scope.signup.showNewAccount = !$scope.signup.showNewAccount;
+  };
 };
 makeBodyController.$inject = ['$scope','UsersService'];
 
