@@ -2,7 +2,11 @@ var app = angular.module("app", ["ui.router", "ngAnimate"]);
 
 var map, center = {lat: 40.0149856, lng: -105.2705456};
 function initMap(){
-  map = new google.maps.Map(document.getElementById('map'), {center: center, zoom: 10});
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: center,
+    mapTypeId: google.maps.MapTypeId.HYBRID,
+    zoom: 10
+  });
 }
 
 app.config(function($stateProvider, $urlRouterProvider, $locationProvider){
@@ -55,15 +59,6 @@ function LocationController($scope, $stateParams, $http){
     $scope.posts = data.data.posts;
   });
 }
-
-app.filter("mapUrl", $sce => input => {
-  var map = {
-    key: "key=AIzaSyBBQxTdpV5zVD6Yt-DufELYVrJrnz7JuMo",
-    type: "maptype=satellite",
-    zoom: "zoom=13"
-  };
-  return $sce.trustAsResourceUrl(`https://www.google.com/maps/embed/v1/place?${map.type}&${map.key}&${map.zoom}&q=${input}`);
-});
 
 app.controller("BodyController", makeBodyController);
 function makeBodyController($scope, UsersService){
