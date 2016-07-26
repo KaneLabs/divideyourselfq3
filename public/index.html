@@ -2,8 +2,10 @@
 <html lang="en" ng-app="app">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Divide Yourself</title>
   <base href="/">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="css/main.css">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.js"></script>
@@ -13,17 +15,20 @@
 <body ng-controller="BodyController" ng-class="{showPosts: showPosts, showNewPost: showNewPost}">
   <nav>
     <div class="nav-link" ui-sref="home">Divide Yourself</div>
-    <form class="sign" ng-submit="submitSign()" ng-class="{open: !!sign.type}">
-      <div class="nav-link" ng-click="openSign('up')" ng-hide="sign.type === 'in'">Signup</div>
-      <div class="nav-link" ng-click="openSign('in')" ng-hide="sign.type === 'up'">Signin</div>
-      <input type="text" placeholder="Email" ng-model="sign.email" required>
+    <div class="nav-link signout" ng-show="!!user" ng-click="signOut()">Signout</div>
+    <form class="sign" ng-submit="submitSign()" ng-class="{open: !!sign.type}" name="signform" ng-hide="!!user">
+      <div class="nav-link" ng-click="openSign('up')" ng-class="{hide: sign.type === 'in'}">Signup</div>
+      <div class="nav-link" ng-click="openSign('in')" ng-class="{hide: sign.type === 'up'}">Signin</div>
+      <i class="material-icons clear-sign" ng-click="sign.type = '';" ng-show="!!sign.type">clear</i>
+      <input type="text" placeholder="Username" ng-model="sign.username" ng-show="sign.type === 'up'">
+      <input type="text" placeholder="{{sign.type === 'in' ? 'Username or Email' : 'Email'}}" ng-model="sign.email" required>
       <input type="password" placeholder="Password" ng-model="sign.password" required>
       <button type="submit">Submit</button>
     </form>
   </nav>
   <main ui-view></main>
   <footer>
-    <div ng-click="toggleNewPost()">New Post</div>
+    <div ng-click="toggleNewPost()" ng-show="!!user">New Post</div>
     <div ng-click="togglePosts()">Top Posts</div>
   </footer>
 </body>
