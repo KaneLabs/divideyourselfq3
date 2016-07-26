@@ -188,12 +188,26 @@ main {
   overflow: hidden;
 }
 .next-image, .prev-image {
-  text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black;
-  color: white;
-  font-size: 60px;
+  box-sizing: border-box;
+  transition: .2s all;
+  padding-top: 25%;
   position: absolute;
-  top: calc(50% - 40px);
+  top: 0;
+  height: 100%;
   z-index: 1;
+  opacity: 0;
+}
+.carosel i {
+  text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black;
+  color: rgb(220,220,220);
+  font-size: 60px;
+}
+
+.carosel:hover .next-image, .carosel:hover .prev-image {
+  opacity: 1;
+}
+.next-image:hover, .prev-image:hover {
+  color: white;
 }
 .next-image {right: 0;}
 .prev-image {left: 0;}
