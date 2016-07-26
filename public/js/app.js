@@ -36,7 +36,9 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $http
       templateUrl: "partials/home.html",
       controller: LocationController
     });
-  $httpProvider.interceptors.push('apiInterceptor')
+    //TODO Add a profile page route with a resolve for UsersService.get(id)
+
+  $httpProvider.interceptors.push('apiInterceptor');
   $locationProvider.html5Mode(true);
 });
 
@@ -112,6 +114,10 @@ function makeBodyController($scope, UsersService, apiInterceptor){
   function updateUserStatus(data){
     localStorage.userToken = data.token;
     $scope.user = data.user;
+  };
+
+  $scope.getProfile = (id) => {
+    UsersService.get(id);
   }
 };
 makeBodyController.$inject = ['$scope','UsersService', 'apiInterceptor'];
@@ -123,6 +129,13 @@ app.factory('UsersService', $http => {
         console.log("Back on the client", data);
         if(!data.data.token) return localStorage.removeItem("userToken");
         callback(data.data);
+      });
+    },
+
+    get: function(id){
+      $http.get(`/users/${id}`).then(data => {
+      //TODO Do something with user data
+      console.log(data.data);
       });
     }
   }
