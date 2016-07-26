@@ -16,7 +16,7 @@
     <form class="sign" ng-submit="submitSign()" ng-class="{open: !!sign.type}">
       <div class="nav-link" ng-click="openSign('up')" ng-hide="sign.type === 'in'">Signup</div>
       <div class="nav-link" ng-click="openSign('in')" ng-hide="sign.type === 'up'">Signin</div>
-      <input type="email" placeholder="Email" ng-model="sign.email" required>
+      <input type="text" placeholder="Email" ng-model="sign.email" required>
       <input type="password" placeholder="Password" ng-model="sign.password" required>
       <button type="submit">Submit</button>
     </form>

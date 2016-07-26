@@ -16,8 +16,32 @@ router.post('/signin', function (req, res, next) {
     .first()
     .then(function(user) {
       if (user === undefined) {
-        // handle: user not authorized
-        res.json('not a user');
+        knex('users')
+          .where({
+            username: req.body.email
+          })
+          .first()
+          .then(function(user){
+            if(user === undefined){
+              // handle: user not authorized
+              res.json('not a user');
+            } else {
+              // check password
+              if (bcrypt.compareSync(req.body.password,user.password,8)) {
+                // log user in with JWT
+                console.log('user authorized');
+                res.json('user authorized');
+              } else {
+                // handle incorrect login password
+                console.log('user NOT authorized');
+                res.json('user NOT authorized');
+              };
+            }
+          })
+          .catch(err => {
+            console.log(err);
+            res.json('not authorized user');
+          })
       } else {
         // check password
         if (bcrypt.compareSync(req.body.password,user.password,8)) {
