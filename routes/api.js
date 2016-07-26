@@ -2,7 +2,13 @@ var express = require("express"),
   router = express.Router(),
   knex = require('../db/knex');
 
-// router.get("/:state", (req, res) => {});
+var Magic = (num, cb) => {
+  var args = [];
+  return data => {
+    args.push(data);
+    if(args.length === num) return cb(args);
+  }
+};
 
 router.post("/locations", (req, res) => {
   var obj = req.body;
@@ -11,24 +17,27 @@ router.post("/locations", (req, res) => {
     .andWhere("lat", "<", obj.maxLat)
     .andWhere("lng", ">", obj.minLng)
     .andWhere("lng", "<", obj.maxLng)
+    .join("users", "posts.user_id", "users.id")
     .then(data => {
       if(!data.length) res.json({message: "no posts in area"});
-      res.json({posts: data});
+
+      // Get all ratings for all posts.
+      var magic = Magic(data.length, all => {
+        data.map(e => {
+          e.votes = all.find(votes => votes.id === e.id);
+          return e;
+        });
+        res.json({posts: data});
+      });
+
+      data.forEach(post => {
+        knex("posts_votes")
+          .where("post_id", post.id)
+          .select()
+          .then(votes => magic({id: post.id, votes: votes}));
+      });
+
     });
 });
-
-// obj {minLng, minLat, maxLng, maxLat}
-function getCityData(obj){
-  return {
-    state: obj.state,
-    city: obj.city,
-    posts: [
-      {title: "Good Picture", type: "image", url: "https://source.unsplash.com/featured/?nature,water", points: 2, username: "Alex", usertribe: "Okok", content: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."},
-      {title: "Super Image", type: "image", url: "https://source.unsplash.com/featured/?nature,mountain", points: 5, username: "Bill", usertribe: "Okok", content: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},
-      {title: "Okay Shot", type: "image", url: "https://source.unsplash.com/featured/?nature,forest", points: 10, username: "Carol", usertribe: "Okok", content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."},
-      {title: "Worthy View", type: "image", url: "https://source.unsplash.com/featured/?nature,ocean", points: 8, username: "White", usertribe: "Nah", content: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."}
-    ]
-  }
-}
 
 module.exports = router;

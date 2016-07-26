@@ -1,14 +1,21 @@
 <div id="content">
   <div ng-repeat="post in posts | orderBy: '-points'" class="post">
-    <img class="post-image" ng-src="{{post.url}}">
-    <div class="post-heading">
-      <div class="post-title">{{post.title}}</div>
-      <div class="separator">by</div>
-      <div class="post-username">{{post.username}}</div>
-      <div class="separator">of</div>
-      <div class="post-usertribe">{{post.usertribe}}</div>
+    <div class="carosel">
+      <i class="material-icons prev-image" ng-click="prevImage(post)" ng-show="post.openImage > 0">keyboard_arrow_left</i>
+      <img class="post-image" ng-repeat="url in post.media_url" ng-src="{{url}}" ng-class="{open: testOpenImage(post, $index)}">
+      <i class="material-icons next-image" ng-click="nextImage(post)" ng-show="post.openImage < post.media_url.length - 1">keyboard_arrow_right</i>
     </div>
-    <div class="post-respect">{{post.points}} respect</div>
-    <div class="post-content">{{post.content}}</div>
+    <div class="post-info">
+      <img class="post-image" ng-src="{{post.url}}">
+      <div class="post-heading">
+        <div class="post-title">{{post.title}}</div>
+        <div class="separator">by</div>
+        <div class="post-username">{{post.username}}</div>
+        <div class="separator">of</div>
+        <div class="post-usertribe">{{post.usertribe}}</div>
+      </div>
+      <div class="post-respect">{{post.points}} respect</div>
+      <div class="post-content">{{post.body}}</div>
+    </div>
   </div>
 </div>
