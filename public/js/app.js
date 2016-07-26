@@ -1,5 +1,18 @@
 var app = angular.module("app", ["ui.router", "ngAnimate"]);
 
+var map, mapConfig = {
+  center: {lat: 40.0149856, lng: -105.2705456}
+};
+
+function initMap(){
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: mapConfig.center,
+    mapTypeId: google.maps.MapTypeId.HYBRID,
+    zoom: 13
+  });
+  if(mapConfig.onclick) map.addListener("click", mapConfig.onclick);
+}
+
 app.config(function($stateProvider, $urlRouterProvider, $locationProvider){
   $urlRouterProvider.otherwise("/");
   $stateProvider
@@ -26,12 +39,18 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider){
   $locationProvider.html5Mode(true);
 });
 
-function LocationController($scope, $stateParams, $http){
-  $scope.location = {
-    state: $stateParams.state || "Colorado",
-    city: $stateParams.city || "Boulder"
-  };
-  $http.get(`/api/${$scope.location.state}/${$scope.location.city}`).then(data => {
+function LocationController($scope, $stateParams, $http, $rootScope){
+  var state = $stateParams.state || "Colorado",
+    city = $stateParams.city || "Boulder";
+
+  $http.get(`http://maps.googleapis.com/maps/api/geocode/json?address=${city},${state}`).then(data => {
+    center = data.data.results[0].geometry.location;
+    if(map) map.setCenter(center);
+  });
+
+  $scope.location = {state, city};
+
+  $http.get(`/api/${state}/${city}`).then(data => {
     $scope.posts = data.data.posts;
   });
 }
@@ -46,40 +65,60 @@ app.filter("mapUrl", $sce => input => {
 });
 
 app.controller("BodyController", makeBodyController);
-function makeBodyController($scope,UsersService) {
+function makeBodyController($scope, UsersService){
+  $scope.newPost = {};
   $scope.togglePosts = () => {
     $scope.showPosts = !$scope.showPosts;
     $scope.showNewPost = false;
   };
-  $scope.toggleNewPost = () => {
+  $scope.toggleNewPost = e => {
+    if(!$scope.user) return $scope.showNewPost = false;
+    if(e){
+      $scope.newPost.lat = e.latLng.lat();
+      $scope.newPost.lng = e.latLng.lng();
+    }
     $scope.showNewPost = !$scope.showNewPost;
     $scope.showPosts = false;
   };
+
+  function mapClick(e){
+    $scope.toggleNewPost(e);
+    $scope.$apply();
+  }
+
+  if(map) map.addListener("click", mapClick);
+  else mapConfig.onclick = mapClick;
+
   $scope.sign = {};
   $scope.openSign = type => {
-    if($scope.sign.type === type) $scope.sign.type = "";
-    else $scope.sign.type = type;
+    $scope.sign.type = ($scope.sign.type === type) ? "" : type;
   };
   $scope.submitSign = () => {
     // send data to server
-    UsersService.authenticate($scope.sign.email,$scope.sign.password);
+    var data = $scope.sign;
+    UsersService.sign(data.type, data.email, data.password, data.username, updateUserStatus);
+    $scope.sign = {};
   };
+  $scope.signOut = () => {
+    $scope.user = null;
+    localStorage.removeItem("userToken");
+  };
+
+  function updateUserStatus(data){
+    localStorage.userToken = data.token;
+    $scope.user = data.user;
+  }
 };
 makeBodyController.$inject = ['$scope','UsersService'];
 
-
-app.factory('UsersService',function($http) {
+app.factory('UsersService', $http => {
   return {
-    authenticate: function(email,password) {
-      var req = {
-        url: '/users/signin',
-        method: "POST",
-        data: {
-          email: email,
-          password: password
-        }
-      };
-      return $http(req);
+    sign: (type, email, password, username, callback) => {
+      $http.post(`/users/sign${type}`, {email, password, username}).then(data => {
+        console.log("Back on the client", data);
+        if(!data.data.token) return localStorage.removeItem("userToken");
+        callback(data.data);
+      });
     }
-  };
+  }
 });

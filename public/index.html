@@ -2,28 +2,49 @@
 <html lang="en" ng-app="app">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Divide Yourself</title>
   <base href="/">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="css/main.css">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
   <script src="js/app.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBQxTdpV5zVD6Yt-DufELYVrJrnz7JuMo&callback=initMap" defer></script>
 </head>
 <body ng-controller="BodyController" ng-class="{showPosts: showPosts, showNewPost: showNewPost}">
   <nav>
     <div class="nav-link" ui-sref="home">Divide Yourself</div>
-    <form class="sign" ng-submit="submitSign()" ng-class="{open: !!sign.type}">
-      <div class="nav-link" ng-click="openSign('up')" ng-hide="sign.type === 'in'">Signup</div>
-      <div class="nav-link" ng-click="openSign('in')" ng-hide="sign.type === 'up'">Signin</div>
-      <input type="email" placeholder="Email" ng-model="sign.email" required>
+    <div class="nav-link signout" ng-show="!!user" ng-click="signOut()">Signout</div>
+    <form class="sign" ng-submit="submitSign()" ng-class="{open: !!sign.type}" name="signform" ng-hide="!!user">
+      <div class="nav-link" ng-click="openSign('up')" ng-class="{hide: sign.type === 'in'}">Signup</div>
+      <div class="nav-link" ng-click="openSign('in')" ng-class="{hide: sign.type === 'up'}">Signin</div>
+      <i class="material-icons clear-sign" ng-click="sign.type = '';" ng-show="!!sign.type">clear</i>
+      <input type="text" placeholder="Username" ng-model="sign.username" ng-show="sign.type === 'up'">
+      <input type="text" placeholder="{{sign.type === 'in' ? 'Username or Email' : 'Email'}}" ng-model="sign.email" required>
       <input type="password" placeholder="Password" ng-model="sign.password" required>
       <button type="submit">Submit</button>
     </form>
   </nav>
+  <div id="map-container">
+    <div id="map"></div>
+  </div>
+  <div class="newPost" ng-hide="!user">
+    <form>
+      <h2>Add New Post</h2>
+      <input type="text" placeholder="title" ng-model="newPost.title" required>
+      <input type="text" placeholder="media url" ng-model="newPost.url" required>
+      <input type="text" placeholder="lat" class="lat" ng-model="newPost.lat" required>
+      <input type="text" placeholder="lng" class="lng" ng-model="newPost.lng" required>
+      <textarea rows="8" cols="40" ng-model="newPost.body" placeholder="body"></textarea>
+      <button class="submit" type="submit">Submit</button>
+      <button class="cancel" ng-click="toggleNewPost()">Cancel</button>
+    </form>
+  </div>
   <main ui-view></main>
   <footer>
-    <div ng-click="toggleNewPost()">New Post</div>
+    <div ng-click="toggleNewPost()" ng-show="!!user">New Post</div>
     <div ng-click="togglePosts()">Top Posts</div>
   </footer>
 </body>

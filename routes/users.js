@@ -1,32 +1,54 @@
 var express = require('express');
 var router = express.Router();
 var knex = require('../db/knex');
+var bcrypt = require('bcrypt');
+var jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/', (req, res) => {
   res.send('respond with a resource');
 });
 
-router.post('/signin', function (req, res, next) {
+router.post('/signin', (req, res) => {
   knex('users')
-    .where({
-      email: req.body.email,
-      password: req.body.password
-    })
+    .where({email: req.body.email})
+    .orWhere({username: req.body.email})
     .first()
-    .then(function(user) {
-      if (user === undefined) {
-        // handle user not authorized
-        console.log('not a user');
-      } else {
-        // log user in with JWT
-        console.log('a user');
-        res.json(user);
-      }
+    .then(user => {
+      // If user doesn't exist, or password doesnt match, return false token.
+      if(!user) return res.json({token: false, message: "no user"});
+      if(!bcrypt.compareSync(req.body.password, user.password, 8)) return res.json({token: false, message: "wrong pw"});
+      // log user in with JWT
+      token = jwt.sign({user: user}, process.env.SECRET);
+      console.log('user authorized');
+      res.json({token: token, user: {name: user.username, profile: user.profile_url}});
     })
-    .catch(function(err) {
+    .catch(err => {
       console.log(err);
-      res.json('not authorized user');
+      res.json({token: false, message: "knex error"});
+    });
+});
+
+router.post('/signup', (req, res) => {
+  knex('users')
+    .where('email', req.body.email)
+    .orWhere('username', req.body.username)
+    .first()
+    .then(data => {
+      if(data) return res.json({token: false, message: "user exists"});
+      var hashedPassword = bcrypt.hashSync(req.body.password,8);
+      console.log(hashedPassword);
+      knex('users')
+        .insert({
+          email: req.body.email,
+          username: req.body.username,
+          password: hashedPassword,
+        })
+        .then(data => {
+          console.log(data);
+          res.json({token: true});
+        });
     });
 });
 
