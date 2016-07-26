@@ -1,12 +1,16 @@
 var app = angular.module("app", ["ui.router", "ngAnimate"]);
 
-var map, center = {lat: 40.0149856, lng: -105.2705456};
+var map, mapConfig = {
+  center: {lat: 40.0149856, lng: -105.2705456}
+};
+
 function initMap(){
   map = new google.maps.Map(document.getElementById('map'), {
-    center: center,
+    center: mapConfig.center,
     mapTypeId: google.maps.MapTypeId.HYBRID,
     zoom: 13
   });
+  if(mapConfig.onclick) map.addListener("click", mapConfig.onclick);
 }
 
 app.config(function($stateProvider, $urlRouterProvider, $locationProvider){
@@ -35,41 +39,46 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider){
   $locationProvider.html5Mode(true);
 });
 
-function addMapScript(){
-  var script = document.createElement("script");
-  script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBBQxTdpV5zVD6Yt-DufELYVrJrnz7JuMo&callback=initMap";
-  document.body.appendChild(script);
-}
-
-function LocationController($scope, $stateParams, $http){
+function LocationController($scope, $stateParams, $http, $rootScope){
   var state = $stateParams.state || "Colorado",
     city = $stateParams.city || "Boulder";
 
   $http.get(`http://maps.googleapis.com/maps/api/geocode/json?address=${city},${state}`).then(data => {
-    console.log("Result of Geocoding");
     center = data.data.results[0].geometry.location;
-    addMapScript();
+    if(map) map.setCenter(center);
   });
 
-  $scope.location = {
-    state: $stateParams.state || "Colorado",
-    city: $stateParams.city || "Boulder"
-  };
-  $http.get(`/api/${$scope.location.state}/${$scope.location.city}`).then(data => {
+  $scope.location = {state, city};
+
+  $http.get(`/api/${state}/${city}`).then(data => {
     $scope.posts = data.data.posts;
   });
 }
 
 app.controller("BodyController", makeBodyController);
 function makeBodyController($scope, UsersService){
+  $scope.newPost = {};
   $scope.togglePosts = () => {
     $scope.showPosts = !$scope.showPosts;
     $scope.showNewPost = false;
   };
-  $scope.toggleNewPost = () => {
+  $scope.toggleNewPost = e => {
+    if(e){
+      $scope.newPost.lat = e.latLng.lat();
+      $scope.newPost.lng = e.latLng.lng();
+    }
     $scope.showNewPost = !$scope.showNewPost;
     $scope.showPosts = false;
   };
+
+  function mapClick(e){
+    $scope.toggleNewPost(e);
+    $scope.$apply();
+  }
+
+  if(map) map.addListener("click", mapClick);
+  else mapConfig.onclick = mapClick;
+
   $scope.sign = {};
   $scope.openSign = type => {
     $scope.sign.type = ($scope.sign.type === type) ? "" : type;
