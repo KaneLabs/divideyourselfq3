@@ -83,7 +83,10 @@ app.factory('UsersService',function($http) {
           password: password
         }
       };
-      return $http(req);
+      return $http(req).then(function(data){
+        console.log("Back on the client ", data);
+        localStorage.setItem('userToken', data.data)
+      });
     },
     signUp: function(email,password) {
       var req = {
