@@ -52,4 +52,13 @@ router.post('/signup', (req, res) => {
     });
 });
 
+router.get('/:id', (req, res) => {
+  knex('users')
+    .where('id', req.params.id)
+    .first()
+    .then(data => {
+      res.json(data)
+    });
+});
+
 module.exports = router;
