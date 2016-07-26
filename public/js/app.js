@@ -178,11 +178,14 @@ app.factory('UsersService', $http => {
 app.factory('apiInterceptor', () => {
   return {
     request: (config) => {
-      var token = localStorage.getItem('userToken')
-      if (token){
-        config.headers.Authorization = "Bearer " + token;
-        return config
+      if(config.url.indexOf("maps") > -1){
+        return config;
       }
+      var token = localStorage.getItem('userToken');
+      if(token){
+        config.headers.Authorization = "Bearer " + token;
+      }
+      return config;
     }
   }
 });
