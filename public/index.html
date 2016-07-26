@@ -17,9 +17,10 @@
 <body ng-controller="BodyController" ng-class="{showPosts: showPosts, showNewPost: showNewPost}">
   <nav>
     <div class="nav-link" ui-sref="home">Divide Yourself</div>
+    <div class="nav-link signout" ng-show="!!user" ng-click="signOut()">Profile</div>
     <div class="nav-link signout" ng-show="!!user" ng-click="signOut()">Signout</div>
     <form class="sign" ng-submit="submitSign()" ng-class="{open: !!sign.type}" name="signform" ng-hide="!!user">
-      <div class="nav-link" ng-click="signup.toggleNewAccount();openSign('up')" ng-class="{hide: sign.type === 'in'}">Signup</div>
+      <div class="nav-link" ng-click="signup.toggleNewProfile();openSign('up')" ng-class="{hide: sign.type === 'in'}">Signup</div>
       <div class="nav-link" ng-click="openSign('in')" ng-class="{hide: sign.type === 'up'}">Signin</div>
       <i class="material-icons clear-sign" ng-click="sign.type = '';" ng-show="sign.type === 'in'">clear</i>
       <input type="text" placeholder="{{sign.type === 'in' ? 'Username or Email' : 'Email'}}" ng-model="sign.email" ng-show="sign.type === 'in'" required>
@@ -42,15 +43,15 @@
       <button class="cancel" ng-click="toggleNewPost()">Cancel</button>
     </form>
   </div>
-  <div class="newAccount" ng-show="signup.showNewAccount">
-    <form ng-submit="submitSign()">
-      <h2>Create new account</h2>
+  <div class="newProfile" ng-show="signup.showNewProfile">
+    <form ng-submit="submitSign();signup.toggleNewProfile()">
+      <h2>Create new Profile</h2>
       <input type="text" placeholder="User Name" ng-model="sign.username" required>
       <input type="text" placeholder="Email" ng-model="sign.email" required>
       <input type="password" placeholder="Password" class="lat" ng-model="sign.password" required>
       <input type="password" placeholder="Confirm Password" class="lng" ng-model="sign.passwordconfirm" required>
       <button class="submit" type="submit">Submit</button>
-      <button class="cancel" ng-click="signup.toggleNewAccount();openSign('up')">Cancel</button>
+      <button class="cancel" ng-click="signup.toggleNewProfile();openSign('up')">Cancel</button>
     </form>
   </div>
   <main ui-view></main>
