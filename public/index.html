@@ -13,7 +13,9 @@
   <script src="js/app.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBQxTdpV5zVD6Yt-DufELYVrJrnz7JuMo&callback=initMap" defer></script>
 </head>
-<body ng-controller="BodyController" ng-class="{showPosts: showPosts, showNewPost: showNewPost}">
+<body
+  ng-controller="BodyController"
+  ng-class="{showPosts: showPosts, showNewPost: showNewPost, newPostActive: newPostActive}">
   <nav>
     <div class="nav-link" ui-sref="home">Divide Yourself</div>
     <div class="nav-link signout" ng-show="!!user" ng-click="signOut()">Signout</div>
@@ -44,7 +46,7 @@
   </div>
   <main ui-view></main>
   <footer>
-    <div ng-click="toggleNewPost()" ng-show="!!user">New Post</div>
+    <div ng-click="activateNewPost()" ng-show="!!user">New Post</div>
     <div ng-click="togglePosts()">Top Posts</div>
   </footer>
 </body>

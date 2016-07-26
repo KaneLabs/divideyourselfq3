@@ -71,8 +71,11 @@ function makeBodyController($scope, UsersService){
     $scope.showPosts = !$scope.showPosts;
     $scope.showNewPost = false;
   };
+  $scope.activateNewPost = () => {
+    if($scope.user) $scope.newPostActive = !$scope.newPostActive;
+  };
   $scope.toggleNewPost = e => {
-    if(!$scope.user) return $scope.showNewPost = false;
+    if(!$scope.user || !$scope.newPostActive) return $scope.showNewPost = false;
     if(e){
       $scope.newPost.lat = e.latLng.lat();
       $scope.newPost.lng = e.latLng.lng();
