@@ -6,7 +6,6 @@ var express = require("express"),
 
 router.post("/locations", (req, res) => {
   var obj = req.body;
-  console.log(obj);
   knex("posts")
     .where("lat", ">", obj.minLat)
     .andWhere("lat", "<", obj.maxLat)
@@ -14,7 +13,6 @@ router.post("/locations", (req, res) => {
     .andWhere("lng", "<", obj.maxLng)
     .then(data => {
       if(!data.length) res.json({message: "no posts in area"});
-      console.log(data);
       res.json({posts: data});
     });
 });
