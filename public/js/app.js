@@ -59,22 +59,19 @@ function LocationController($scope, $stateParams, $http, $rootScope){
       var bounds = map.getBounds();
       $http.post("/api/locations", {minLat: bounds.f.f, maxLat: bounds.f.b, minLng: bounds.b.b, maxLng: bounds.b.f})
         .then(data => {
-          $scope.posts = data.data.posts;
-          data.data.posts.forEach(post => {
-            var latlng = {lat: parseFloat(post.lat), lng: parseFloat(post.lng)};
+          $scope.posts = data.data.posts.map(post => {
             new google.maps.Marker({
-              position: latlng,
+              position: {lat: parseFloat(post.lat), lng: parseFloat(post.lng)},
               map: map,
               title: post.title
             });
+            post.media_url = post.media_url.split(",");
+            post.openImage = 0;
+            return post;
           });
         });
     });
   }
-
-  // $http.get(`/api/${state}/${city}`).then(data => {
-  //   $scope.posts = data.data.posts;
-  // });
 }
 
 app.controller("BodyController", makeBodyController);
@@ -84,6 +81,14 @@ function makeBodyController($scope, UsersService){
     $scope.showPosts = !$scope.showPosts;
     $scope.showNewPost = false;
   };
+
+  $scope.testOpenImage = (post, index) => post.openImage === index;
+  $scope.nextImage = post => {
+    post.openImage++;
+    console.log("WHAT");
+  }
+  $scope.prevImage = post => post.openImage--;
+
   $scope.activateNewPost = () => {
     if($scope.user) $scope.newPostActive = !$scope.newPostActive;
   };

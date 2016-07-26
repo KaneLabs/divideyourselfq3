@@ -170,14 +170,45 @@ main {
 .post {
   border-radius: 5px;
   box-shadow: 0px 0px 20px 5px rgba(0,0,0,.5);
-  background: white;
   margin: 20px auto;
-  max-width: 1000px;
+  max-width: 900px;
   width: 95%;
 }
-.post-image {
+.post-info {
+  background: white;
+  border-radius: 0px 0px 5px 5px;
+}
+
+.carosel {
   border-radius: 5px 5px 0px 0px;
+  background: rgba(20,20,20,.8);
+  position: relative;
+  height: 480px;
+  width: 100%;
+  overflow: hidden;
+}
+.next-image, .prev-image {
+  text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black;
+  color: white;
+  font-size: 60px;
+  position: absolute;
+  top: calc(50% - 40px);
+  z-index: 1;
+}
+.next-image {right: 0;}
+.prev-image {left: 0;}
+.post-image {
+  position: absolute;
+  top: 0;
+  height: 100%;
   max-width: 100%;
+  opacity: 0;
+  transition: .2s all;
+}
+.post-image.open {
+  margin: 0 auto;
+  position: relative;
+  opacity: 1;
 }
 .post-heading, .post-respect {
   padding: 5px 10px;
