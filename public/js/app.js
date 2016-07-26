@@ -13,7 +13,7 @@ function initMap(){
   if(mapConfig.onclick) map.addListener("click", mapConfig.onclick);
 }
 
-app.config(function($stateProvider, $urlRouterProvider, $locationProvider){
+app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider){
   $urlRouterProvider.otherwise("/");
   $stateProvider
     .state("home", {
@@ -36,8 +36,10 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider){
       templateUrl: "partials/home.html",
       controller: LocationController
     });
+  $httpProvider.interceptors.push('apiInterceptor')
   $locationProvider.html5Mode(true);
 });
+
 
 function LocationController($scope, $stateParams, $http, $rootScope){
   var state = $stateParams.state || "Colorado",
@@ -65,7 +67,7 @@ app.filter("mapUrl", $sce => input => {
 });
 
 app.controller("BodyController", makeBodyController);
-function makeBodyController($scope, UsersService){
+function makeBodyController($scope, UsersService, apiInterceptor){
   $scope.newPost = {};
   $scope.togglePosts = () => {
     $scope.showPosts = !$scope.showPosts;
@@ -112,7 +114,7 @@ function makeBodyController($scope, UsersService){
     $scope.user = data.user;
   }
 };
-makeBodyController.$inject = ['$scope','UsersService'];
+makeBodyController.$inject = ['$scope','UsersService', 'apiInterceptor'];
 
 app.factory('UsersService', $http => {
   return {
@@ -122,6 +124,18 @@ app.factory('UsersService', $http => {
         if(!data.data.token) return localStorage.removeItem("userToken");
         callback(data.data);
       });
+    }
+  }
+});
+
+app.factory('apiInterceptor', function(){
+  return {
+    request: function(config){
+      var token = localStorage.getItem('userToken')
+      if (token){
+        config.headers.Authorization = "Bearer " + token;
+        return config
+      }
     }
   }
 });
