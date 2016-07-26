@@ -22,6 +22,11 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $http
       templateUrl: "partials/home.html",
       controller: LocationController
     })
+    // .state("profile", {
+    //   url: "/users/:userId",
+    //   templateUrl: "partials/profile.html",
+    //   controller: ProfileController
+    // })
     .state("state", {
       url: "/:state",
       templateUrl: "partials/home.html",
@@ -77,6 +82,11 @@ function LocationController($scope, $stateParams, $http, $rootScope){
     });
   }
 }
+
+// app.controller("ProfileController", makeProfileController);
+// function makeProfileController($scope, UserService) {
+//   $scope.user = {};
+// }
 
 app.controller("BodyController", makeBodyController);
 function makeBodyController($scope, UsersService, apiInterceptor){
@@ -137,6 +147,12 @@ function makeBodyController($scope, UsersService, apiInterceptor){
   $scope.getProfile = (id) => {
     UsersService.get(id);
   }
+
+  $scope.signup = {};
+  $scope.signup.showNewProfile = false;
+  $scope.signup.toggleNewProfile = function() {
+    $scope.signup.showNewProfile = !$scope.signup.showNewProfile;
+  };
 };
 makeBodyController.$inject = ['$scope','UsersService', 'apiInterceptor'];
 
