@@ -10,6 +10,7 @@ body {
 }
 ::-webkit-scrollbar {display: none;}
 ::-moz-scrollbar {display: none;}
+.material-icons {font-size: 20px; padding: 10px; cursor: pointer;}
 
 /* Nav */
 nav {
@@ -25,28 +26,49 @@ nav {
   cursor: pointer;
   display: inline-block;
   padding: 10px;
+  max-width: 150px;
 }
 .nav-link:first-child {
   padding: 10px 20px;
 }
 
+.signout {
+  border-left: 1px solid white;
+  float: right;
+  padding: 10px 20px;
+}
 .sign {
   float: right;
   font-size: 0;
-  height: 40px;
+  max-height: 40px;
   overflow: hidden;
   transition: .2s all;
   width: 200px;
 }
 .sign.open {
-  height: 160px;
+  max-height: 200px;
+}
+
+.clear-sign {
+  color: white;
+  float: right;
+  vertical-align: top;
 }
 
 .sign .nav-link {
+  border-left: 1px solid white;
+  overflow: hidden;
   padding: 12px;
   text-align: center;
+  transition: .2s all;
   width: 50%;
 }
+.sign .nav-link.hide {
+  border: 0;
+  padding: 10px 0px;
+  width: 0px;
+}
+
 .sign input, .sign button, .sign div {
   box-sizing: border-box;
   font-size: 14px;
@@ -67,16 +89,18 @@ main {
   margin-top: 40px;
 }
 
-#map {
+#map-container {
   height: calc(100% - 80px);
   width: 100%;
   position: fixed;
   transition: .3s all;
   z-index: 2;
 }
-.showPosts #map {
+.showPosts #map-container {
   z-index: 1;
 }
+
+#map {height: 100%; width: 100%;}
 
 #content {
   position: absolute;
