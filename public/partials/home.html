@@ -10,7 +10,6 @@
       </div>
     </div>
     <div class="post-info">
-      <img class="post-image" ng-src="{{post.url}}">
       <div class="post-heading">
         <div class="post-title">{{post.title}}</div>
         <div class="separator">by</div>
@@ -20,6 +19,14 @@
       </div>
       <div class="post-respect">{{post.points}} respect</div>
       <div class="post-content">{{post.body}}</div>
+      <div class="post-comments">
+        <div class="comment" ng-repeat="comment in post.comments | orderBy: 'timestamp'">
+          <img class="comment-profile" ng-src="{{comment.profile_url}}">
+          <div class="comment-username">{{comment.username}}</div>
+          <div class="comment-comment">{{comment.comment}}</div>
+          <div class="comment-timestamp">{{comment.timestamp | dateFilter}}</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

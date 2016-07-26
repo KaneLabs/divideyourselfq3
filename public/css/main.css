@@ -247,6 +247,29 @@ main {
   padding: 10px 10px 30px 10px;
 }
 
+.post-comments {
+  text-align: left;
+}
+.comment {}
+.comment-profile {
+  height: 40px;
+  width: 40px;
+}
+.comment-username {
+  font-size: 20px;
+  font-weight: 500;
+}
+.comment div {display: inline-block;}
+
+/*<div class="post-comments">
+  <div class="comment" ng-repeat="comment in post.comments | orderBy: 'timestamp'">
+    <img class="comment-profile" ng-src="{{comment.profile_url}}">
+    <div class="comment-username">{{comment.username}}</div>
+    <div class="comment-comment">{{comment.comment}}</div>
+    <div class="comment-timestamp">{{comment.timestamp | dateFilter}}</div>
+  </div>
+</div>*/
+
 /* Footer */
 footer {
   bottom: 0;
