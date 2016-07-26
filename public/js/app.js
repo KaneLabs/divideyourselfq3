@@ -110,9 +110,9 @@ function makeBodyController($scope, UsersService){
   }
 
   $scope.signup = {};
-  $scope.signup.showNewAccount = false;
-  $scope.signup.toggleNewAccount = function() {
-    $scope.signup.showNewAccount = !$scope.signup.showNewAccount;
+  $scope.signup.showNewProfile = false;
+  $scope.signup.toggleNewProfile = function() {
+    $scope.signup.showNewProfile = !$scope.signup.showNewProfile;
   };
 };
 makeBodyController.$inject = ['$scope','UsersService'];

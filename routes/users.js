@@ -38,16 +38,16 @@ router.post('/signup', (req, res) => {
     .then(data => {
       if(data) return res.json({token: false, message: "user exists"});
       var hashedPassword = bcrypt.hashSync(req.body.password,8);
-      console.log(hashedPassword);
       knex('users')
         .insert({
           email: req.body.email,
           username: req.body.username,
           password: hashedPassword,
         })
-        .then(data => {
-          console.log(data);
-          res.json({token: true});
+        .then(user => {
+          // log user in with JWT
+          token = jwt.sign({user: user}, process.env.SECRET);
+          res.json({token: token, user: {name: user.username, profile: user.profile_url}});
         });
     });
 });
