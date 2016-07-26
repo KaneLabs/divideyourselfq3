@@ -118,6 +118,7 @@ main {
 .newPost {
   font-size: 0;
   transition: .2s all;
+  pointer-events: none;
   position: fixed;
   top: 200px;
   width: 100%;
@@ -129,6 +130,7 @@ main {
 }
 .newPost form {
   margin: 0 auto;
+  pointer-events: auto;
   width: 90%;
   max-width: 600px;
 }
@@ -136,6 +138,9 @@ main {
   box-sizing: border-box;
   width: 100%;
   padding: 10px;
+}
+.newPost .lat, .newPost .lng {
+  width: 50%;
 }
 .newPost button {
   border: 0;
