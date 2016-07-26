@@ -2,41 +2,48 @@ var express = require("express"),
   router = express.Router(),
   knex = require('../db/knex');
 
-var Magic = (num, cb) => {
-  var args = [];
+var Magic = (number, callback) => {
+  var argumentArray = [];
   return data => {
-    args.push(data);
-    if(args.length === num) return cb(args);
+    argumentArray.push(data);
+    if(argumentArray.length === number) return callback(argumentArray);
   }
 };
 
 router.post("/locations", (req, res) => {
   var obj = req.body;
-  knex("posts")
+    knex("posts")
+    .select(['posts.*', 'users.id as user_id', "users.username as username"])
+    .leftJoin('users', 'posts.user_id', 'users.id')
     .where("lat", ">", obj.minLat)
     .andWhere("lat", "<", obj.maxLat)
     .andWhere("lng", ">", obj.minLng)
     .andWhere("lng", "<", obj.maxLng)
-    .join("users", "posts.user_id", "users.id")
     .then(data => {
       if(!data.length) res.json({message: "no posts in area"});
 
-      // Get all ratings for all posts.
-      var magic = Magic(data.length, all => {
-        data.map(e => {
-          e.votes = all.find(votes => votes.id === e.id);
-          return e;
-        });
+      // Get all comments and ratings for all posts.
+      var magic = Magic(data.length, () => {
+        console.log(data);
         res.json({posts: data});
       });
 
       data.forEach(post => {
-        knex("posts_votes")
+        knex("comments")
+          .select(["comments.*", "users.id as user_id", "users.username as username", "users.profile_url as profile_url"])
+          .leftJoin("users", "comments.user_id", "users.id")
           .where("post_id", post.id)
-          .select()
-          .then(votes => magic({id: post.id, votes: votes}));
+          .then(comments => {
+            post.comments = comments;
+            magic();
+          });
+        // knex("posts_votes")
+        //   .where("post_id", post.id)
+        //   .then(votes => {
+        //     post.votes = votes;
+        //     magic();
+        //   });
       });
-
     });
 });
 
