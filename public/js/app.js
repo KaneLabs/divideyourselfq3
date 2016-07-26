@@ -150,7 +150,7 @@ app.factory('UsersService', $http => {
       });
     },
 
-    get: function(id){
+    get: (id) => {
       $http.get(`/users/${id}`).then(data => {
       //TODO Do something with user data
       console.log(data.data);
@@ -159,9 +159,9 @@ app.factory('UsersService', $http => {
   }
 });
 
-app.factory('apiInterceptor', function(){
+app.factory('apiInterceptor', () => {
   return {
-    request: function(config){
+    request: (config) => {
       var token = localStorage.getItem('userToken')
       if (token){
         config.headers.Authorization = "Bearer " + token;
