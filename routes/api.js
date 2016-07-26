@@ -1,15 +1,26 @@
 var express = require("express"),
-  router = express.Router();
+  router = express.Router(),
+  knex = require('../db/knex');
 
 // router.get("/:state", (req, res) => {});
 
-router.get("/:state/:city", (req, res) => {
-  res.json(getCityData({city: req.params.city, state: req.params.state}));
+router.post("/locations", (req, res) => {
+  var obj = req.body;
+  console.log(obj);
+  knex("posts")
+    .where("lat", ">", obj.minLat)
+    .andWhere("lat", "<", obj.maxLat)
+    .andWhere("lng", ">", obj.minLng)
+    .andWhere("lng", "<", obj.maxLng)
+    .then(data => {
+      if(!data.length) res.json({message: "no posts in area"});
+      console.log(data);
+      res.json({posts: data});
+    });
 });
 
-// use db for this
+// obj {minLng, minLat, maxLng, maxLat}
 function getCityData(obj){
-
   return {
     state: obj.state,
     city: obj.city,

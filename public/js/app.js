@@ -10,6 +10,7 @@ function initMap(){
     mapTypeId: google.maps.MapTypeId.HYBRID,
     zoom: 13
   });
+  if(mapConfig.onload) mapConfig.onload();
   if(mapConfig.onclick) map.addListener("click", mapConfig.onclick);
 }
 
@@ -50,19 +51,24 @@ function LocationController($scope, $stateParams, $http, $rootScope){
 
   $scope.location = {state, city};
 
-  $http.get(`/api/${state}/${city}`).then(data => {
-    $scope.posts = data.data.posts;
-  });
-}
+  if(!map) mapConfig.onload = loadMap;
+  else loadMap();
 
-app.filter("mapUrl", $sce => input => {
-  var map = {
-    key: "key=AIzaSyBBQxTdpV5zVD6Yt-DufELYVrJrnz7JuMo",
-    type: "maptype=satellite",
-    zoom: "zoom=20"
-  };
-  return $sce.trustAsResourceUrl(`https://www.google.com/maps/embed/v1/place?${map.type}&${map.key}&${map.zoom}&q=${input}`);
-});
+  function loadMap(){
+    google.maps.event.addListener(map, "idle", () => {
+      var bounds = map.getBounds();
+      $http.post("/api/locations", {minLat: bounds.f.f, maxLat: bounds.f.b, minLng: bounds.b.b, maxLng: bounds.b.f})
+        .then(data => {
+          console.log(data);
+          $scope.posts = data.data.posts;
+        });
+    });
+  }
+
+  // $http.get(`/api/${state}/${city}`).then(data => {
+  //   $scope.posts = data.data.posts;
+  // });
+}
 
 app.controller("BodyController", makeBodyController);
 function makeBodyController($scope, UsersService){
