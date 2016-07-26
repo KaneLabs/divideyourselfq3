@@ -214,6 +214,7 @@ footer {
   z-index: 3;
 }
 footer div {
+  transition: .2s all;
   border-right: 1px solid white;
   color: white;
   cursor: pointer;
@@ -223,3 +224,7 @@ footer div {
   padding: 10px;
 }
 footer div:hover {background: black;}
+.newPostActive footer div:first-child {
+  color: black;
+  background: white;
+}
