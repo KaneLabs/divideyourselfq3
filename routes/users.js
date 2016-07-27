@@ -60,7 +60,6 @@ router.get('/:id', (req, res) => {
   .then( data => {
     res.json(data)
   })
-
   // Save this for other user's profiles
   // knex.raw('SELECT COALESCE (users.id, posts.user_id) AS user_id, users.username, users.firstName, users.lastName, users.profile_url, posts.title, posts.body, posts.media_url FROM users LEFT JOIN posts ON users.id = posts.user_id WHERE users.id = ' + req.params.id).then(function(data){
   //   console.log(data.rows);
