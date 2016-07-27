@@ -1,0 +1,11 @@
+<div class="nav-link" ui-sref="home">Divide Yourself</div>
+<div class="nav-link signout" ng-show="!!user" ng-click="">Profile</div>
+<div class="nav-link signout" ng-show="!!user" ng-click="signOut()">Signout</div>
+<form class="sign" ng-submit="submitSign()" ng-class="{open: !!sign.type}" name="signform" ng-hide="!!user">
+  <div class="nav-link" ng-click="openSign('up')" ng-class="{hide: sign.type === 'in'}">Signup</div>
+  <div class="nav-link" ng-click="openSign('in')" ng-class="{hide: sign.type === 'up'}">Signin</div>
+  <i class="material-icons clear-sign" ng-click="sign.type = '';">clear</i>
+  <input type="text" placeholder="{{sign.type === 'in' ? 'Username or Email' : 'Email'}}" ng-model="sign.email" required>
+  <input type="password" placeholder="Password" ng-model="sign.password" required>
+  <button type="submit">Submit</button>
+</form>

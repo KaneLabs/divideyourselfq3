@@ -1,0 +1,7 @@
+<div class="prev-image" ng-click="prevImage(post)" ng-show="post.openImage > 0">
+  <i class="material-icons">keyboard_arrow_left</i>
+</div>
+<img class="post-image" ng-repeat="url in post.media_url" ng-src="{{url}}" ng-class="{open: testOpenImage(post, $index)}">
+<div class="next-image" ng-click="nextImage(post)" ng-show="post.openImage < post.media_url.length - 1">
+  <i class="material-icons">keyboard_arrow_right</i>
+</div>
