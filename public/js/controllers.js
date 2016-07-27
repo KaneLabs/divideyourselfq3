@@ -105,3 +105,12 @@ function makeBodyController($scope, UsersService, apiInterceptor){
   };
 };
 makeBodyController.$inject = ['$scope','UsersService', 'apiInterceptor'];
+
+// app.controller('ProfileController',makeProfileController);
+// function makeProfileController($scope,UsersService) {
+//   $scope.view = {};
+//   $scope.view.greeting = "Profile Controller";
+//   console.log(localStorage.userToken);
+//   $scope.user = UsersService.get(userId);
+//   console.log($scope.user);
+// }
