@@ -86,7 +86,6 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   $scope.profile = {};
   $scope.profile.showProfile = false;
   $scope.profile.toggleShowProfile = function() {
-    console.log('function');
     $scope.profile.showProfile = !$scope.profile.showProfile;
   };
 };
