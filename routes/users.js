@@ -45,11 +45,12 @@ router.post('/signup', (req, res) => {
           username: req.body.username,
           password: hashedPassword,
         })
+        .returning('*')
         .then(user => {
           // console.log("USER: ", user);
           // log user in with JWT
-          token = jwt.sign({user: user}, process.env.SECRET);
-          res.json({token: token, user: {name: user.username, profile: user.profile_url}});
+          token = jwt.sign({user: user[0]}, process.env.SECRET);
+          res.json({token: token, user: user[0]});
         });
     });
 });

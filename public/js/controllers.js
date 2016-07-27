@@ -81,43 +81,11 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   if(map) map.addListener("click", mapClick);
   else mapConfig.onclick = mapClick;
 
-  $scope.sign = {};
-  $scope.openSign = type => {
-    $scope.sign.type = ($scope.sign.type === type) ? "" : type;
-  };
-  $scope.submitSign = () => {
-    // send data to server
-    var data = $scope.sign;
-    UsersService.sign(data.type, data.email, data.password, data.username, updateUserStatus);
-    $scope.sign = {};
-  };
-  $scope.signOut = () => {
-    $scope.profile.showProfile = false;
-    $scope.user = null;
-    localStorage.removeItem("userToken");
-  };
-
-  function updateUserStatus(data){
-    localStorage.userToken = data.token;
-    $scope.user = data.user;
-  };
-
-  $scope.getProfile = (id) => {
-    UsersService.get(id);
-  };
-
-  $scope.signup = {};
-  $scope.signup.showNewProfile = false;
-  $scope.signup.toggleNewProfile = function() {
-    $scope.signup.showNewProfile = !$scope.signup.showNewProfile;
-  };
-
   $scope.profile = {};
   $scope.profile.showProfile = false;
   $scope.profile.toggleShowProfile = function() {
     $scope.profile.showProfile = !$scope.profile.showProfile;
   };
-
   $scope.profile.getProfileUser = function(id) {
     $scope.user.userPosts = [];
     $http.get(`/users/${id}`).then(function(data){
@@ -135,5 +103,43 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
       }
     });
   };
+
+  $scope.sign = {};
+  $scope.openSign = type => {
+    $scope.sign.type = ($scope.sign.type === type) ? "" : type;
+  };
+  $scope.submitSign = () => {
+    // send data to server
+    var data = $scope.sign;
+    UsersService.sign(data.type, data.email, data.password, data.username, updateUserStatus);
+    if ($scope.sign.type === 'up') {
+      $scope.profile.showProfile = true;
+    }
+    console.log($scope.user);
+    $scope.sign = {};
+  };
+  $scope.signOut = () => {
+    $scope.profile.showProfile = false;
+    $scope.user = null;
+    localStorage.removeItem("userToken");
+  };
+
+  function updateUserStatus(data){
+    localStorage.userToken = data.token;
+    $scope.user = data.user;
+    console.log($scope.user);
+  };
+
+  $scope.getProfile = (id) => {
+    UsersService.get(id);
+  };
+
+  $scope.signup = {};
+  $scope.signup.showNewProfile = false;
+  $scope.signup.toggleNewProfile = function() {
+    $scope.signup.showNewProfile = !$scope.signup.showNewProfile;
+  };
+
+
 };
 makeBodyController.$inject = ['$scope','UsersService', 'apiInterceptor', 'NewCommentService', "NewPostService","$http"];
