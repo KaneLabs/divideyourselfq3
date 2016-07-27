@@ -21,33 +21,9 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBQxTdpV5zVD6Yt-DufELYVrJrnz7JuMo&callback=initMap" defer></script>
 </head>
 <body ng-controller="BodyController" ng-class="{showPosts: showPosts, showNewPost: showNewPost, newPostActive: newPostActive}">
-  <nav>
-    <div class="nav-link" ui-sref="home">Divide Yourself</div>
-    <div class="nav-link signout" ng-show="!!user" ng-click="profile.toggleShowProfile()">Profile</div>
-    <div class="nav-link signout" ng-show="!!user" ng-click="signOut()">Signout</div>
-    <form class="sign" ng-submit="submitSign()" ng-class="{open: !!sign.type}" name="signform" ng-hide="!!user">
-      <div class="nav-link" ng-click="signup.toggleNewProfile();openSign('up')" ng-class="{hide: sign.type === 'in'}">Signup</div>
-      <div class="nav-link" ng-click="openSign('in')" ng-class="{hide: sign.type === 'up'}">Signin</div>
-      <i class="material-icons clear-sign" ng-click="sign.type = '';" ng-show="sign.type === 'in'">clear</i>
-      <input type="text" placeholder="{{sign.type === 'in' ? 'Username or Email' : 'Email'}}" ng-model="sign.email" ng-show="sign.type === 'in'" required>
-      <input type="password" placeholder="Password" ng-model="sign.password" ng-show="sign.type === 'in'" required>
-      <button type="submit" ng-show="sign.type === 'in'">Submit</button>
-    </form>
-  </nav>
+  <navbar></navbar>
   <div id="map-container">
     <div id="map"></div>
-  </div>
-  <div class="newPost" ng-hide="!user">
-    <form>
-      <h2>Add New Post</h2>
-      <input type="text" placeholder="title" ng-model="newPost.title" required>
-      <input type="text" placeholder="media url" ng-model="newPost.url" required>
-      <input type="text" placeholder="lat" class="lat" ng-model="newPost.lat" required>
-      <input type="text" placeholder="lng" class="lng" ng-model="newPost.lng" required>
-      <textarea rows="8" cols="40" ng-model="newPost.body" placeholder="body"></textarea>
-      <button class="submit" type="submit">Submit</button>
-      <button class="cancel" ng-click="toggleNewPost()">Cancel</button>
-    </form>
   </div>
   <div class="newProfile" ng-show="signup.showNewProfile">
     <form ng-submit="submitSign();signup.toggleNewProfile()">
@@ -63,7 +39,7 @@
   <main ui-view></main>
   <main dy-profile ng-show="profile.showProfile"></main>
   <footer>
-    <div ng-click="activateNewPost()" ng-show="!!user">New Post</div>
+    <div ng-click="postServ.toggleLock()" ng-show="!!user">New Post</div>
     <div ng-click="togglePosts()">Top Posts</div>
   </footer>
 </body>

@@ -16,3 +16,45 @@ app.factory('UsersService', $http => {
     }
   }
 });
+
+app.factory("NewPostService", $http => $scope => ({
+  toggleLock: () => $scope.newPostActive = !$scope.newPostActive,
+  create: posts => {
+    var post = {
+      user_id: $scope.user.id,
+      title: $scope.newPost.title,
+      body: $scope.newPost.body,
+      media_url: $scope.newPost.media_url,
+      lat: $scope.newPost.lat,
+      lng: $scope.newPost.lng,
+      timestamp: Date.now().toString()
+    };
+    $http.post("/api/posts", post).then(() => {
+      post.media_url = [post.media_url];
+      post.username = $scope.user.username;
+      post.openImage = 0;
+      post.comments = [];
+      posts.push(post);
+      console.log(posts);
+      loadPostsInBounds($scope, $http);
+    });
+    $scope.toggleNewPost();
+  }
+}));
+
+app.factory("NewCommentService", $http => $scope => ({
+  create: post => {
+    var comment = {
+      username: $scope.user.username,
+      user_id: $scope.user.id,
+      profile_url: $scope.user.profile_url,
+      post_id: post.id,
+      comment: post.newComment,
+      timestamp: Date.now().toString()
+    };
+    post.comments.push(comment);
+    console.log(post.comments);
+    post.newComment = "";
+    $http.post("/api/comments", comment);
+  }
+}));
