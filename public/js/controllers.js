@@ -47,9 +47,7 @@ app.controller("BodyController", makeBodyController);
 function makeBodyController($scope, UsersService, apiInterceptor, NewCommentService, NewPostService){
   $scope.commServ = NewCommentService($scope),
   $scope.postServ = NewPostService($scope);
-
   $scope.newPost = {};
-
   $scope.togglePosts = () => {
     $scope.showPosts = !$scope.showPosts;
     $scope.showNewPost = false;
@@ -102,12 +100,19 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
 
   $scope.getProfile = (id) => {
     UsersService.get(id);
-  }
+  };
 
   $scope.signup = {};
   $scope.signup.showNewProfile = false;
   $scope.signup.toggleNewProfile = function() {
     $scope.signup.showNewProfile = !$scope.signup.showNewProfile;
+  };
+
+  $scope.profile = {};
+  $scope.profile.showProfile = false;
+  $scope.profile.toggleShowProfile = function() {
+    console.log('function');
+    $scope.profile.showProfile = !$scope.profile.showProfile;
   };
 };
 makeBodyController.$inject = ['$scope','UsersService', 'apiInterceptor', 'NewCommentService', "NewPostService"];
