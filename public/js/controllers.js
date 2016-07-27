@@ -90,6 +90,7 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
     $scope.sign = {};
   };
   $scope.signOut = () => {
+    $scope.profile.showProfile = false;
     $scope.user = null;
     localStorage.removeItem("userToken");
   };
@@ -116,8 +117,20 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   };
 
   $scope.profile.getProfileUser = function(id) {
+    $scope.user.userPosts = [];
     $http.get(`/users/${id}`).then(function(data){
-      $scope.user.userPosts = data.data;
+      for (var i = 0; i < data.data.length; i++) {
+        $scope.user.userPosts.push({
+          id: data.data[i].id,
+          title: data.data[i].title,
+          body: data.data[i].body,
+          type: data.data[i].type,
+          timestamp: data.data[i].timestamp,
+          lat: data.data[i].lat,
+          lng: data.data[i].lng,
+          media_url: data.data[i].media_url.split(',')
+        })
+      }
     });
   };
 };
