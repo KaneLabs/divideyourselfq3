@@ -21,6 +21,13 @@ navbar {
   width: 100%;
   z-index: 3;
 }
+navbar input {
+  box-sizing: border-box;
+  border: 0;
+  height: 39px;
+  padding: 10px;
+  width: calc(100% - 351px);
+}
 .nav-link {
   color: white;
   cursor: pointer;
