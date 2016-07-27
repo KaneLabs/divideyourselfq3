@@ -1,4 +1,5 @@
 <div class="nav-link" ui-sref="home">Divide Yourself</div>
+<input type="text" placeholder="Search Posts" ng-model="search">
 <div class="nav-link signout" ng-show="!!user" ng-click="">Profile</div>
 <div class="nav-link signout" ng-show="!!user" ng-click="signOut()">Signout</div>
 <form class="sign" ng-submit="submitSign()" ng-class="{open: !!sign.type}" name="signform" ng-hide="!!user">
