@@ -1,0 +1,10 @@
+<form ng-submit="postServ.create(posts)">
+  <h2>Add New Post</h2>
+  <input type="text" placeholder="title" ng-model="newPost.title" required>
+  <input type="text" placeholder="media url" ng-model="newPost.media_url" required>
+  <input type="text" placeholder="lat" class="lat" ng-model="newPost.lat" required>
+  <input type="text" placeholder="lng" class="lng" ng-model="newPost.lng" required>
+  <textarea rows="8" cols="40" ng-model="newPost.body" placeholder="body"></textarea>
+  <button class="submit" type="submit">Submit</button>
+  <button class="cancel" ng-click="toggleNewPost()">Cancel</button>
+</form>
