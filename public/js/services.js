@@ -35,7 +35,6 @@ app.factory("NewPostService", $http => $scope => ({
       post.openImage = 0;
       post.comments = [];
       posts.push(post);
-      console.log(posts);
       loadPostsInBounds($scope, $http);
     });
     $scope.toggleNewPost();

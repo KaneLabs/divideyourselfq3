@@ -1,11 +1,19 @@
-function LocationController($scope, $stateParams, $http){
+function LocationController($scope, $rootScope, $stateParams, $http){
   var state = $stateParams.state || "Colorado",
     city = $stateParams.city || "Boulder";
+
+  $scope.show = {post: null};
+  $scope.linkBuilder = (post, backCheck) => {
+    if(!post) return;
+    if(backCheck) return {state: post.lat, city: post.lng};
+    return {state: post.lat, city: post.lng, post: post.id};
+  };
 
   $scope.location = {state, city};
 
   $http.get(`http://maps.googleapis.com/maps/api/geocode/json?address=${city},${state}`).then(data => {
-    center = data.data.results[0].geometry.location;
+    if(data.data.results[0]) center = data.data.results[0].geometry.location;
+    else center = {lat: parseFloat(state), lng: parseFloat(city)};
     if(map) map.setCenter(center);
   });
 
@@ -13,8 +21,25 @@ function LocationController($scope, $stateParams, $http){
 
   function loadMap(){
     google.maps.event.addListener(map, "idle", () => {
-      loadPostsInBounds($scope, $http);
+      loadPostsInBounds($http, data => {
+        if(!data.data.posts) return;
+        $scope.posts = data.data.posts.map(post => {
+          if($stateParams.post && post.id !== parseInt($stateParams.post)) return;
+          new google.maps.Marker({
+            position: {lat: parseFloat(post.lat), lng: parseFloat(post.lng)},
+            map: map,
+            title: post.title
+          });
+          post.media_url = post.media_url.split(",");
+          post.openImage = 0;
+          $scope.soloPost = $stateParams.post ? post : null;
+          $rootScope.isSolo = $stateParams.post ? true : false;
+          return post;
+        });
+      })
+      // loadPostsInBounds($scope, $http, $stateParams.post, $rootScope);
     });
+    if(map) google.maps.event.trigger(map, "idle");
   }
 }
 

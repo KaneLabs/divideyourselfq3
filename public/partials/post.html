@@ -1,0 +1,19 @@
+<carosel class="carosel"></carosel>
+<div class="post-info">
+  <div class="post-heading">
+    <a ui-sref="post(linkBuilder(post))" class="post-title">{{post.title}}</a>
+    <div class="separator">by</div>
+    <div class="post-username">{{post.username}}</div>
+    <div class="separator">of</div>
+    <div class="post-usertribe">{{post.usertribe}}</div>
+  </div>
+  <div class="post-respect">{{post.points || 0}} respect</div>
+  <div class="post-content">{{post.body}}</div>
+  <div class="post-comments">
+    <form class="newComment" ng-show="!!user" ng-submit="commServ.create(post)">
+      <textarea rows="4" placeholder="Write a Comment" ng-model="post.newComment" required></textarea>
+      <button type="submit">Add Comment</button>
+    </form>
+    <comment class="comment" ng-repeat="comment in post.comments | orderBy: '-timestamp'"></comment>
+  </div>
+</div>
