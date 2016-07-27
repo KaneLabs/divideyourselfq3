@@ -15,23 +15,23 @@ database is called dividedb
 ### JWT Auth
 
 /Signup:
-- create signup route
-- Create a form with email, username and password
+- ~~create signup route~~
+- ~~Create a form with email, username and password~~
 - get last location with geolocation API
-- email and username need to be unique
-- Encrypt password with bcrypt
-- store in email, username, pass and lastLat, lastLng
+- ~~email and username need to be unique~~
+- ~~Encrypt password with bcrypt~~
+- ~~store email, username, pass and lastLat, lastLng~~
 - redirect to users profile upon success
 
 /Signin:
-- create signin route
-- create a form with email OR username and password
-- use bcrypt to check if password matches
+- ~~create signin route~~
+- ~~create a form with email OR username and password~~~
+- ~~use bcrypt to check if password matches~~~
 - redirect to /:location upon success
 
 /Signout:
-- create signout route
-- not sure about the specifics with JWT
+- ~~create signout route~~
+- ~~not sure about the specifics with JWT~~
 - redirect to a "goodbye" page
 
 ### POSTING
@@ -71,7 +71,7 @@ API Interface = [
 ###### add route for /:location GET
 
 Google Maps:
-- load google map for that location
+- ~~load google map for that location~~
 - load top 16 posts for that location from db
 - load park maps for that location from db
 - plot top 16 posts on map
