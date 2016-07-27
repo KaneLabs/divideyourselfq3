@@ -1,3 +1,15 @@
-<div class="profile">
-  <h1>Profile Section</h1>
+<div user="user" class="profile">
+  <div class='profile-img'>
+    <img ng-src="{{ user.profile_url }}" alt="">
+  </div>
+  <div class='profile-details'>
+    <h2>{{ user.username }}</h2>
+    <h4>{{ user.email }}</h4>
+    <!-- TODO Add change password feature -->
+    <h5 style="cursor: pointer">Change Password</h5>
+  </div>
+  <div class="post-history">
+    <h2>Posts</h2>
+    <!--  ng-repeat through users posts -->
+  </div>
 </div>
