@@ -6,7 +6,7 @@
       <div class="post-heading">
         <div class="post-title">{{post.title}}</div>
         <div class="separator">by</div>
-        <div class="post-username">{{post.username}}</div>
+        <div class="post-username" ng-click="getProfile(post.user_id)">{{post.username}}</div>
         <div class="separator">of</div>
         <div class="post-usertribe">{{post.usertribe}}</div>
       </div>

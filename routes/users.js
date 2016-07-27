@@ -59,8 +59,8 @@ router.get('/:id', (req, res) => {
     var decoded = jwt.verify(req.headers.authorization.split(' ')[1], process.env.SECRET);
     if (decoded.user.id == req.params.id){
       knex('users')
-      .innerJoin('users_favorites', 'users.id', 'users_favorites.user_id')
-      .innerJoin('posts', 'post_id', 'posts.id')
+      // .innerJoin('users_favorites', 'users.id', 'users_favorites.user_id')
+      .innerJoin('posts', 'users.id', 'posts.user_id')
       .where('users.id', req.params.id)
       .then(data => {
         // console.log("This user's data: ", data);
