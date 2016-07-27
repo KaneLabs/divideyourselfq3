@@ -49,6 +49,7 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   $scope.postServ = NewPostService($scope);
   $scope.newPost = {};
   $scope.togglePosts = () => {
+    $scope.profile.showProfile = false;
     $scope.showPosts = !$scope.showPosts;
     $scope.showNewPost = false;
   };
@@ -116,7 +117,6 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
 
   $scope.profile.getProfileUser = function(id) {
     $http.get(`/users/${id}`).then(function(data){
-      console.log(data.data);
       $scope.user.userPosts = data.data;
     });
   };
