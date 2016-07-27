@@ -323,6 +323,49 @@ main {
   </div>
 </div>*/
 
+/* Profile */
+.profile * {
+  margin: 2%;
+}
+.profile {
+  position: fixed;
+  display: flex;
+  flex-flow: row wrap;
+  top: 15%;
+  left: 10%;
+  margin: 0 auto;
+  z-index: 3;
+  width: 80%;
+  height: 70%;
+  background: white;
+  opacity: 0.9;
+  border-radius: 5px;
+  overflow-y: scroll;
+}
+.profile-details {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+.profile .profile-img {
+  border: 1px solid black;
+  height: 100px;
+  width: 100px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.profile .user-details {
+  width: 65%;
+}
+.post-history {
+  width: 100%;
+  background: red;
+  height: 500px;
+}
+
 /* Footer */
 footer {
   bottom: 0;
