@@ -20,12 +20,10 @@
   <script src="js/interceptors.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBQxTdpV5zVD6Yt-DufELYVrJrnz7JuMo&callback=initMap" defer></script>
 </head>
-<body
-  ng-controller="BodyController"
-  ng-class="{showPosts: showPosts, showNewPost: showNewPost, newPostActive: newPostActive}">
+<body ng-controller="BodyController" ng-class="{showPosts: showPosts, showNewPost: showNewPost, newPostActive: newPostActive}">
   <nav>
     <div class="nav-link" ui-sref="home">Divide Yourself</div>
-    <div class="nav-link signout" ng-show="!!user" ng-click="">Profile</div>
+    <div class="nav-link signout" ng-show="!!user" ng-click="profile.toggleShowProfile()">Profile</div>
     <div class="nav-link signout" ng-show="!!user" ng-click="signOut()">Signout</div>
     <form class="sign" ng-submit="submitSign()" ng-class="{open: !!sign.type}" name="signform" ng-hide="!!user">
       <div class="nav-link" ng-click="signup.toggleNewProfile();openSign('up')" ng-class="{hide: sign.type === 'in'}">Signup</div>
@@ -63,6 +61,7 @@
     </form>
   </div>
   <main ui-view></main>
+  <main dy-profile ng-show="profile.showProfile"></main>
   <footer>
     <div ng-click="activateNewPost()" ng-show="!!user">New Post</div>
     <div ng-click="togglePosts()">Top Posts</div>

@@ -90,12 +90,18 @@ function makeBodyController($scope, UsersService, apiInterceptor){
 
   $scope.getProfile = (id) => {
     UsersService.get(id);
-  }
+  };
 
   $scope.signup = {};
   $scope.signup.showNewProfile = false;
   $scope.signup.toggleNewProfile = function() {
     $scope.signup.showNewProfile = !$scope.signup.showNewProfile;
+  };
+
+  $scope.profile = {};
+  $scope.profile.showProfile = false;
+  $scope.profile.toggleShowProfile = function() {
+    $scope.profile.showProfile = !$scope.profile.showProfile;
   };
 };
 makeBodyController.$inject = ['$scope','UsersService', 'apiInterceptor'];
