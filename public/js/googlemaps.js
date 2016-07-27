@@ -1,6 +1,21 @@
-var map, mapConfig = {
-  center: {lat: 40.0149856, lng: -105.2705456}
-};
+var map,
+  loc = window.location.pathname.split("/"),
+  isHome = window.location.pathname === "/",
+  mapConfig = {
+    center: localStorage.center ? JSON.parse(localStorage.center) : {
+      lat: parseFloat(loc[1]) || 40.0149856,
+      lng: parseFloat(loc[2]) || -105.2705456
+    }
+  };
+
+if(isHome){
+  navigator.geolocation.getCurrentPosition(data => {
+    if(!data.coords) return;
+    mapConfig.center = {lat: data.coords.latitude, lng: data.coords.longitude};
+    if(map) map.setCenter(mapConfig.center);
+    localStorage.center = JSON.stringify(mapConfig.center);
+  })
+}
 
 function initMap(){
   map = new google.maps.Map(document.getElementById('map'), {
