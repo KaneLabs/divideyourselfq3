@@ -9,6 +9,8 @@ https://divideq3.herokuapp.com/
 
 database is called dividedb
 
+```dropdb dividedb && createdb dividedb && knex migrate:latest && knex seed:run```
+
 ## MVP-Lite
 
 
@@ -22,7 +24,7 @@ database is called dividedb
 - ~~Encrypt password with bcrypt~~
 - ~~store email, username, pass and lastLat, lastLng~~
 - redirect to users profile upon success
-
+  
 /Signin:
 - ~~create signin route~~
 - ~~create a form with email OR username and password~~~
@@ -87,8 +89,8 @@ Posts have a footer with:
 - grab button
 
 Post Button:
-- add post button to main route
-- open post form on post icon click
+- ~~add post button to main route~~
+- ~~open post form on post icon click~~
 
 Switch Cities:
 - add text input search to switch to different routes
@@ -98,12 +100,12 @@ Switch Cities:
 
 Post form fields:
 - multi-image upload
-- url to image/video
-- description
+- ~~url to image/video~~
+- ~~description~~
 
 Post must include:
-- image or url to image/video
-- description
+- ~~image or url to image/video~~
+- ~~description~~
 
 
 ### REVIEWS COMMENTS AND RESPECT
