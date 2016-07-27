@@ -1,39 +1,27 @@
-function LocationController($scope, $stateParams, $http, $rootScope){
+function LocationController($scope, $stateParams, $http){
   var state = $stateParams.state || "Colorado",
     city = $stateParams.city || "Boulder";
+
+  $scope.location = {state, city};
 
   $http.get(`http://maps.googleapis.com/maps/api/geocode/json?address=${city},${state}`).then(data => {
     center = data.data.results[0].geometry.location;
     if(map) map.setCenter(center);
   });
 
-  $scope.location = {state, city};
-
-  if(!map) mapConfig.onload = loadMap;
-  else loadMap();
+  map ? loadMap() : mapConfig.onload = loadMap;
 
   function loadMap(){
     google.maps.event.addListener(map, "idle", () => {
-      var bounds = map.getBounds();
-      $http.post("/api/locations", {minLat: bounds.f.f, maxLat: bounds.f.b, minLng: bounds.b.b, maxLng: bounds.b.f})
-        .then(data => {
-          $scope.posts = data.data.posts.map(post => {
-            new google.maps.Marker({
-              position: {lat: parseFloat(post.lat), lng: parseFloat(post.lng)},
-              map: map,
-              title: post.title
-            });
-            post.media_url = post.media_url.split(",");
-            post.openImage = 0;
-            return post;
-          });
-        });
+      loadPostsInBounds($scope, $http);
     });
   }
 }
 
 app.controller("BodyController", makeBodyController);
-function makeBodyController($scope, UsersService, apiInterceptor){
+function makeBodyController($scope, UsersService, apiInterceptor, NewCommentService, NewPostService){
+  $scope.commServ = NewCommentService($scope),
+  $scope.postServ = NewPostService($scope);
   $scope.newPost = {};
   $scope.togglePosts = () => {
     $scope.showPosts = !$scope.showPosts;
@@ -41,10 +29,7 @@ function makeBodyController($scope, UsersService, apiInterceptor){
   };
 
   $scope.testOpenImage = (post, index) => post.openImage === index;
-  $scope.nextImage = post => {
-    post.openImage++;
-    console.log("WHAT");
-  }
+  $scope.nextImage = post => post.openImage++;
   $scope.prevImage = post => post.openImage--;
 
   $scope.activateNewPost = () => {
@@ -101,16 +86,8 @@ function makeBodyController($scope, UsersService, apiInterceptor){
   $scope.profile = {};
   $scope.profile.showProfile = false;
   $scope.profile.toggleShowProfile = function() {
+    console.log('function');
     $scope.profile.showProfile = !$scope.profile.showProfile;
   };
 };
-makeBodyController.$inject = ['$scope','UsersService', 'apiInterceptor'];
-
-// app.controller('ProfileController',makeProfileController);
-// function makeProfileController($scope,UsersService) {
-//   $scope.view = {};
-//   $scope.view.greeting = "Profile Controller";
-//   console.log(localStorage.userToken);
-//   $scope.user = UsersService.get(userId);
-//   console.log($scope.user);
-// }
+makeBodyController.$inject = ['$scope','UsersService', 'apiInterceptor', 'NewCommentService', "NewPostService"];

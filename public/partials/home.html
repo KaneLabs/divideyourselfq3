@@ -1,14 +1,7 @@
+<newpost class="newPost" ng-hide="!user"></newpost>
 <div id="content">
-  <div ng-repeat="post in posts | orderBy: '-points'" class="post">
-    <div class="carosel">
-      <div class="prev-image" ng-click="prevImage(post)" ng-show="post.openImage > 0">
-        <i class="material-icons">keyboard_arrow_left</i>
-      </div>
-      <img class="post-image" ng-repeat="url in post.media_url" ng-src="{{url}}" ng-class="{open: testOpenImage(post, $index)}">
-      <div class="next-image" ng-click="nextImage(post)" ng-show="post.openImage < post.media_url.length - 1">
-        <i class="material-icons">keyboard_arrow_right</i>
-      </div>
-    </div>
+  <div ng-repeat="post in posts | orderBy: '-points' | filter: search" class="post">
+    <carosel class="carosel"></carosel>
     <div class="post-info">
       <div class="post-heading">
         <div class="post-title">{{post.title}}</div>
@@ -17,15 +10,14 @@
         <div class="separator">of</div>
         <div class="post-usertribe">{{post.usertribe}}</div>
       </div>
-      <div class="post-respect">{{post.points}} respect</div>
+      <div class="post-respect">{{post.points || 0}} respect</div>
       <div class="post-content">{{post.body}}</div>
       <div class="post-comments">
-        <div class="comment" ng-repeat="comment in post.comments | orderBy: 'timestamp'">
-          <img class="comment-profile" ng-src="{{comment.profile_url}}">
-          <div class="comment-username">{{comment.username}}</div>
-          <div class="comment-comment">{{comment.comment}}</div>
-          <div class="comment-timestamp">{{comment.timestamp | dateFilter}}</div>
-        </div>
+        <form class="newComment" ng-show="!!user" ng-submit="commServ.create(post)">
+          <textarea rows="4" placeholder="Write a Comment" ng-model="post.newComment" required></textarea>
+          <button type="submit">Add Comment</button>
+        </form>
+        <comment class="comment" ng-repeat="comment in post.comments | orderBy: '-timestamp'"></comment>
       </div>
     </div>
   </div>
