@@ -40,7 +40,7 @@
     </form>
   </div>
 
-  <main ui-view></main>
+  <main ng-class="{fixed: isSolo}" ui-view></main>
   <footer>
     <div ng-click="postServ.toggleLock()" ng-show="!!user">New Post</div>
     <div ng-click="togglePosts()">Top Posts</div>
