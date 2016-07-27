@@ -9,7 +9,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $http
       controller: LocationController
     })
     // .state("profile", {
-    //   url: "/users/:userId",
+    //   url: "/users/:userName",
     //   templateUrl: "partials/profile.html",
     //   controller: ProfileController
     // })
