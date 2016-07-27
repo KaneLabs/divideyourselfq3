@@ -142,10 +142,13 @@ main {
 .newPost .lat, .newPost .lng {
   width: 50%;
 }
-.newPost button {
+.newPost button, .newPost .cancel {
   border: 0;
   box-sizing: border-box;
+  display: inline-block;
+  font-size: 14px;
   padding: 10px;
+  vertical-align: top;
   width: 50%;
 }
 .newPost .cancel {
