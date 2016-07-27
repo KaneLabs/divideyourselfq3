@@ -8,11 +8,6 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $http
       templateUrl: "partials/home.html",
       controller: LocationController
     })
-    // .state("profile", {
-    //   url: "/users/:userId",
-    //   templateUrl: "partials/profile.html",
-    //   controller: ProfileController
-    // })
     .state("state", {
       url: "/:state",
       templateUrl: "partials/home.html",

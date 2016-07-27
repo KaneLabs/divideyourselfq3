@@ -270,6 +270,20 @@ main {
   </div>
 </div>*/
 
+/* Profile */
+.profile {
+  position: fixed;
+  top: 25%;
+  left: 25%;
+  margin: 0 auto;
+  z-index: 3;
+  width: 50%;
+  height: 50%;
+  background: white;
+  opacity: 0.9;
+  border-radius: 5px;
+}
+
 /* Footer */
 footer {
   bottom: 0;
