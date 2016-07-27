@@ -1,6 +1,18 @@
+var Magic = (number, callback) => {
+  var argumentArray = [];
+  return data => {
+    argumentArray.push(data);
+    if(argumentArray.length === number) return callback(argumentArray);
+  }
+};
+
 function LocationController($scope, $rootScope, $stateParams, $http){
-  var state = $stateParams.state || "Colorado",
-    city = $stateParams.city || "Boulder";
+  if(window.location.pathname !== "/" && !parseFloat(loc[1])){
+    $http.get(`http://maps.googleapis.com/maps/api/geocode/json?address=${loc[2]},${loc[1]}`).then(data => {
+      if(data.data.results[0]) mapConfig.center = data.data.results[0].geometry.location;
+      if(map) map.setCenter(mapConfig.center);
+    });
+  }
 
   $scope.show = {post: null};
   $scope.linkBuilder = (post, backCheck) => {
@@ -8,15 +20,6 @@ function LocationController($scope, $rootScope, $stateParams, $http){
     if(backCheck) return {state: post.lat, city: post.lng};
     return {state: post.lat, city: post.lng, post: post.id};
   };
-
-  $scope.location = {state, city};
-
-  $http.get(`http://maps.googleapis.com/maps/api/geocode/json?address=${city},${state}`).then(data => {
-    if(data.data.results[0]) center = data.data.results[0].geometry.location;
-    else center = {lat: parseFloat(state), lng: parseFloat(city)};
-    if(map) map.setCenter(center);
-  });
-
   map ? loadMap() : mapConfig.onload = loadMap;
 
   function loadMap(){
@@ -37,7 +40,6 @@ function LocationController($scope, $rootScope, $stateParams, $http){
           return post;
         });
       })
-      // loadPostsInBounds($scope, $http, $stateParams.post, $rootScope);
     });
     if(map) google.maps.event.trigger(map, "idle");
   }
