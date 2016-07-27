@@ -10,9 +10,12 @@
       <!-- TODO Add change password feature -->
       <h5 style="cursor: pointer">Change Password</h5>
     </div>
-    <div ng-show="user.userPosts.length > 0" ng-repeat="post in user.userPosts">
-      <h1>{{ post.title }}</h1>
-      <img style="width: 75px" ng-src="{{ post.media_url }}" alt="">
+    <div class="post-details">
+      <div class="post-preview" ng-show="user.userPosts.length > 0" ng-repeat="post in user.userPosts">
+        <h4 class="title">{{ post.title }}</h4>
+        <p>{{ post.body }}</p>
+        <!-- <img style="width: 75px" ng-src="{{ post.media_url }}" alt=""> -->
+      </div>
     </div>
   </div>
 </div>

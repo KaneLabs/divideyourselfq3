@@ -116,8 +116,8 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
 
   $scope.profile.getProfileUser = function(id) {
     $http.get(`/users/${id}`).then(function(data){
+      console.log(data.data);
       $scope.user.userPosts = data.data;
-      console.log($scope.user.userPosts);
     });
   };
 };
