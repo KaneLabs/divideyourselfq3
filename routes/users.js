@@ -55,38 +55,13 @@ router.post('/signup', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-  console.log('router/:id');
-  console.log(req.params.id);
   knex('users')
-  // .innerJoin('users_favorites', 'users.id', 'users_favorites.user_id')
   .innerJoin('posts', 'users.id', 'posts.user_id')
   .where('users.id', req.params.id)
   .then(data => {
-    // console.log("This user's data: ", data);
+    console.log("This user's data: ", data);
     res.json(data);
   });
-
-
-  // if (req.headers.authorization){
-  //   var decoded = jwt.verify(req.headers.authorization.split(' ')[1], process.env.SECRET);
-  //   if (decoded.user.id == req.params.id){
-  //     knex('users')
-  //     // .innerJoin('users_favorites', 'users.id', 'users_favorites.user_id')
-  //     .innerJoin('posts', 'users.id', 'posts.user_id')
-  //     .where('users.id', req.params.id)
-  //     .then(data => {
-  //       // console.log("This user's data: ", data);
-  //       res.json(data)
-  //     });
-  //     return
-  //   }
-  // }
-  // knex('users')
-  // .where('users.id', req.params.id)
-  // .then(data => {
-  //   // console.log("Other users data: ", data);
-  //   res.json(data);
-  // })
 });
 
 
