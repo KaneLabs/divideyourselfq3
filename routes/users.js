@@ -58,7 +58,7 @@ router.get('/:id', (req, res) => {
   knex('posts')
   .where('user_id', req.params.id)
   .then( data => {
-    console.log(data);
+    res.json(data)
   })
 
   // Save this for other user's profiles
