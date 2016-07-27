@@ -20,14 +20,11 @@
   <script src="js/interceptors.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBQxTdpV5zVD6Yt-DufELYVrJrnz7JuMo&callback=initMap" defer></script>
 </head>
-<body
-  ng-controller="BodyController"
-  ng-class="{showPosts: showPosts, showNewPost: showNewPost, newPostActive: newPostActive}">
+<body ng-controller="BodyController" ng-class="{showPosts: showPosts, showNewPost: showNewPost, newPostActive: newPostActive}">
   <navbar></navbar>
   <div id="map-container">
     <div id="map"></div>
   </div>
-
   <div class="newProfile" ng-show="signup.showNewProfile">
     <form ng-submit="submitSign();signup.toggleNewProfile()">
       <h2>Create new Profile</h2>
@@ -39,8 +36,8 @@
       <button class="cancel" ng-click="signup.toggleNewProfile();openSign('up')">Cancel</button>
     </form>
   </div>
-
   <main ui-view></main>
+  <main dy-profile ng-show="profile.showProfile"></main>
   <footer>
     <div ng-click="postServ.toggleLock()" ng-show="!!user">New Post</div>
     <div ng-click="togglePosts()">Top Posts</div>
