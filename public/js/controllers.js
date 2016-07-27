@@ -44,7 +44,7 @@ function LocationController($scope, $rootScope, $stateParams, $http){
 }
 
 app.controller("BodyController", makeBodyController);
-function makeBodyController($scope, UsersService, apiInterceptor, NewCommentService, NewPostService){
+function makeBodyController($scope, UsersService, apiInterceptor, NewCommentService, NewPostService, $http){
   $scope.commServ = NewCommentService($scope),
   $scope.postServ = NewPostService($scope);
   $scope.newPost = {};
@@ -113,5 +113,12 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   $scope.profile.toggleShowProfile = function() {
     $scope.profile.showProfile = !$scope.profile.showProfile;
   };
+
+  $scope.profile.getProfileUser = function(id) {
+    $http.get(`/users/${id}`).then(function(data){
+      $scope.user.userPosts = data.data;
+      console.log($scope.user.userPosts);
+    });
+  };
 };
-makeBodyController.$inject = ['$scope','UsersService', 'apiInterceptor', 'NewCommentService', "NewPostService"];
+makeBodyController.$inject = ['$scope','UsersService', 'apiInterceptor', 'NewCommentService', "NewPostService","$http"];
