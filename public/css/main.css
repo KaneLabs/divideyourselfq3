@@ -325,7 +325,7 @@ main {
 
 /* Profile */
 .profile * {
-  margin: 5%;
+  margin: 2%;
 }
 .profile {
   position: fixed;
@@ -342,6 +342,12 @@ main {
   border-radius: 5px;
   overflow-y: scroll;
 }
+.profile-details {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
 .profile .profile-img {
   border: 1px solid black;
   height: 100px;
@@ -350,6 +356,9 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.profile .user-details {
+  width: 65%;
 }
 .post-history {
   width: 100%;
