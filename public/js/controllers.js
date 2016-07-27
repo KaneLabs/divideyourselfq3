@@ -17,6 +17,7 @@ function LocationController($scope, $stateParams, $http, $rootScope){
       var bounds = map.getBounds();
       $http.post("/api/locations", {minLat: bounds.f.f, maxLat: bounds.f.b, minLng: bounds.b.b, maxLng: bounds.b.f})
         .then(data => {
+          if(!data.data.posts) return;
           $scope.posts = data.data.posts.map(post => {
             new google.maps.Marker({
               position: {lat: parseFloat(post.lat), lng: parseFloat(post.lng)},
