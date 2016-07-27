@@ -10,6 +10,32 @@ var Magic = (number, callback) => {
   }
 };
 
+router.post("/comments", (req, res) => {
+  knex("comments")
+    .insert({
+      user_id: req.body.user_id,
+      post_id: req.body.post_id,
+      comment: req.body.comment,
+      timestamp: req.body.timestamp
+    })
+    .then(() => res.send(null));
+})
+
+router.post("/posts", (req, res) => {
+  knex('posts')
+    .insert({
+      user_id: req.body.user_id,
+      title: req.body.title,
+      body: req.body.body,
+      media_url: req.body.media_url,
+      lat: req.body.lat,
+      lng: req.body.lng,
+      type: 'board',
+      timestamp: req.body.timestamp
+    })
+    .then(() => res.send(null))
+})
+
 router.post("/locations", (req, res) => {
   var obj = req.body;
   knex("posts")
@@ -22,9 +48,8 @@ router.post("/locations", (req, res) => {
     .then(data => {
       if(!data.length) res.json({message: "no posts in area"});
 
-      // Get all comments and ratings for all posts.
+      // Get all comments for all posts.
       var magic = Magic(data.length, () => {
-        console.log(data);
         res.json({posts: data});
       });
 

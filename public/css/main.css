@@ -13,7 +13,7 @@ body {
 .material-icons {font-size: 20px; padding: 10px; cursor: pointer;}
 
 /* Nav */
-nav {
+navbar {
   height: 40px;
   background: rgb(20,20,20);
   position: fixed;
@@ -142,10 +142,13 @@ main {
 .newPost .lat, .newPost .lng {
   width: 50%;
 }
-.newPost button {
+.newPost button, .newPost .cancel {
   border: 0;
   box-sizing: border-box;
+  display: inline-block;
+  font-size: 14px;
   padding: 10px;
+  vertical-align: top;
   width: 50%;
 }
 .newPost .cancel {
@@ -186,6 +189,7 @@ main {
   max-height: 480px;
   width: 100%;
   overflow: hidden;
+  display: block;
 }
 .next-image, .prev-image {
   box-sizing: border-box;
@@ -251,7 +255,9 @@ main {
   text-align: left;
 }
 .comment {
+  display: block;
   border-top: 1px solid black;
+  padding: 5px 0px;
 }
 .comment-profile {
   padding: 10px;
@@ -260,7 +266,7 @@ main {
 }
 .comment-heading {
   display: inline-block;
-  width: 80px;
+  width: 120px;
   height: 60px;
 }
 .comment-username, .comment-timestamp {
@@ -274,10 +280,30 @@ main {
 .comment-comment {
   display: inline-block;
   padding: 10px;
-  width: calc(100% - 180px);
+  width: calc(100% - 220px);
 }
 .comment div {
   vertical-align: top;
+}
+
+.newComment textarea {
+  box-sizing: border-box;
+  padding: 10px;
+  width: 100%;
+  border-top: 1px solid black;
+  border-bottom: 0;
+  border-left: 0;
+  border-right: 0;
+}
+.newComment button {
+  border-top: 1px solid black;
+  border-bottom: 0;
+  border-left: 0;
+  border-right: 0;
+  width: 100%;
+  display: block;
+  text-align: center;
+  padding: 10px;
 }
 
 /*<div class="post-comments">
