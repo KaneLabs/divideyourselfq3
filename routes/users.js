@@ -16,13 +16,13 @@ router.post('/signin', (req, res) => {
     .orWhere({username: req.body.email})
     .first()
     .then(user => {
-      console.log("USER: ", user);
+      // console.log("USER: ", user);
       // If user doesn't exist, or password doesnt match, return false token.
       if(!user) return res.json({token: false, message: "no user"});
       if(!bcrypt.compareSync(req.body.password, user.password, 8)) return res.json({token: false, message: "wrong pw"});
       // log user in with JWT
       token = jwt.sign({user: user}, process.env.SECRET);
-      console.log('user authorized');
+      // console.log('user authorized: ', token);
       res.json({token: token, user: user});
     })
     .catch(err => {
@@ -46,7 +46,7 @@ router.post('/signup', (req, res) => {
           password: hashedPassword,
         })
         .then(user => {
-          console.log("USER: ", user);
+          // console.log("USER: ", user);
           // log user in with JWT
           token = jwt.sign({user: user}, process.env.SECRET);
           res.json({token: token, user: {name: user.username, profile: user.profile_url}});
@@ -55,12 +55,27 @@ router.post('/signup', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
+  if (req.headers.authorization){
+    var decoded = jwt.verify(req.headers.authorization.split(' ')[1], process.env.SECRET);
+    if (decoded.user.id == req.params.id){
+      knex('users')
+      .innerJoin('users_favorites', 'users.id', 'users_favorites.user_id')
+      .innerJoin('posts', 'post_id', 'posts.id')
+      .where('users.id', req.params.id)
+      .then(data => {
+        // console.log("This user's data: ", data);
+        res.json(data)
+      });
+      return
+    }
+  }
   knex('users')
-    .where('id', req.params.id)
-    .first()
-    .then(data => {
-      res.json(data)
-    });
+  .where('users.id', req.params.id)
+  .then(data => {
+    // console.log("Other users data: ", data);
+    res.json(data);
+  })
 });
+
 
 module.exports = router;
