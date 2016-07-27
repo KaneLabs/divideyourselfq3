@@ -115,7 +115,6 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
     if ($scope.sign.type === 'up') {
       $scope.profile.showProfile = true;
     }
-    console.log($scope.user);
     $scope.sign = {};
   };
   $scope.signOut = () => {
@@ -127,7 +126,6 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   function updateUserStatus(data){
     localStorage.userToken = data.token;
     $scope.user = data.user;
-    console.log($scope.user);
   };
 
   $scope.getProfile = (id) => {
