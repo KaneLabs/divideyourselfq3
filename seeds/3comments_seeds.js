@@ -1,6 +1,6 @@
-exports.seed = function(knex, Promise) {
+exports.seed = (knex, Promise) => {
   return knex('comments').del()
-    .then(function () {
+    .then( () => {
       return Promise.all([
         knex("comments").insert({
           user_id: 2,
