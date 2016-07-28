@@ -6,6 +6,8 @@ function HomeController($scope, MapService){
 }
 
 function LocationController($scope, $stateParams, MapService){
+  $scope.$parent.showPosts = false;
+  $scope.togglePosts = $scope.$parent.togglePosts;
   $scope.linkBuilder = linkBuilder;
   MapService.location.setCenter([$stateParams.state, $stateParams.city]);
   MapService.getPosts($scope);
@@ -13,7 +15,6 @@ function LocationController($scope, $stateParams, MapService){
 }
 
 function PostPageController($scope, $stateParams, MapService){
-  console.log("post", $stateParams.post);
   $scope.linkBuilder = linkBuilder;
   MapService.post.setCenter([$stateParams.state, $stateParams.city]);
   MapService.getPosts($scope, $stateParams.post);
@@ -30,6 +31,7 @@ app.controller("BodyController", makeBodyController);
 function makeBodyController($scope, UsersService, apiInterceptor, NewCommentService, NewPostService, $http){
   $scope.commServ = NewCommentService($scope),
   $scope.postServ = NewPostService($scope);
+  $scope.ok = "ok";
   $scope.newPost = {};
   $scope.togglePosts = () => {
     $scope.profile.showProfile = false;
