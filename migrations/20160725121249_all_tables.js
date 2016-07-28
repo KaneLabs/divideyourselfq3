@@ -1,8 +1,8 @@
 
-exports.up = function(knex, Promise) {
+exports.up = (knex, Promise) => {
   return Promise.all([
     // Create 'users' table
-    knex.schema.createTable('users',function(table) {
+    knex.schema.createTable('users', (table) => {
       table.increments();
       table.integer('tribe_id').references('id').inTable('tribes').onDelete("CASCADE");
       table.string('email').unique().notNullable();
@@ -14,7 +14,7 @@ exports.up = function(knex, Promise) {
       table.string('profile_url').defaultTo('https://s3-us-west-2.amazonaws.com/divideyourself.com/images/1divide-logo.svg');
     }),
     // Create 'posts' table
-    knex.schema.createTable('posts', function(table) {
+    knex.schema.createTable('posts', (table) => {
       table.increments();
       table.integer('user_id').notNullable().references('id').inTable('users').onDelete("CASCADE");
       table.string('title').notNullable();
@@ -27,7 +27,7 @@ exports.up = function(knex, Promise) {
       table.integer('points').defaultTo(1);
     }),
     // Create 'comments' table
-    knex.schema.createTable('comments', function(table){
+    knex.schema.createTable('comments', (table) => {
       table.increments();
       table.integer('user_id').notNullable().references('id').inTable('users').onDelete("CASCADE");
       table.integer('post_id').notNullable().references('id').inTable('posts').onDelete("CASCADE");
@@ -70,7 +70,7 @@ exports.up = function(knex, Promise) {
   ]);
 };
 
-exports.down = function(knex, Promise) {
+exports.down = (knex, Promise) => {
   return Promise.all([
     knex.raw('drop table if exists users cascade'),
     knex.raw('drop table if exists posts cascade'),
