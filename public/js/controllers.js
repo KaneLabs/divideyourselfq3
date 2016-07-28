@@ -98,7 +98,8 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
           timestamp: data.data[i].timestamp,
           lat: data.data[i].lat,
           lng: data.data[i].lng,
-          media_url: data.data[i].media_url.split(',')
+          media_url: data.data[i].media_url.split(','),
+          points: data.data[i].points
         })
       }
     });
@@ -137,7 +138,16 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   $scope.signup.toggleNewProfile = function() {
     $scope.signup.showNewProfile = !$scope.signup.showNewProfile;
   };
+  
+  $scope.upvote = (id, type, post) => {
+    post.points += 1;
+    $http.post(`/theboard/upvote/${type}/${id}`)
+  };
 
+  $scope.downvote = (id, type, post) => {
+    post.points -= 1;
+    $http.post(`/theboard/downvote/${type}/${id}`)
+  };
 
 };
 makeBodyController.$inject = ['$scope','UsersService', 'apiInterceptor', 'NewCommentService', "NewPostService","$http"];

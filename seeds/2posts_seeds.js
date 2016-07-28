@@ -12,7 +12,8 @@ exports.seed = function(knex, Promise) {
           lat: 39.926759,
           lng: -105.293428,
           type: 'board',
-          timestamp: 1469469244841
+          timestamp: 1469469244841,
+          points: 17
         }),
         knex('posts').insert({
           user_id: 2,
@@ -22,7 +23,8 @@ exports.seed = function(knex, Promise) {
           lat: 39.952135,
           lng: -105.290241,
           type: 'board',
-          timestamp: 1469412343124
+          timestamp: 1469412343124,
+          points: 0
         }),
         knex('posts').insert({
           user_id: 3,
@@ -32,7 +34,8 @@ exports.seed = function(knex, Promise) {
           lat: 40.002490,
           lng: -105.285039,
           type: 'board',
-          timestamp: 1469469244841
+          timestamp: 1469469244841,
+          points: 15
         }),
         knex('posts').insert({
           user_id: 4,
@@ -42,7 +45,8 @@ exports.seed = function(knex, Promise) {
           lat: 40.006172,
           lng: -105.287785,
           type: 'board',
-          timestamp: 1469412343124
+          timestamp: 1469412343124,
+          points: -3
         }),
         knex('posts').insert({
           user_id: 1,
@@ -52,7 +56,8 @@ exports.seed = function(knex, Promise) {
           lat: 40.011133,
           lng: -105.284901,
           type: 'board',
-          timestamp: 1469469244841
+          timestamp: 1469469244841,
+          points: 1230
         }),
         knex('posts').insert({
           user_id: 1,
@@ -62,7 +67,8 @@ exports.seed = function(knex, Promise) {
           lat: 40.012137,
           lng: -105.290107,
           type: 'board',
-          timestamp: 1469412343124
+          timestamp: 1469412343124,
+          points: 1
         })
       ]);
     });
