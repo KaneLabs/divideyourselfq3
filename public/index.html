@@ -41,7 +41,7 @@
       <button class="cancel" ng-click="signup.toggleNewProfile();openSign('up')">Cancel</button>
     </form>
   </div>
-  <main ng-class="{fixed: isSolo}" ui-view></main>
+  <main ui-view></main>
   <main dy-profile ng-show="profile.showProfile"></main>
   <footer>
     <div ng-click="postServ.toggleLock()" ng-show="!!user">New Post</div>
