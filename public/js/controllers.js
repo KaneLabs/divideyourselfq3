@@ -75,6 +75,8 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
       $scope.profile.profileView = null;
     } else if ($scope.profile.isActiveUser(id) && $scope.profile.profileView === null) {
       $scope.profile.profileView = "activeUser";
+    } else if (!$scope.profile.isActiveUser(id) && $scope.profile.profileView === "profileUser") {
+      $scope.profile.profileView = null;
     } else {
       $scope.profile.profileView = "profileUser";
     }
