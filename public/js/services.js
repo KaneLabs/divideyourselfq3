@@ -108,23 +108,19 @@ app.factory("MapService", $http => {
     post: {
       setCenter: loc => {
         if(!loc) loc = window.location.pathname.split("/").slice(1);
-        console.log(loc, window.location.pathname.split("/").slice(1));
         mapConfig.center = {lat: parseFloat(loc[0]), lng: parseFloat(loc[1])};
-        if(map){
-          console.log("setting center", mapConfig.center);
-          map.panTo(mapConfig.center);
-        }
+        if(map) map.panTo(mapConfig.center);
       }
     },
-    getPosts: $scope => {
-      console.log("get posts in bounds");
+    getPosts: ($scope, post_id) => {
       var loc = window.location.pathname.split("/");
-      var post_id = parseInt(loc[3]);
       var bounds = map.getBounds();
+      if(post_id) post_id = parseInt(post_id);
+      console.log("no bounds", !bounds);
       if(!bounds) return;
       bounds = {minLat: bounds.f.f, maxLat: bounds.f.b, minLng: bounds.b.b, maxLng: bounds.b.f};
       $http.post("/api/locations", bounds).then(data => {
-        console.log(!data.data.posts);
+        console.log("no data", !data.data.posts);
         if(!data.data.posts) return;
         $scope.posts = data.data.posts.map(post => {
           if(post_id && post.id !== post_id) return;
@@ -138,6 +134,9 @@ app.factory("MapService", $http => {
           if(post_id) $scope.soloPost = post;
           return post;
         }).filter(e => !!e);
+        console.log("no posts", !$scope.posts.length);
+        console.log("posts", $scope.posts);
+        console.log("solo", $scope.soloPost);
       });
     }
   }

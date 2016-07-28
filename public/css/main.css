@@ -189,18 +189,19 @@ main {
 
 /* Posts */
 .solo-container, .backFromPost {
-  position: absolute;
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
 }
 .solo-container {
+  position: absolute;
   pointer-events: none;
   z-index: 2;
 }
 
 .backFromPost {
+  position: fixed;
   z-index: 2;
 }
 .post {
