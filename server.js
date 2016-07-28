@@ -11,6 +11,7 @@ var theBoard = require('./routes/theBoard');
 var locations = require("./routes/locations");
 var comments = require("./routes/comments");
 var posts = require("./routes/posts");
+var friends = require('./routes/friends')
 
 // MVPlus
 // var knowledge = require('./routes/knowledge');
@@ -42,6 +43,7 @@ app.use('/theboard', theBoard);
 app.use("/locations", locations);
 app.use("/comments", comments);
 app.use("/posts", posts);
+app.use("/friends", friends);
 
 app.use("*", (req, res) => res.sendFile(__dirname + "/public/index.html"));
 
