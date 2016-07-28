@@ -248,5 +248,27 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
     });
   };
 
+  $scope.friends = {};
+  $scope.friends.getFriends = (id) => {
+    $http.get(`/friends/${id}`).then( data => {
+      console.log(data);
+    })
+  };
+  $scope.friends.showFriends = false;
+  $scope.friends.toggleShowFriends = () => {
+    $scope.friends.showFriends = !$scope.friends.showFriends;
+  };
+
+
+
+
+
+
+
+
+
+
+
+
 };
 makeBodyController.$inject = ['$scope','UsersService', 'apiInterceptor', 'NewCommentService', "NewPostService","$http"];
