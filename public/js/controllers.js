@@ -72,6 +72,7 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   $scope.profile.getProfileUser = function(id) {
     $scope.user.userPosts = [];
     $http.get(`/users/${id}`).then(function(data){
+      console.log(data);
       for (var i = 0; i < data.data.length; i++) {
         $scope.user.userPosts.push({
           id: data.data[i].id,
@@ -141,14 +142,20 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
     $scope.signup.show = !$scope.signup.show;
     $scope.locationFeature.showChangeLoc = false;
     $scope.searchFeature.showSearch = false;
+    if($scope.locationFeature.showChangeLoc || $scope.searchFeature.showSearch){
+      $scope.locationFeature.showChangeLoc = false;
+      $scope.searchFeature.showSearch = false;
+    }
   };
 
   $scope.signin = {};
   $scope.signin.show = false;
   $scope.signin.toggle = function() {
     $scope.signin.show = !$scope.signin.show;
-    $scope.locationFeature.showChangeLoc = false;
-    $scope.searchFeature.showSearch = false;
+    if($scope.locationFeature.showChangeLoc || $scope.searchFeature.showSearch){
+      $scope.locationFeature.showChangeLoc = false;
+      $scope.searchFeature.showSearch = false;
+    }
   };
 
   $scope.subnav = {};
@@ -167,14 +174,20 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
       console.log('function');
       $scope.searchFeature.showSearch = !$scope.searchFeature.showSearch;
       $scope.locationFeature.showChangeLoc = false;
+      $scope.signin.show = false;
+      $scope.signup.show = false;
+
     }
   };
   $scope.locationFeature = {
     showChangeLoc: false,
     toggleShowChangeLoc: function(){
       console.log('function');
+
       $scope.locationFeature.showChangeLoc = !$scope.locationFeature.showChangeLoc;
       $scope.searchFeature.showSearch = false;
+      $scope.signin.show = false;
+      $scope.signup.show = false;
     }
   };
 

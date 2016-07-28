@@ -7,7 +7,8 @@ function initMap(){
   map = new google.maps.Map(document.getElementById('map'), {
     center: mapConfig.center,
     mapTypeId: google.maps.MapTypeId.HYBRID,
-    zoom: 13
+    zoom: 13,
+    mapTypeControlOptions: { mapTypeIds: [] }
   });
   map.addListener("idle", () => mapConfig.onidle());
   if(mapConfig.onclick) map.addListener("click", mapConfig.onclick);
