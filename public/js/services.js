@@ -71,3 +71,74 @@ app.factory("NewCommentService", $http => $scope => ({
     $http.post("/api/comments", comment);
   }
 }));
+
+app.factory("MapService", $http => {
+  return {
+    home: {
+      setCenter: () => {
+        var isStored = localStorage.center && parseInt(localStorage.centerttl) > Date.now();
+        if(isStored) mapConfig.center = JSON.parse(localStorage.center);
+        else {
+          navigator.geolocation.getCurrentPosition(data => {
+            if(!data.coords) return;
+            mapConfig.center = {lat: data.coords.latitude, lng: data.coords.longitude};
+            if(map) map.panTo(mapConfig.center);
+            localStorage.center = JSON.stringify(mapConfig.center);
+            localStorage.centerttl = Date.now() + (1000 * 60 * 15);
+          });
+        }
+        if(map) map.panTo(mapConfig.center);
+      }
+    },
+    location: {
+      setCenter: () => {
+        var loc = window.location.pathname.split("/");
+        if(parseFloat(loc[1])){
+          mapConfig.center = {lat: parseFloat(loc[1]), lng: parseFloat(loc[2])};
+          if(map) map.panTo(mapConfig.center);
+        }
+        else {
+          $http.get(`http://maps.googleapis.com/maps/api/geocode/json?address=${loc[2]},${loc[1]}`).then(data => {
+            if(data.data.results[0]) mapConfig.center = data.data.results[0].geometry.location;
+            if(map) map.panTo(mapConfig.center);
+          });
+        }
+      }
+    },
+    post: {
+      setCenter: loc => {
+        if(!loc) loc = window.location.pathname.split("/").slice(1);
+        console.log(loc, window.location.pathname.split("/").slice(1));
+        mapConfig.center = {lat: parseFloat(loc[0]), lng: parseFloat(loc[1])};
+        if(map){
+          console.log("setting center", mapConfig.center);
+          map.panTo(mapConfig.center);
+        }
+      }
+    },
+    getPosts: $scope => {
+      console.log("get posts in bounds");
+      var loc = window.location.pathname.split("/");
+      var post_id = parseInt(loc[3]);
+      var bounds = map.getBounds();
+      if(!bounds) return;
+      bounds = {minLat: bounds.f.f, maxLat: bounds.f.b, minLng: bounds.b.b, maxLng: bounds.b.f};
+      $http.post("/api/locations", bounds).then(data => {
+        console.log(!data.data.posts);
+        if(!data.data.posts) return;
+        $scope.posts = data.data.posts.map(post => {
+          if(post_id && post.id !== post_id) return;
+          new google.maps.Marker({
+            position: {lat: parseFloat(post.lat), lng: parseFloat(post.lng)},
+            map: map,
+            title: post.title
+          });
+          post.media_url = post.media_url.split(",");
+          post.openImage = 0;
+          if(post_id) $scope.soloPost = post;
+          return post;
+        }).filter(e => !!e);
+      });
+    }
+  }
+});

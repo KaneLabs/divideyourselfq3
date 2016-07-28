@@ -97,13 +97,13 @@ main {
   position: relative;
   margin-top: 40px;
 }
-main.fixed {
+/*main.fixed {
   margin-top: 0;
   position: fixed;
   top: 40px;
   width: 100%;
   z-index: 2;
-}
+}*/
 
 #map-container {
   height: calc(100% - 80px);
@@ -188,12 +188,20 @@ main.fixed {
 }
 
 /* Posts */
-.backFromPost {
+.solo-container, .backFromPost {
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
+}
+.solo-container {
+  pointer-events: none;
+  z-index: 2;
+}
+
+.backFromPost {
+  z-index: 2;
 }
 .post {
   display: block;
@@ -279,61 +287,6 @@ main.fixed {
 .post-content {
   clear: both;
   padding: 10px 10px 30px 10px;
-}
-
-.post-comments {
-  text-align: left;
-}
-.comment {
-  display: block;
-  border-top: 1px solid black;
-  padding: 5px 0px;
-}
-.comment-profile {
-  padding: 10px;
-  height: 40px;
-  width: 40px;
-}
-.comment-heading {
-  display: inline-block;
-  width: 120px;
-  height: 60px;
-}
-.comment-username, .comment-timestamp {
-  width: 60%;
-  font-size: 14px;
-}
-.comment-username {
-  font-weight: 500;
-  padding-top: 10px;
-}
-.comment-comment {
-  display: inline-block;
-  padding: 10px;
-  width: calc(100% - 220px);
-}
-.comment div {
-  vertical-align: top;
-}
-
-.newComment textarea {
-  box-sizing: border-box;
-  padding: 10px;
-  width: 100%;
-  border-top: 1px solid black;
-  border-bottom: 0;
-  border-left: 0;
-  border-right: 0;
-}
-.newComment button {
-  border-top: 1px solid black;
-  border-bottom: 0;
-  border-left: 0;
-  border-right: 0;
-  width: 100%;
-  display: block;
-  text-align: center;
-  padding: 10px;
 }
 
 /* Profile */
