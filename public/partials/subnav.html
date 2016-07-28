@@ -2,12 +2,15 @@
   <input type="text" placeholder="Search Posts" ng-show="searchFeature.showSearch === true" ng-model="search"  class="searchbar">
   <input type="text" placeholder="Change Location" ng-show="locationFeature.showChangeLoc === true"  class="searchbar">
 </div>
-<div class="subnav" ng-show="!!user">
+<div class="subnav" ng-show="subnav.show">
   <div class="subnavSort">Sort by : <span>Date </span><span>Rating </span><span>Trending</span></div>
   <div class="subnavIcon">
     <i class="material-icons addPostIcon" ng-click="activateNewPost();toggleNewPost()">add</i>
   </div>
 </div>
+<aside class="sidenav" ng-show='sideNav.show'>
+  <p>hello</p>
+</aside>
 
 
 

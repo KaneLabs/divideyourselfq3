@@ -16,9 +16,8 @@
   <div class="signinSignupDiv" ng-click="signup.toggle()"><span>Sign Up</span></div> /
   <div class="signinSignupDiv" ng-click="signin.toggle()"><span>Sign In</span></div>
 </div>
-<!-- <div class="nav-link signout" ng-show="!!user" ng-click="profile.toggleShowProfile()">Profile</div> -->
 
-<div class="signout" ng-show="!!user" ng-click="profile.toggleShowProfile();profile.getProfileUser(user.id)">{{user.username || profile}}</div>
+<div class="signout" ng-show="!!user" ng-click="profile.toggle();profile.getUser(user.id)">{{user.username || profile}}</div>
 
 <form class="sign" ng-submit="submitSignIn()"  name="signform" ng-show="signin.show">
   <input ng-model="sign.email" type="text" placeholder="Enter Username or Email" required>
