@@ -151,6 +151,8 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
     $scope.searchFeature.showSearch = false;
   };
 
+  $scope.subnav = {};
+  $scope.subnav.show = false;
 
   // $scope.profile = {};
   // $scope.profile.showProfile = false;
