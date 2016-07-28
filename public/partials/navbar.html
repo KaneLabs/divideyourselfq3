@@ -20,7 +20,7 @@
 
 <div class="signout" ng-show="!!user" ng-click="profile.toggleShowProfile();profile.getProfileUser(user.id)">{{user.username || profile}}</div>
 
-<form class="sign" ng-submit="submitSignIn()"  name="signform" ng-show="signin.show" ng-if='!user'>
+<form class="sign" ng-submit="submitSignIn()"  name="signform" ng-show="signin.show">
   <input ng-model="sign.email" type="text" placeholder="Enter Username or Email" required>
   <input ng-model="sign.password" type="password" placeholder="Password"  required>
   <button type="submit">Submit</button>

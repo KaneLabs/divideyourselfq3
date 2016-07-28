@@ -29,9 +29,9 @@ function linkBuilder(post, backCheck){
 
 app.controller("BodyController", makeBodyController);
 function makeBodyController($scope, UsersService, apiInterceptor, NewCommentService, NewPostService, $http){
-  $scope.commServ = NewCommentService($scope),
+  if(localStorage.userToken) $scope.user = jwt_decode(localStorage.userToken).user;
+  $scope.commServ = NewCommentService($scope);
   $scope.postServ = NewPostService($scope);
-  $scope.ok = "ok";
   $scope.newPost = {};
   $scope.togglePosts = () => {
     $scope.profile.showProfile = false;
@@ -69,6 +69,8 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   $scope.profile.toggleShowProfile = function() {
     $scope.profile.showProfile = !$scope.profile.showProfile;
   };
+
+  
   $scope.profile.getProfileUser = function(id) {
     $scope.user.userPosts = [];
     $http.get(`/users/${id}`).then(function(data){
