@@ -150,6 +150,7 @@ subnav input {
 }
 
 .signinSignupContainer{
+  /*font-size: 12px;*/
   color: white;
   opacity: .85;
   float: right;
