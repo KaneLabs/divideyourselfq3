@@ -13,8 +13,6 @@ body {
 ::-moz-scrollbar {display: none;}
 .material-icons {font-size: 20px; padding: 10px; cursor: pointer;}
 
-/*<<<<<<< HEAD
-=======*/
 /* Nav */
 /*navbar {
   height: 40px;
@@ -66,7 +64,7 @@ navbar input {
   float: right;
   font-size: 0;
   max-height: 40px;
-  /*overflow: hidden;*/
+  overflow: hidden;
   width: 200px;
 }
 .sign.open {
@@ -103,8 +101,7 @@ navbar input {
   box-sizing: border-box;
   padding: 10px;
   width: 100%;
-}
->>>>>>> 12fc292cfbb3c17edf0f99bfb169434dada14aa2*/
+}*/
 
 /* Main */
 main {
@@ -305,7 +302,7 @@ main {
 
 /* Profile */
 .profile * {
-  margin: 2%;
+  margin: 1%;
 }
 .profile {
   position: fixed;
@@ -402,9 +399,14 @@ footer div:hover {background: black;}
   flex-flow: column;
 }
 .vote-container{
+  vertical-align: top;
   float: right;
 }
 
 .single-voting{
    margin-left: 33%;
+}
+
+.pointer {
+  cursor: pointer;
 }

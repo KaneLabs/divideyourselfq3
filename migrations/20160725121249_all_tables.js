@@ -55,10 +55,15 @@ exports.up = function(knex, Promise) {
     //   table.integer('rating');
     // }),
     // Create 'users_favorites' table
-    knex.schema.createTable('users_favorites', function(table){
+    knex.schema.createTable('users_favorites', (table) => {
       table.increments();
       table.integer('post_id').references('id').inTable('posts');
       table.integer('user_id').references('id').inTable('users');
+    }),
+    knex.schema.createTable('users_friends', (table) => {
+      table.increments();
+      table.integer('user_id').references('id').inTable('users');
+      table.integer('friend_id').references('id').inTable('users');
     })
   ]);
 };
@@ -71,6 +76,7 @@ exports.down = function(knex, Promise) {
     knex.raw('drop table if exists tribes cascade'),
     knex.raw('drop table if exists posts_votes cascade'),
     knex.raw('drop table if exists comments_votes cascade'),
-    knex.raw('drop table if exists users_favorites cascade')
+    knex.raw('drop table if exists users_favorites cascade'),
+    knex.raw('drop table if exists users_friends cascade')
   ]);
 };

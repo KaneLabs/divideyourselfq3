@@ -18,10 +18,12 @@
   <div class="signinSignupDiv" ng-click="signin.toggle()"><span>Sign In</span></div>
   <!-- <i class="material-icons menuArrow">arrow_drop_down</i> -->
 </div>
+
 <!-- <div class="nav-link signout" ng-show="!!user" ng-click="profile.toggleShowProfile()">Profile</div> -->
 <i class="material-icons menuArrow" ng-show="!!user">arrow_drop_down</i>
-<div class="signout" ng-show="!!user" ng-click="profile.toggleShowProfile();profile.getProfileUser(user.id)">{{user.username || profile}} </div>
 
+
+<div class="signout" ng-show="!!user" ng-click="profile.toggleShowProfile();profile.getUser(user.id)">{{user.username || profile}}</div>
 
 
 <form class="sign" ng-submit="submitSignIn()"  name="signform" ng-show="signin.show" ng-if='!user'>
