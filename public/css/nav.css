@@ -292,8 +292,8 @@ box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
     float: right;
 }
 .addPostIcon {
-  /*box-sizing: padding-box;*/
-  /*display: inline-block;*/
+  box-sizing: border-box;
+  display: inline-block;
   color: white;
   vertical-align: top;
   opacity: .85;

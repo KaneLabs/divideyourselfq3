@@ -6,7 +6,7 @@
 <div class="subnav" ng-show="subnav.show">
   <div class="subnavSort">Sort by : <span>Date </span><span ng-click="togglePosts()">Rating </span><span>Trending</span></div>
   <div class="subnavIcon">
-    <i class="material-icons addPostIcon" ng-click="activateNewPost();toggleNewPost()">add</i>
+    <i class="material-icons addPostIcon"  ng-class="{newPostActive: newPostActive}" ng-click="postServ.toggleLock()">add</i>
   </div>
 </div>
 <aside class="sidenav" ng-show='sideNav.show'>

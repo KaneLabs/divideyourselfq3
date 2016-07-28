@@ -25,7 +25,7 @@
   <script src="js/interceptors.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBQxTdpV5zVD6Yt-DufELYVrJrnz7JuMo&callback=initMap" defer></script>
 </head>
-<body ng-controller="BodyController" ng-class="{showPosts: showPosts, showNewPost: showNewPost, newPostActive: newPostActive}">
+<body ng-controller="BodyController" ng-class="{showPosts: showPosts, showNewPost: showNewPost}">
   <navbar></navbar>
   <subnav></subnav>
   <div id="map-container">
@@ -44,9 +44,5 @@
   </div>
   <main ui-view></main>
   <main dy-profile></main>
-  <!-- <footer>
-    <div ng-click="postServ.toggleLock()" ng-show="!!user">New Post</div>
-    <div ng-click="togglePosts()">Top Posts</div>
-  </footer> -->
 </body>
 </html>

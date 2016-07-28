@@ -9,6 +9,7 @@ body {
   margin: 0;
   overflow: hidden;
 }
+
 ::-webkit-scrollbar {display: none;}
 ::-moz-scrollbar {display: none;}
 .material-icons {font-size: 20px; padding: 10px; cursor: pointer;}
@@ -137,8 +138,7 @@ main {
 }
 
 .newPost {
-  font-size: 0;
-  transition: .2s all;
+  /*transition:opacity 1s linear;*/
   pointer-events: none;
   position: fixed;
   top: 200px;
@@ -146,13 +146,17 @@ main {
   transform: translate3d(0,100vh,0);
   z-index: 10;
 }
+
+.newPostActive {
+  background-color: #D84315;
+}
+
 .showNewPost .newPost {
   transform: translate3d(0,0,0);
   z-index: 2;
 }
 .newPost form {
   margin: 0 auto;
-  pointer-events: auto;
   width: 90%;
   max-width: 600px;
 }
