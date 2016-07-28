@@ -1,5 +1,6 @@
 <!-- Display signed-in user -->
 <div class="profile" ng-show="profile.profileView === 'activeUser'">
+  <button ng-click="profile.hideProfile()" class="close-profile-button">X</button>
 <!-- <div class="profile"> -->
   <div class="profile-details">
     <div class='profile-img'>
@@ -8,7 +9,6 @@
       <h3>{{ user.username }}</h3>
     </div>
     <div class='user-details'>
-      <button ng-click="profile.hideProfile()">X</button>
       <h4>{{ user.email }}</h4>
       <!-- TODO Add change password feature -->
       <h5 style="cursor: pointer">Change Password</h5>
@@ -27,6 +27,7 @@
 
 <!-- Display different users -->
 <div class="profile" ng-show="profile.profileView === 'profileUser'">
+  <button ng-click="profile.hideProfile()" class="close-profile-button">X</button>
   <div class="profile-details">
     <div class='profile-img'>
       <img ng-src="{{ profile.profileUser.profile_url }}" alt="">
@@ -34,7 +35,6 @@
       <h3>{{ profile.profileUser.username }}</h3>
     </div>
     <div class='user-details'>
-      <button ng-click="profile.hideProfile()">X</button>
       <h4>{{ profile.profileUser.email }}</h4>
     </div>
     <div class="post-details">
