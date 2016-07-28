@@ -16,8 +16,8 @@
           <a ui-sref="post(linkBuilder(soloPost))" class="post-title">{{soloPost.title}}</a>
           <div class="separator">by</div>
           <div class="post-username">{{soloPost.username}}</div>
-          <div class="separator">of</div>
-          <div class="post-usertribe">{{soloPost.usertribe}}</div>
+          <div class="separator" ng-show="soloPost.usertribe">of</div>
+          <div class="post-usertribe" ng-show="soloPost.usertribe">{{soloPost.usertribe}}</div>
         </div>
         <div class="vote-container">
           <div class="voting">
