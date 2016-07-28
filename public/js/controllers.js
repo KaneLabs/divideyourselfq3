@@ -232,7 +232,7 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   $scope.locationFeature = {
     showChangeLoc: false,
     toggleShowChangeLoc: function(){
-      console.log('function');
+      // console.log('function');
 
       $scope.locationFeature.showChangeLoc = !$scope.locationFeature.showChangeLoc;
       $scope.searchFeature.showSearch = false;

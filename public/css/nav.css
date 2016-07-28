@@ -325,6 +325,42 @@ box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   z-index: 4;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   /*transition: all 0.3s cubic-bezier(.25,.8,.25,1);*/
+  /*display: flex;*/
+  /*flex-flow: row-reverse;*/
+  justify-content: flex-end;
+  /*text-align: right;*/
+}
+hr {
+  width: 90%;
+  opacity: 0.5;
+}
+.sidenav-user {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.sidenav-user img {
+  width: 30px;
+  background: rgba(255,255,255,0.85);
+  border-radius: 15px;
+  margin-left: 20px;
+}
+.sidenav-user i {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 10px;
+  height: 10px;
+  border-radius: 15px;
+  background: rgba(255,255,255,0.85);
+  margin-left: 20px;
+}
+.sidenav p {
+  color: rgba(255,255,255,0.87);
+  padding-left: 15px;
+}
+.sidenav .signout, .sidenav .sidenav-friends {
+  padding-left: 50px;
 }
 
 .sidenav:hover {
