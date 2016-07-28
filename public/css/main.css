@@ -282,9 +282,6 @@ main {
   font-weight: 500;
 }
 
-.post-respect {
-  float: right;
-}
 .post-content {
   clear: both;
   padding: 10px 10px 30px 10px;
@@ -391,4 +388,8 @@ footer div:hover {background: black;}
 .vote-container{
   float: right;
   display: inline-block;
+}
+
+.single-voting{
+   margin-left: 33%;
 }

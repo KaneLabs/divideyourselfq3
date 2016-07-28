@@ -11,6 +11,7 @@ var Magic = (number, callback) => {
 };
 
 router.post("/comments", (req, res) => {
+  
   knex("comments")
     .insert({
       user_id: req.body.user_id,
