@@ -18,6 +18,7 @@ router.post('/:id/add', (req, res) => {
     console.log(data);
     res.send(data);
   })
+});
 //   knex('users_friends')
 //   .insert('')
 // })
