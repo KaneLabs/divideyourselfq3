@@ -178,12 +178,8 @@ subnav input {
 }
 
 .searchbar {
-<<<<<<< HEAD
-  height: 38px;
-=======
   height: 40px;
   background-color: #303030;
->>>>>>> 57b88b9acf290292d65b67aeae4e414bc116d789
   position: fixed;
   top: 42px;
   width: 100%;
