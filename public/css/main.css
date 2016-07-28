@@ -13,93 +13,6 @@ body {
 ::-moz-scrollbar {display: none;}
 .material-icons {font-size: 20px; padding: 10px; cursor: pointer;}
 
-/* Nav */
-/*navbar {
-  height: 40px;
-  background: #212121;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 3;
-  border-bottom: 2px solid #212121;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-}
-
-navbar:hover {
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-}
-
-navbar input {
-  box-sizing: border-box;
-  border: 0;
-  height: 39px;
-  padding: 10px;
-  width: calc(100% - 351px);
-}
-.nav-link {
-  color: white;
-  cursor: pointer;
-  display: inline-block;
-  padding: 10px;
-  max-width: 150px;
-}
-.nav-link:first-child {
-  padding: 10px 20px;
-}
-
-.signout {
-  float: right;
-  padding: 10px 20px;
-  color: white;
-  opacity: .85;
-}
-
-.signout:hover {
-  cursor: pointer;
-  border-bottom: 1px solid white;
-}
-
-.sign {
-
-}
-
-.sign.open {
-  max-height: 200px;
-}*/
-
-/*.clear-sign {
-  color: white;
-  float: right;
-  vertical-align: top;
-}
-
-.sign .nav-link {
-  border-left: 1px solid white;
-  overflow: hidden;
-  padding: 12px;
-  text-align: center;
-  transition: .2s all;
-  width: 50%;
-}
-.sign .nav-link.hide {
-  border: 0;
-  padding: 10px 0px;
-  width: 0px;
-}*/
-
-/*.sign input, .sign button, .sign div {
-  box-sizing: border-box;
-  font-size: 14px;
-  height: 38px;
-}
-
-.sign input, .sign button {
-  box-sizing: border-box;
-  padding: 10px;
-  width: 100%;
-}*/
-
 /* Main */
 main {
   height: calc(100% - 40px);
@@ -203,12 +116,10 @@ main {
   pointer-events: none;
   z-index: 2;
 }
-
 .backFromPost {
   position: fixed;
   z-index: 2;
 }
-
 .post-container {
   position: relative;
   max-width: 900px;
@@ -217,7 +128,6 @@ main {
   margin: 0 auto;
   padding: 40px 0;
 }
-
 .post {
   display: block;
   border-radius: 5px;
@@ -228,7 +138,6 @@ main {
   background: white;
   border-radius: 0px 0px 5px 5px;
 }
-
 .carosel {
   border-radius: 5px 5px 0px 0px;
   background: rgba(20,20,20,.8);
@@ -254,7 +163,6 @@ main {
   color: rgb(220,220,220);
   font-size: 60px;
 }
-
 .carosel:hover .next-image, .carosel:hover .prev-image {
   opacity: 1;
 }
@@ -413,12 +321,13 @@ footer div {
   height: 100%;
   padding: 10px;
 }
-footer div:hover {background: black;}
+footer div:hover {
+  background: black;
+}
 .newPostActive footer div:first-child {
   color: black;
   background: white;
 }
-
 .voting{
   width: 100%;
   display:flex;
@@ -429,11 +338,9 @@ footer div:hover {background: black;}
   vertical-align: top;
   float: right;
 }
-
 .single-voting{
    margin-left: 33%;
 }
-
 .pointer {
   cursor: pointer;
 }
