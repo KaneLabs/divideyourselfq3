@@ -140,6 +140,7 @@ main.fixed {
   top: 200px;
   width: 100%;
   transform: translate3d(0,100vh,0);
+  z-index: 10;
 }
 .showNewPost .newPost {
   transform: translate3d(0,0,0);

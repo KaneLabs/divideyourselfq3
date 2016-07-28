@@ -13,15 +13,15 @@
   <i class="material-icons navIcon" ng-click="searchFeature.toggleShowSearch()">search</i>
 </div>
 <div class='signinSignupContainer'>
-  <div class="signinSignupDiv" ng-click="signup.toggleNewProfile();openSign('up')"><span>Sign Up</span></div> /
-  <div class="signinSignupDiv" ng-click="signin.toggle();openSign('in')"><span>Sign In</span></div>
+  <div class="signinSignupDiv" ng-click="signup.toggle()"><span>Sign Up</span></div> /
+  <div class="signinSignupDiv" ng-click="signin.toggle()"><span>Sign In</span></div>
 </div>
 <!-- <div class="nav-link signout" ng-show="!!user" ng-click="profile.toggleShowProfile()">Profile</div> -->
 
 <!-- <div class="nav-link signout" ng-show="!!user" ng-click="profile.toggleShowProfile();profile.getProfileUser(user.id)">Profile</div> -->
 
 <!-- <div class="nav-link signout" ng-show="!!user" ng-click="signOut()">Signout</div> -->
-<form class="sign" ng-submit="submitSign()"  name="signform" ng-show="signin.show" ng-show="!user">
+<form class="sign" ng-submit="submitSignIn()"  name="signform" ng-show="signin.show" ng-if='!user'>
   <input ng-model="sign.email" type="text" placeholder="Enter Username or Email" required>
   <input ng-model="sign.password" type="password" placeholder="Password"  required>
   <button type="submit">Submit</button>
