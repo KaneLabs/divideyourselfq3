@@ -396,6 +396,7 @@ footer div:hover {background: black;}
   flex-flow: column;
 }
 .vote-container{
+  vertical-align: top;
   float: right;
 }
 
