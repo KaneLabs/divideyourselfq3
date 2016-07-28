@@ -393,3 +393,7 @@ footer div:hover {background: black;}
 .single-voting{
    margin-left: 33%;
 }
+
+.pointer {
+  cursor: pointer;
+}

@@ -18,7 +18,7 @@
 </div>
 <!-- <div class="nav-link signout" ng-show="!!user" ng-click="profile.toggleShowProfile()">Profile</div> -->
 
-<div class="nav-link signout" ng-show="!!user" ng-click="profile.toggleShowProfile();profile.getProfileUser(user.id)">Profile</div>
+<div class="nav-link signout" ng-show="!!user" ng-click="profile.toggleShowProfile();profile.getUser(user.id)">Profile</div>
 
 <div class="nav-link signout" ng-show="!!user" ng-click="signOut()">Signout</div>
 <form class="sign" ng-submit="submitSignIn()"  name="signform" ng-show="signin.show" ng-if='!user'>
