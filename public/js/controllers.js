@@ -68,9 +68,16 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   $scope.profile = {};
   $scope.profile.activeUser = {};
   $scope.profile.profileUser = {};
+  $scope.profile.profileView = null;
   $scope.profile.showProfile = false;
-  $scope.profile.toggleShowProfile = () => {
-    $scope.profile.showProfile = !$scope.profile.showProfile;
+  $scope.profile.toggleProfile = (id) => {
+    if ($scope.profile.isActiveUser(id) && $scope.profile.profileView === "activeUser") {
+      $scope.profile.profileView = null;
+    } else if ($scope.profile.isActiveUser(id) && $scope.profile.profileView === null) {
+      $scope.profile.profileView = "activeUser";
+    } else {
+      $scope.profile.profileView = "profileUser";
+    }
   };
   $scope.profile.getUser = (id) => {
     if ($scope.profile.isActiveUser(id)) {
@@ -112,6 +119,9 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
     } else {
       return false;
     };
+  };
+  $scope.profile.hideProfile = () => {
+    $scope.profile.profileView = null;
   };
 
   $scope.sign = {};
