@@ -106,18 +106,37 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   };
 
   $scope.sign = {};
-  $scope.openSign = type => {
-    $scope.sign.type = ($scope.sign.type === type) ? "" : type;
-  };
-  $scope.submitSign = () => {
-    // send data to server
+  // $scope.openSign = type => {
+  //   $scope.sign.type = ($scope.sign.type === type) ? "" : type;
+  // };
+  // $scope.submitSign = () => {
+  //   // send data to server
+  //   var data = $scope.sign;
+  //   UsersService.sign(data.type, data.email, data.password, data.username, updateUserStatus);
+  //   if ($scope.sign.type === 'up') {
+  //     $scope.profile.showProfile = true;
+  //   }
+  //   $scope.sign = {};
+  // };
+
+  $scope.submitSignIn = () => {
     var data = $scope.sign;
-    UsersService.sign(data.type, data.email, data.password, data.username, updateUserStatus);
-    if ($scope.sign.type === 'up') {
-      $scope.profile.showProfile = true;
-    }
+    UsersService.signIn(data.email, data.password, data.username, updateUserStatus);
+
     $scope.sign = {};
-  };
+
+  }
+
+  $scope.submitSignUp = () => {
+    var data = $scope.sign;
+    UsersService.signUp(data.email, data.password, data.username, updateUserStatus);
+    $scope.profile.showProfile = true;
+
+    $scope.sign = {};
+
+  }
+
+
   $scope.signOut = () => {
     $scope.profile.showProfile = false;
     $scope.user = null;
@@ -134,9 +153,44 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   };
 
   $scope.signup = {};
-  $scope.signup.showNewProfile = false;
-  $scope.signup.toggleNewProfile = function() {
-    $scope.signup.showNewProfile = !$scope.signup.showNewProfile;
+  $scope.signup.show = false;
+  $scope.signup.toggle = function() {
+    $scope.signup.show = !$scope.signup.show;
+    $scope.locationFeature.showChangeLoc = false;
+    $scope.searchFeature.showSearch = false;
+  };
+
+  $scope.signin = {};
+  $scope.signin.show = false;
+  $scope.signin.toggle = function() {
+    $scope.signin.show = !$scope.signin.show;
+    $scope.locationFeature.showChangeLoc = false;
+    $scope.searchFeature.showSearch = false;
+  };
+
+
+  // $scope.profile = {};
+  // $scope.profile.showProfile = false;
+  // $scope.profile.toggleShowProfile = function() {
+  //   console.log('function');
+  //   $scope.profile.showProfile = !$scope.profile.showProfile;
+  // };
+
+  $scope.searchFeature = {
+    showSearch: false,
+    toggleShowSearch: function(){
+      console.log('function');
+      $scope.searchFeature.showSearch = !$scope.searchFeature.showSearch;
+      $scope.locationFeature.showChangeLoc = false;
+    }
+  };
+  $scope.locationFeature = {
+    showChangeLoc: false,
+    toggleShowChangeLoc: function(){
+      console.log('function');
+      $scope.locationFeature.showChangeLoc = !$scope.locationFeature.showChangeLoc;
+      $scope.searchFeature.showSearch = false;
+    }
   };
   
   $scope.upvote = (id, type, post) => {

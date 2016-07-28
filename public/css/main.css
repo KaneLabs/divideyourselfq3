@@ -2,9 +2,10 @@
 html, body {
   height: 100%;
   width: 100%;
+  font-family: 'Roboto Condensed', sans-serif;
 }
 body {
-  font-family: "Helvetica Neue", "Segoe UI";
+  /*font-family: "Helvetica Neue", "Segoe UI";*/
   margin: 0;
   overflow: hidden;
 }
@@ -15,12 +16,13 @@ body {
 /* Nav */
 navbar {
   height: 40px;
-  background: rgb(20,20,20);
+  background: #212121;
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 3;
   box-shadow: 0px 0px 20px 5px rgba(0,0,0,.5);
+  border-bottom: 2px solid #212121;
 }
 navbar input {
   box-sizing: border-box;
@@ -49,15 +51,14 @@ navbar input {
   float: right;
   font-size: 0;
   max-height: 40px;
-  overflow: hidden;
-  transition: .2s all;
+  /*overflow: hidden;*/
   width: 200px;
 }
 .sign.open {
   max-height: 200px;
 }
 
-.clear-sign {
+/*.clear-sign {
   color: white;
   float: right;
   vertical-align: top;
@@ -75,12 +76,12 @@ navbar input {
   border: 0;
   padding: 10px 0px;
   width: 0px;
-}
+}*/
 
 .sign input, .sign button, .sign div {
   box-sizing: border-box;
   font-size: 14px;
-  height: 40px;
+  height: 38px;
 }
 
 .sign input, .sign button {
@@ -139,6 +140,7 @@ main.fixed {
   top: 200px;
   width: 100%;
   transform: translate3d(0,100vh,0);
+  z-index: 10;
 }
 .showNewPost .newPost {
   transform: translate3d(0,0,0);
