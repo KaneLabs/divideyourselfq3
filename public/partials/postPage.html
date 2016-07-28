@@ -19,7 +19,7 @@
           <div class="separator" ng-show="soloPost.usertribe">of</div>
           <div class="post-usertribe" ng-show="soloPost.usertribe">{{soloPost.usertribe}}</div>
         </div>
-        <div class="vote-container">
+        <div class="vote-container" ng-show="user">
           <div class="voting">
             <span class="material-icons voting single-voting" ng-click="upvote(post.id, 'posts', soloPost)">keyboard_arrow_up</span>
               <span class="post-respect">{{soloPost.points || 0}} respect</span>

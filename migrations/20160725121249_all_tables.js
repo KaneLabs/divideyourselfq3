@@ -4,7 +4,7 @@ exports.up = (knex, Promise) => {
     // Create 'users' table
     knex.schema.createTable('users', (table) => {
       table.increments();
-      table.integer('tribe_id').references('id').inTable('tribes').onDelete("CASCADE");
+      table.integer('tribe_id');
       table.string('email').unique().notNullable();
       table.string('username').unique().notNullable();
       table.string('password').notNullable();
@@ -63,7 +63,6 @@ exports.up = (knex, Promise) => {
     knex.schema.createTable('users_friends', (table) => {
       table.increments();
       table.integer('user_id');
-      //Make this unique, stupid...
       table.integer('friend_id');
       table.string('friend_firstname');
       table.string('profile_url');
