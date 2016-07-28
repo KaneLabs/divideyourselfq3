@@ -75,16 +75,16 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   $scope.profile.getUser = (id) => {
     if ($scope.profile.isActiveUser(id)) {
       $scope.profile.activeUser = $scope.user;
-      $scope.profile.activeUser.posts = $scope.profile.getUserPosts(id);
+      $scope.profile.activeUser.posts = $scope.profile.getUserPosts(id,$scope.profile.isActiveUser(id));
     } else {
       $http.get(`/users/${id}`).then( data => {
         $scope.profile.profileUser = data.data;
-        $scope.profile.profileUser.posts = $scope.profile.getUserPosts(id);
+        $scope.profile.profileUser.posts = $scope.profile.getUserPosts(id,$scope.profile.isActiveUser(id));
       });
     };
   };
 
-  $scope.profile.getUserPosts = (id) => {
+  $scope.profile.getUserPosts = (id,isActive) => {
     var userPosts = [];
     $http.get(`/users/${id}/posts`).then(function(data){
       for (var i = 0; i < data.data.length; i++) {
@@ -100,7 +100,11 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
           points: data.data[i].points
         })
       };
-      return userPosts;
+      if (isActive) {
+        $scope.profile.activeUser.posts = userPosts;
+      } else {
+        $scope.profile.profileUser.posts = userPosts;
+      };
     });
   };
   $scope.profile.isActiveUser = (id) => {
