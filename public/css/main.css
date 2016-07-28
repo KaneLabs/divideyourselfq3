@@ -342,6 +342,12 @@ main {
   display: flex;
   flex-flow: column nowrap;
 }
+.profile .user-details button {
+  width: 20px;
+  height: 20px;
+  border: none;
+  align-self: flex-end;
+}
 .post-details {
   display: flex;
   width: 100%;
