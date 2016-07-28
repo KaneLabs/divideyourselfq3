@@ -1,34 +1,36 @@
 <a ui-sref="city(linkBuilder(soloPost, 1))" class="backFromPost"></a>
 <div class="solo-container">
-  <div class="solo-post post">
-    <div class="carosel">
-      <div class="prev-image" ng-click="prevImage(soloPost)" ng-show="soloPost.openImage > 0">
-        <i class="material-icons">keyboard_arrow_left</i>
+  <div class="post-container">
+    <div class="solo-post post">
+      <div class="carosel">
+        <div class="prev-image" ng-click="prevImage(soloPost)" ng-show="soloPost.openImage > 0">
+          <i class="material-icons">keyboard_arrow_left</i>
+        </div>
+        <img class="post-image" ng-repeat="url in soloPost.media_url" ng-src="{{url}}" ng-class="{open: testOpenImage(soloPost, $index)}">
+        <div class="next-image" ng-click="nextImage(soloPost)" ng-show="soloPost.openImage < soloPost.media_url.length - 1">
+          <i class="material-icons">keyboard_arrow_right</i>
+        </div>
       </div>
-      <img class="post-image" ng-repeat="url in soloPost.media_url" ng-src="{{url}}" ng-class="{open: testOpenImage(soloPost, $index)}">
-      <div class="next-image" ng-click="nextImage(soloPost)" ng-show="soloPost.openImage < soloPost.media_url.length - 1">
-        <i class="material-icons">keyboard_arrow_right</i>
-      </div>
-    </div>
-    <div class="post-info">
-      <div class="post-heading">
-        <a ui-sref="post(linkBuilder(soloPost))" class="post-title">{{soloPost.title}}</a>
-        <div class="separator">by</div>
-        <div class="post-username">{{soloPost.username}}</div>
-        <div class="separator">of</div>
-        <div class="post-usertribe">{{soloPost.usertribe}}</div>
-      </div>
-      <div class="post-respect">{{soloPost.points || 0}} respect</div>
-      <div class="post-content">{{soloPost.body}}</div>
-      <div class="post-comments-toggle" ng-click="soloPost.commentsClosed = !soloPost.commentsClosed">
-        {{soloPost.commentsClosed ? 'Hide' : 'Show'}} {{soloPost.comments.length}} Comment{{soloPost.comments.length === 1 ? '' : 's'}}
-      </div>
-      <div class="post-comments" ng-show="!soloPost.commentsClosed">
-        <form class="newComment" ng-show="!!user" ng-submit="commServ.create(soloPost)">
-          <textarea rows="4" placeholder="Write a Comment" ng-model="soloPost.newComment" required></textarea>
-          <button type="submit">Add Comment</button>
-        </form>
-        <comment class="comment" ng-repeat="comment in soloPost.comments | orderBy: '-timestamp'"></comment>
+      <div class="post-info">
+        <div class="post-heading">
+          <a ui-sref="post(linkBuilder(soloPost))" class="post-title">{{soloPost.title}}</a>
+          <div class="separator">by</div>
+          <div class="post-username">{{soloPost.username}}</div>
+          <div class="separator">of</div>
+          <div class="post-usertribe">{{soloPost.usertribe}}</div>
+        </div>
+        <div class="post-respect">{{soloPost.points || 0}} respect</div>
+        <div class="post-content">{{soloPost.body}}</div>
+        <div class="post-comments-toggle" ng-click="soloPost.commentsClosed = !soloPost.commentsClosed">
+          {{soloPost.commentsClosed ? 'Hide' : 'Show'}} {{soloPost.comments.length}} Comment{{soloPost.comments.length === 1 ? '' : 's'}}
+        </div>
+        <div class="post-comments" ng-show="!soloPost.commentsClosed">
+          <form class="newComment" ng-show="!!user" ng-submit="commServ.create(soloPost)">
+            <textarea rows="4" placeholder="Write a Comment" ng-model="soloPost.newComment" required></textarea>
+            <button type="submit">Add Comment</button>
+          </form>
+          <comment class="comment" ng-repeat="comment in soloPost.comments | orderBy: '-timestamp'"></comment>
+        </div>
       </div>
     </div>
   </div>
