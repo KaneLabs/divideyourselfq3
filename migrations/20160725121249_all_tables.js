@@ -63,8 +63,9 @@ exports.up = (knex, Promise) => {
     knex.schema.createTable('users_friends', (table) => {
       table.increments();
       table.integer('user_id');
+      //Make this unique, stupid...
       table.integer('friend_id');
-      table.string('friend_username');
+      table.string('friend_firstname');
       table.string('profile_url');
     })
   ]);

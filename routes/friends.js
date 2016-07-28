@@ -23,7 +23,7 @@ router.post('/:id/add', (req, res) => {
     .insert({
       user_id: user.user.id,
       friend_id: req.params.id,
-      friend_username: newFriend.firstname,
+      friend_firstname: newFriend.firstname,
       profile_url: newFriend.profile_url
     }).returning('*')
     .then((inserted) => {
