@@ -13,6 +13,10 @@ app.directive("navbar", () => ({
   templateUrl: "partials/navbar.html"
 }));
 
+app.directive("subnav", () => ({
+  templateUrl: "partials/subnav.html"
+}));
+
 app.directive("newpost", () => ({
   templateUrl: "partials/newpost.html"
 }));
