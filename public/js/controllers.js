@@ -142,20 +142,16 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
     $scope.signup.show = !$scope.signup.show;
     $scope.locationFeature.showChangeLoc = false;
     $scope.searchFeature.showSearch = false;
-    if($scope.locationFeature.showChangeLoc || $scope.searchFeature.showSearch){
-      $scope.locationFeature.showChangeLoc = false;
-      $scope.searchFeature.showSearch = false;
-    }
+    $scope.signin.show = false;
   };
 
   $scope.signin = {};
   $scope.signin.show = false;
   $scope.signin.toggle = function() {
     $scope.signin.show = !$scope.signin.show;
-    if($scope.locationFeature.showChangeLoc || $scope.searchFeature.showSearch){
-      $scope.locationFeature.showChangeLoc = false;
-      $scope.searchFeature.showSearch = false;
-    }
+    $scope.locationFeature.showChangeLoc = false;
+    $scope.searchFeature.showSearch = false;
+    $scope.signup.show = false;
   };
 
   $scope.subnav = {};
