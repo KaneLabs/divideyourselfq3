@@ -78,6 +78,8 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
     $scope.sideNav.show = !$scope.sideNav.show;
     if($scope.sideNav.show === true){
       $scope.subnav.show = false;
+      $scope.locationFeature.showChangeLoc = false;
+      $scope.searchFeature.showSearch = false;
     }else {
       $scope.subnav.show = true;
     }
