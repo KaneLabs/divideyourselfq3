@@ -166,19 +166,18 @@ subnav input {
 
 .subnav {
   height: 38px;
-  background: rgb(80,80,80);
+  background: #303030;
   position: fixed;
   top: 38px;
   width: 100%;
   z-index: 3;
 }
 .subnav:hover {
-  box-shadow: 0px 0px 20px 5px rgba(0,0,0,.5);
+  box-shadow: 0px 0px 20px 5px rgba(0,0,0,.85);
 }
 
 .searchbar {
   height: 38px;
-  background-color: #303030;
   position: fixed;
   top: 38px;
   width: 100%;
@@ -276,4 +275,23 @@ subnav input {
   color: white;
   vertical-align: top;
   opacity: .85;
+}
+@media(max-width: 440px){
+  .sidenav{
+    width: 100%;
+  }
+}
+
+@media(min-width: 420px){
+  .sidenav{
+    width: 140px;
+  }
+}
+
+.sidenav{
+  position: absolute;
+  right: 0;
+  top: 42px;
+  background-color: #303030;
+  z-index: 4
 }
