@@ -66,10 +66,14 @@ app.factory("NewCommentService", $http => $scope => ({
       timestamp: Date.now().toString(),
       points: 1
     };
-    post.comments.push(comment);
     console.log(post.comments);
     post.newComment = "";
-    $http.post("/comments/create", comment);
+    $http.post("/comments/create", comment).then((data) => {
+      comment.id = data.data[0];
+      console.log(comment);
+      post.comments.push(comment);
+
+    });
   }
 }));
 
