@@ -1,4 +1,6 @@
-<div class="profile">
+<!-- Display signed-in user -->
+<div class="profile" ng-show="profile.profileView === 'activeUser'">
+<!-- <div class="profile"> -->
   <div class="profile-details">
     <div class='profile-img'>
       <img ng-src="{{ user.profile_url }}" alt="">
@@ -6,6 +8,7 @@
       <h3>{{ user.username }}</h3>
     </div>
     <div class='user-details'>
+      <button ng-click="profile.hideProfile()">X</button>
       <h4>{{ user.email }}</h4>
       <!-- TODO Add change password feature -->
       <h5 style="cursor: pointer">Change Password</h5>
@@ -14,6 +17,30 @@
       <h3>Posts by {{ user.username }}</h3>
       <p ng-show="profile.activeUser.posts <= 0">Click "New Post" to get started!</p>
       <div class="post-preview" ng-repeat="post in profile.activeUser.posts">
+        <h4>{{ post.title }}</h4>
+        <img ng-src="{{ post.media_url[0] }}" alt="">
+        <p>{{ post.body }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Display different users -->
+<div class="profile" ng-show="profile.profileView === 'profileUser'">
+  <div class="profile-details">
+    <div class='profile-img'>
+      <img ng-src="{{ profile.profileUser.profile_url }}" alt="">
+      <h3>{{ profile.profileUser.firstname }} {{ profile.profileUser.lastname }}</h3>
+      <h3>{{ profile.profileUser.username }}</h3>
+    </div>
+    <div class='user-details'>
+      <button ng-click="profile.hideProfile()">X</button>
+      <h4>{{ profile.profileUser.email }}</h4>
+    </div>
+    <div class="post-details">
+      <h3>Posts by {{ profile.profileUser.username }}</h3>
+      <p ng-show="profile.profileUser.posts <= 0">Click "New Post" to get started!</p>
+      <div class="post-preview" ng-repeat="post in profile.profileUser.posts">
         <h4>{{ post.title }}</h4>
         <img ng-src="{{ post.media_url[0] }}" alt="">
         <p>{{ post.body }}</p>

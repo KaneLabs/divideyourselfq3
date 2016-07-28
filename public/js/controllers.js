@@ -71,13 +71,25 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   };
   $scope.profile.activeUser = {};
   $scope.profile.profileUser = {};
+  $scope.profile.profileView = null;
   $scope.profile.showProfile = false;
+
   $scope.profile.toggle = () => {
     $scope.sideNav.show = !$scope.sideNav.show;
     if($scope.sideNav.show === true){
       $scope.subnav.show = false;
     }else {
       $scope.subnav.show = true;
+    }
+  }
+
+  $scope.profile.toggleProfile = (id) => {
+    if ($scope.profile.isActiveUser(id) && $scope.profile.profileView === "activeUser") {
+      $scope.profile.profileView = null;
+    } else if ($scope.profile.isActiveUser(id) && $scope.profile.profileView === null) {
+      $scope.profile.profileView = "activeUser";
+    } else {
+      $scope.profile.profileView = "profileUser";
     }
   };
 
@@ -121,6 +133,9 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
     } else {
       return false;
     };
+  };
+  $scope.profile.hideProfile = () => {
+    $scope.profile.profileView = null;
   };
 
   $scope.sign = {};
@@ -186,7 +201,7 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   $scope.subnav = {};
   if($scope.user){
     $scope.subnav.show = true;
-  }else{  
+  }else{
     $scope.subnav.show = false;
   }
 
