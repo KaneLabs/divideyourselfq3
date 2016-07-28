@@ -8,7 +8,9 @@ dotenv.load();
 
 var users = require('./routes/users');
 var theBoard = require('./routes/theBoard');
-var api = require("./routes/api");
+var locations = require("./routes/locations");
+var comments = require("./routes/comments");
+var posts = require("./routes/posts");
 
 // MVPlus
 // var knowledge = require('./routes/knowledge');
@@ -26,7 +28,9 @@ app.use(express.static(__dirname + "/public"));
 
 app.use('/users', users);
 app.use('/theboard', theBoard);
-app.use("/api", api);
+app.use("/locations", locations);
+app.use("/comments", comments);
+app.use("/posts", posts);
 
 app.use("*", (req, res) => res.sendFile(__dirname + "/public/index.html"));
 
