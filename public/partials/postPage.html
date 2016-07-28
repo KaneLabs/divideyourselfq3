@@ -19,7 +19,13 @@
           <div class="separator">of</div>
           <div class="post-usertribe">{{soloPost.usertribe}}</div>
         </div>
-        <div class="post-respect">{{soloPost.points || 0}} respect</div>
+        <div class="vote-container">
+          <div class="voting">
+            <span class="material-icons voting single-voting" ng-click="upvote(post.id, 'posts', soloPost)">keyboard_arrow_up</span>
+              <span class="post-respect">{{soloPost.points || 0}} respect</span>
+            <span class="material-icons voting single-voting" ng-click="downvote(post.id, 'posts', soloPost)">keyboard_arrow_down</span>
+          </div>
+        </div>
         <div class="post-content">{{soloPost.body}}</div>
         <div class="post-comments-toggle" ng-click="soloPost.commentsClosed = !soloPost.commentsClosed">
           {{soloPost.commentsClosed ? 'Hide' : 'Show'}} {{soloPost.comments.length}} Comment{{soloPost.comments.length === 1 ? '' : 's'}}
