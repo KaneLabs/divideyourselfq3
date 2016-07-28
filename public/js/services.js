@@ -43,7 +43,7 @@ app.factory("NewPostService", $http => $scope => ({
       lng: $scope.newPost.lng,
       timestamp: Date.now().toString()
     };
-    $http.post("/api/posts", post).then(() => {
+    $http.post("/posts/create", post).then(() => {
       post.media_url = [post.media_url];
       post.username = $scope.user.username;
       post.openImage = 0;
@@ -68,7 +68,7 @@ app.factory("NewCommentService", $http => $scope => ({
     post.comments.push(comment);
     console.log(post.comments);
     post.newComment = "";
-    $http.post("/api/comments", comment);
+    $http.post("/comments/create", comment);
   }
 }));
 
@@ -112,23 +112,24 @@ app.factory("MapService", $http => {
         if(map) map.panTo(mapConfig.center);
       }
     },
-    getPosts: ($scope, post_id) => {
+    getPosts: ($scope, $state, post_id) => {
       var loc = window.location.pathname.split("/");
       var bounds = map.getBounds();
       if(post_id) post_id = parseInt(post_id);
       console.log("no bounds", !bounds);
       if(!bounds) return;
       bounds = {minLat: bounds.f.f, maxLat: bounds.f.b, minLng: bounds.b.b, maxLng: bounds.b.f};
-      $http.post("/api/locations", bounds).then(data => {
+      $http.post("/locations", bounds).then(data => {
         console.log("no data", !data.data.posts);
         if(!data.data.posts) return;
         $scope.posts = data.data.posts.map(post => {
           if(post_id && post.id !== post_id) return;
-          new google.maps.Marker({
+          post.marker = new google.maps.Marker({
             position: {lat: parseFloat(post.lat), lng: parseFloat(post.lng)},
             map: map,
             title: post.title
           });
+          post.marker.addListener('click', () => $state.transitionTo("post", {state: post.lat, city: post.lng, post: post.id}));
           post.media_url = post.media_url.split(",");
           post.openImage = 0;
           if(post_id) $scope.soloPost = post;

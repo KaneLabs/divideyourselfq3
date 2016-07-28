@@ -1,5 +1,9 @@
 .post-comments-toggle {
+  cursor: pointer;
   padding: 10px;
+}
+.post-comments-toggle:hover {
+  font-weight: 700;
 }
 
 .post-comments {

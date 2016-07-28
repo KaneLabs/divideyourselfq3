@@ -1,24 +1,24 @@
-function HomeController($scope, MapService){
+function HomeController($scope, $state, MapService){
   $scope.linkBuilder = linkBuilder;
   MapService.home.setCenter();
-  MapService.getPosts($scope);
-  mapConfig.onidle = () => MapService.getPosts($scope);
+  MapService.getPosts($scope, $state);
+  mapConfig.onidle = () => MapService.getPosts($scope, $state);
 }
 
-function LocationController($scope, $stateParams, MapService){
+function LocationController($scope, $state, $stateParams, MapService){
   $scope.$parent.showPosts = false;
   $scope.togglePosts = $scope.$parent.togglePosts;
   $scope.linkBuilder = linkBuilder;
   MapService.location.setCenter([$stateParams.state, $stateParams.city]);
-  MapService.getPosts($scope);
-  mapConfig.onidle = () => MapService.getPosts($scope);
+  MapService.getPosts($scope, $state);
+  mapConfig.onidle = () => MapService.getPosts($scope, $state);
 }
 
-function PostPageController($scope, $stateParams, MapService){
+function PostPageController($scope, $state, $stateParams, MapService){
   $scope.linkBuilder = linkBuilder;
   MapService.post.setCenter([$stateParams.state, $stateParams.city]);
-  MapService.getPosts($scope, $stateParams.post);
-  mapConfig.onidle = () => MapService.getPosts($scope, $stateParams.post);
+  MapService.getPosts($scope, $state, $stateParams.post);
+  mapConfig.onidle = () => MapService.getPosts($scope, $state, $stateParams.post);
 }
 
 function linkBuilder(post, backCheck){
