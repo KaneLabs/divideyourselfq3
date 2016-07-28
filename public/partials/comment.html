@@ -1,6 +1,6 @@
 <img class="comment-profile" ng-src="{{comment.profile_url}}">
 <div class="comment-heading">
-  <div class="vote-container">
+  <div class="vote-container" ng-show="user">
     <div class="voting">
       <span class="material-icons" ng-click="upvote(comment.id, 'comments', comment)">keyboard_arrow_up</span>
       <span class="comment-respect">{{comment.points}}</span>
