@@ -13,26 +13,28 @@ router.post("/create", (req, res) => {
     .then(() => res.send(null));
 });
 
-router.post("/update", (req, res) => {
-  if(!req.headers.authorization) return res.json({success: false, message: "no header"});
-  var token = req.headers.authorization.split(' ')[1];
-  if(!token) return res.json({success: false, message: "no token"});
-  jwt.verify(token, process.env.SECRET, (err, data) => {
-    if(err) return res.json({success: false, message: "error parsing token"});
-    if(data.user.id !== req.body.user_id) return res.json({success: false, message: "wrong user"});
-    knex("comments")
-      .where("id", req.body.id)
-      .update(req.body)
-      .then(() => res.json({success: true}));
-  });
-});
+// router.post("/update", (req, res) => {
+//   if(!req.headers.authorization) return res.json({success: false, message: "no header"});
+//   var token = req.headers.authorization.split(' ')[1];
+//   if(!token) return res.json({success: false, message: "no token"});
+//   jwt.verify(token, process.env.SECRET, (err, data) => {
+//     if(err) return res.json({success: false, message: "error parsing token"});
+//     if(data.user.id !== req.body.user_id) return res.json({success: false, message: "wrong user"});
+//     knex("comments")
+//       .where("id", req.body.id)
+//       .update(req.body)
+//       .then(() => res.json({success: true}));
+//   });
+// });
 
 router.post("/delete", (req, res) => {
+  console.log("delete");
+  res.json({success: false});
   // check if user has permission
-  knex("comments")
-    .where("id", req.body.id)
-    .del()
-    .then(() => res.json({success: true}));
+  // knex("comments")
+  //   .where("id", req.body.id)
+  //   .del()
+  //   .then(() => res.json({success: true}));
 });
 
 module.exports = router;
