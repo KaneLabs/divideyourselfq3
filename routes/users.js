@@ -45,36 +45,27 @@ router.post('/signup', (req, res) => {
           username: req.body.username,
           password: hashedPassword,
         })
+        .returning('*')
         .then(user => {
           // console.log("USER: ", user);
           // log user in with JWT
-          token = jwt.sign({user: user}, process.env.SECRET);
-          res.json({token: token, user: {name: user.username, profile: user.profile_url}});
+          token = jwt.sign({user: user[0]}, process.env.SECRET);
+          res.json({token: token, user: user[0]});
         });
     });
 });
 
 router.get('/:id', (req, res) => {
-  if (req.headers.authorization){
-    var decoded = jwt.verify(req.headers.authorization.split(' ')[1], process.env.SECRET);
-    if (decoded.user.id == req.params.id){
-      knex('users')
-      .innerJoin('users_favorites', 'users.id', 'users_favorites.user_id')
-      .innerJoin('posts', 'post_id', 'posts.id')
-      .where('users.id', req.params.id)
-      .then(data => {
-        // console.log("This user's data: ", data);
-        res.json(data)
-      });
-      return
-    }
-  }
-  knex('users')
-  .where('users.id', req.params.id)
-  .then(data => {
-    // console.log("Other users data: ", data);
-    res.json(data);
+  knex('posts')
+  .where('user_id', req.params.id)
+  .then( data => {
+    res.json(data)
   })
+  // Save this for other user's profiles
+  // knex.raw('SELECT COALESCE (users.id, posts.user_id) AS user_id, users.username, users.firstName, users.lastName, users.profile_url, posts.title, posts.body, posts.media_url FROM users LEFT JOIN posts ON users.id = posts.user_id WHERE users.id = ' + req.params.id).then(function(data){
+  //   console.log(data.rows);
+  //   res.json(data.rows)
+  // })
 });
 
 
