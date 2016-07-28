@@ -89,5 +89,23 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
     console.log('function');
     $scope.profile.showProfile = !$scope.profile.showProfile;
   };
+
+  $scope.searchFeature = {
+    showSearch: false,
+    toggleShowSearch: function(){
+      console.log('function');
+      $scope.searchFeature.showSearch = !$scope.searchFeature.showSearch;
+      $scope.locationFeature.showChangeLoc = false;
+    }
+  };
+  $scope.locationFeature = {
+    showChangeLoc: false,
+    toggleShowChangeLoc: function(){
+      console.log('function');
+      $scope.locationFeature.showChangeLoc = !$scope.locationFeature.showChangeLoc;
+      $scope.searchFeature.showSearch = false;
+    }
+  };
+
 };
 makeBodyController.$inject = ['$scope','UsersService', 'apiInterceptor', 'NewCommentService', "NewPostService"];

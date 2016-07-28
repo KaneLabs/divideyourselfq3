@@ -1,0 +1,113 @@
+
+.nav-link-logo {
+  color: white;
+  cursor: pointer;
+  /*display: inline-block;*/
+  /*padding: 10px;*/
+  max-width: 150px;
+}
+
+subnav input {
+  box-sizing: border-box;
+  border: 0;
+  height: 39px;
+  /*padding: 10px;*/
+  width: calc(100% - 351px);
+}
+.subnav-link {
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  /*padding: 10px;*/
+  max-width: 150px;
+}
+.subnav-link:first-child {
+  /*padding: 10px 20px;*/
+}
+/*
+.signout {
+  border-left: 1px solid white;
+  float: right;
+  padding: 10px 20px;
+}
+.sign {
+  float: right;
+  font-size: 0;
+  max-height: 40px;
+  overflow: hidden;
+  transition: .2s all;
+  width: 200px;
+}
+.sign.open {
+  max-height: 200px;
+}
+
+.clear-sign {
+  color: white;
+  float: right;
+  vertical-align: top;
+}
+
+.sign .subnav-link {
+  border-left: 1px solid white;
+  overflow: hidden;
+  padding: 12px;
+  text-align: center;
+  transition: .2s all;
+  width: 50%;
+}
+.sign .subnav-link.hide {
+  border: 0;
+  padding: 10px 0px;
+  width: 0px;
+}
+
+.sign input, .sign button, .sign div {
+  box-sizing: border-box;
+  font-size: 14px;
+  height: 40px;
+}
+
+.sign input, .sign button {
+  box-sizing: border-box;
+  padding: 10px;
+  width: 100%;
+}*/
+
+.subnav {
+  height: 40px;
+  background: rgb(80,80,80);
+  position: fixed;
+  top: 40px;
+  width: 100%;
+  z-index: 3;
+  box-shadow: 0px 0px 20px 5px rgba(0,0,0,.5);
+}
+
+.searchbar {
+  height: 40px;
+  background: white;
+  position: fixed;
+  top: 40px;
+  width: 100%;
+  z-index: 2;
+  box-shadow: 0px 0px 20px 5px rgba(0,0,0,.5);
+}
+
+.logo {
+  display: inline-block;
+  height: 40px;
+  background-color: white;
+  padding: 0;
+  margin: 0;
+  float: left;
+}
+
+.navIcon {
+  display: inline-block;
+  color: white;
+  float: left;
+  vertical-align: top;
+}
+
+/*.subnav*/

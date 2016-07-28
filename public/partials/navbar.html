@@ -1,6 +1,17 @@
-<div class="nav-link" ui-sref="home">Divide Yourself</div>
-<input type="text" placeholder="Search Posts" ng-model="search">
-<div class="nav-link signout" ng-show="!!user" ng-click="profile.toggleShowProfile()">Profile</div>
+<div class="nav-link-logo" ui-sref="home">
+  <img src="https://s3-us-west-2.amazonaws.com/divideyourself.com/images/1divide-logo.svg" alt="" class="logo">
+</div>
+<div class="theboardIcon">
+  <i class="material-icons navIcon" ng-click="">class</i>
+</div>
+<div class="changeLocIcon">
+  <i class="material-icons navIcon" ng-click="locationFeature.toggleShowChangeLoc()">control_point</i>
+</div>
+<div class="searchIcon">
+  <i class="material-icons navIcon" ng-click="searchFeature.toggleShowSearch()">search</i>
+</div>
+<!-- <input type="text" placeholder="Search Posts" ng-model="search"> -->
+<!-- <div class="nav-link signout" ng-show="!!user" ng-click="profile.toggleShowProfile()">Profile</div> -->
 <div class="nav-link signout" ng-show="!!user" ng-click="signOut()">Signout</div>
 <form class="sign" ng-submit="submitSign()" ng-class="{open: !!sign.type}" name="signform" ng-hide="!!user">
   <div class="nav-link" ng-click="openSign('up')" ng-class="{hide: sign.type === 'in'}">Signup</div>
