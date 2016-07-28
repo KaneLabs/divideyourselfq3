@@ -36,20 +36,20 @@ exports.up = (knex, Promise) => {
       table.integer('points').defaultTo(1);
     }),
     // Create 'tribes' table
-    knex.schema.createTable('tribes', function(table) {
+    knex.schema.createTable('tribes', (table) => {
       table.increments();
       table.string('name').unique().notNullable();
       table.text('description');
     }),
     // Create 'posts_votes' table
-    // knex.schema.createTable('posts_votes',function(table) {
+    // knex.schema.createTable('posts_votes', (table) => {
     //   table.increments();
     //   table.integer('post_id').references('id').inTable('posts');
     //   table.integer('user_id').references('id').inTable('users');
     //   table.integer('rating');
     // }),
     // Create 'comments_votes' table
-    // knex.schema.createTable('comments_votes',function(table) {
+    // knex.schema.createTable('comments_votes', (table) => {
     //   table.increments();
     //   table.integer('comment_id').references('id').inTable('comments');
     //   table.integer('rating');
