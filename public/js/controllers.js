@@ -1,6 +1,6 @@
 function HomeController($scope, $state, MapService){
   $scope.linkBuilder = linkBuilder;
-  MapService.home.setCenter();
+  MapService.setCenterHome();
   MapService.getPosts($scope, $state);
   mapConfig.onidle = () => MapService.getPosts($scope, $state);
 }
@@ -9,14 +9,14 @@ function LocationController($scope, $state, $stateParams, MapService){
   $scope.$parent.showPosts = false;
   $scope.togglePosts = $scope.$parent.togglePosts;
   $scope.linkBuilder = linkBuilder;
-  MapService.location.setCenter([$stateParams.state, $stateParams.city]);
+  MapService.setCenterLocation([$stateParams.state, $stateParams.city]);
   MapService.getPosts($scope, $state);
   mapConfig.onidle = () => MapService.getPosts($scope, $state);
 }
 
 function PostPageController($scope, $state, $stateParams, MapService){
   $scope.linkBuilder = linkBuilder;
-  MapService.post.setCenter([$stateParams.state, $stateParams.city]);
+  MapService.setCenterPost([$stateParams.state, $stateParams.city]);
   MapService.getPosts($scope, $state, $stateParams.post);
   mapConfig.onidle = () => MapService.getPosts($scope, $state, $stateParams.post);
 }
