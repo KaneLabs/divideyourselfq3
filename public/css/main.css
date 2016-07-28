@@ -302,7 +302,7 @@ main {
 
 /* Profile */
 .profile * {
-  margin: 2%;
+  margin: 1%;
 }
 .profile {
   position: fixed;
@@ -405,4 +405,8 @@ footer div:hover {background: black;}
 
 .single-voting{
    margin-left: 33%;
+}
+
+.pointer {
+  cursor: pointer;
 }
