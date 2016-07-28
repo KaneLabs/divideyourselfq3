@@ -96,15 +96,51 @@ navbar input {
   max-width: 150px;
 }
 
-/*SUBNAV*/
+/*SEARCHBAR*/
+.searchbar {
+  height: 40px;
+  background-color: #303030;
+  position: fixed;
+  top: 42px;
+  width: 100%;
+  z-index: 4;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  /*transition: all 0.3s cubic-bezier(.25,.8,.25,1);*/
+}
+.searchbar:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+.searchbar:focus {
+  outline: none;
+}
 
 subnav input {
   box-sizing: border-box;
   border: 0;
-  height: 39px;
+  height: 40px;
   padding: 10px;
-  /*width: calc(100% - 351px);*/
+  width: calc(100% - 351px);
 }
+
+/*SUBNAV*/
+.subnavBar {
+  height: 40px;
+  background: #303030;
+  position: fixed;
+  top: 42px;
+  width: 100%;
+  z-index: 3;
+  border-bottom: 2px solid #303030;
+  /*box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);*/
+  /*transition: all 0.3s cubic-bezier(.25,.8,.25,1);*/
+  /*transition: opacity .25s ease-in-out;*/
+
+}
+
+.subnavBar:hover {
+box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
 .subnav-link {
   color: white;
   cursor: pointer;
@@ -114,6 +150,40 @@ subnav input {
 }
 .subnav-link:first-child {
   /*padding: 10px 20px;*/
+}
+
+
+.subnavSort {
+  float: left;
+}
+.subnavSortDiv {
+  display: inline-block;
+  height: 38px;
+}
+
+
+.subnavSort {
+  color: white;
+  vertical-align: top;
+  opacity: .85;
+  float: left;
+  padding: 10px;
+}
+.subnavSort span:hover {
+  cursor: pointer;
+  color: lightgrey;
+  border-bottom: 2px solid white;
+  opacity: .85;
+}
+.subnavIcon {
+    float: right;
+}
+.addPostIcon {
+  /*box-sizing: padding-box;*/
+  /*display: inline-block;*/
+  color: white;
+  vertical-align: top;
+  opacity: .85;
 }
 /*
 .signout {
@@ -165,38 +235,9 @@ subnav input {
   width: 100%;
 }*/
 
-.subnav {
-  height: 38px;
-  background: #303030;
-  position: fixed;
-  top: 42px;
-  width: 100%;
-  z-index: 3;
-  /*box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);*/
-  /*transition: all 0.3s cubic-bezier(.25,.8,.25,1);*/
-  /*transition: opacity .25s ease-in-out;*/
 
-}
-.subnav:hover {
-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-}
 
-.searchbar {
-  height: 40px;
-  background-color: #303030;
-  position: fixed;
-  top: 42px;
-  width: 100%;
-  z-index: 4;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  /*transition: all 0.3s cubic-bezier(.25,.8,.25,1);*/
-}
-.searchbar:hover {
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-}
-.searchbar:focus {
-  outline: none;
-}
+
 .logomark {
   float: left;
   height: 40px;
@@ -275,29 +316,6 @@ box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   border-bottom: 2px solid white;
 }
 
-.subnavSort {
-  color: white;
-  vertical-align: top;
-  opacity: .85;
-  float: left;
-  padding: 10px;
-}
-.subnavSort span:hover {
-  cursor: pointer;
-  color: lightgrey;
-  border-bottom: 2px solid white;
-  opacity: .85;
-}
-.subnavIcon {
-    float: right;
-}
-.addPostIcon {
-  /*box-sizing: padding-box;*/
-  /*display: inline-block;*/
-  color: white;
-  vertical-align: top;
-  opacity: .85;
-}
 
 .sidenav{
   position: absolute;
