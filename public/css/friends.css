@@ -1,10 +1,6 @@
 .friends {
   color: rgba(255,255,255,0.85);
 }
-.friends hr {
-  width: 90%;
-  opacity: 0.85;
-}
 .friend {
   display: flex;
   flex-flow: row nowrap;
