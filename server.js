@@ -26,17 +26,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(__dirname + "/public"));
 
-app.use("*", (req, res, next) => {
-  if(!req.headers.authentication) return next();
-  var token = req.headers.authorization.split(' ')[1];
-  if(!token) next();
-  jwt.verify(token, process.env.SECRET, (err, data) => {
-    if(err) next();
-    req.user = data.user;
-    next();
-  });
-});
-
 app.use('/users', users);
 app.use('/theboard', theBoard);
 app.use("/locations", locations);

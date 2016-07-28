@@ -218,6 +218,7 @@ main {
   width: 95%;
   pointer-events: auto;
   margin: 0 auto;
+  padding: 40px 0;
 }
 
 .post {
@@ -293,6 +294,21 @@ main {
 }
 .post-title, .post-username, .post-usertribe {
   font-weight: 500;
+}
+
+.post-actions {
+  float: left;
+  clear: both;
+}
+.post-edit, .post-delete {
+  display: inline-block;
+  cursor: pointer;
+}
+.post-edit {
+  padding: 5px 5px 5px 10px;
+}
+.post-delete {
+  padding: 5px;
 }
 
 .post-content {
@@ -397,6 +413,7 @@ footer div:hover {background: black;}
   width: 100%;
   display:flex;
   flex-flow: column;
+  padding: 0;
 }
 .vote-container{
   float: right;

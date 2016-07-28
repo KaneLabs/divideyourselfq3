@@ -4,7 +4,7 @@ exports.up = function(knex, Promise) {
     // Create 'users' table
     knex.schema.createTable('users',function(table) {
       table.increments();
-      table.integer('tribe_id').references('id').inTable('tribes');
+      table.integer('tribe_id').references('id').inTable('tribes').onDelete("CASCADE");
       table.string('email').unique().notNullable();
       table.string('username').unique().notNullable();
       table.string('password').notNullable();
@@ -16,7 +16,7 @@ exports.up = function(knex, Promise) {
     // Create 'posts' table
     knex.schema.createTable('posts', function(table) {
       table.increments();
-      table.integer('user_id').notNullable().references('id').inTable('users');
+      table.integer('user_id').notNullable().references('id').inTable('users').onDelete("CASCADE");
       table.string('title').notNullable();
       table.string('type');
       table.text('body').notNullable();
@@ -27,10 +27,10 @@ exports.up = function(knex, Promise) {
       table.integer('points').defaultTo(1);
     }),
     // Create 'comments' table
-    knex.schema.createTable('comments', function(table) {
+    knex.schema.createTable('comments', function(table){
       table.increments();
-      table.integer('user_id').notNullable().references('id').inTable('users');
-      table.integer('post_id').notNullable().references('id').inTable('posts');
+      table.integer('user_id').notNullable().references('id').inTable('users').onDelete("CASCADE");
+      table.integer('post_id').notNullable().references('id').inTable('posts').onDelete("CASCADE");
       table.text('comment').notNullable();
       table.bigInteger('timestamp').notNullable();
       table.integer('points').defaultTo(1);
@@ -57,8 +57,8 @@ exports.up = function(knex, Promise) {
     // Create 'users_favorites' table
     knex.schema.createTable('users_favorites', function(table){
       table.increments();
-      table.integer('post_id').references('id').inTable('posts');
-      table.integer('user_id').references('id').inTable('users');
+      table.integer('post_id').references('id').inTable('posts').onDelete("CASCADE");
+      table.integer('user_id').references('id').inTable('users').onDelete("CASCADE");
     })
   ]);
 };
