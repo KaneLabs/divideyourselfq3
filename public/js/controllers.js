@@ -76,17 +76,52 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   if(map) map.addListener("click", mapClick);
   else mapConfig.onclick = mapClick;
 
+
   $scope.profile = {};
-  $scope.profile.showProfile = false;
-  $scope.profile.toggleShowProfile = function() {
-    $scope.profile.showProfile = !$scope.profile.showProfile;
+  $scope.sideNav = {
+    show: false
   };
-  $scope.profile.getProfileUser = function(id) {
-    $scope.user.userPosts = [];
-    $http.get(`/users/${id}`).then(function(data){
-      console.log(data);
-      for(var i = 0; i < data.data.length; i++){
-        $scope.user.userPosts.push({
+  $scope.profile.activeUser = {};
+  $scope.profile.profileUser = {};
+  $scope.profile.profileView = null;
+  $scope.profile.showProfile = false;
+
+  $scope.profile.toggle = () => {
+    $scope.sideNav.show = !$scope.sideNav.show;
+    if($scope.sideNav.show === true){
+      $scope.subnav.show = false;
+    }else {
+      $scope.subnav.show = true;
+    }
+  }
+
+  $scope.profile.toggleProfile = (id) => {
+    if ($scope.profile.isActiveUser(id) && $scope.profile.profileView === "activeUser") {
+      $scope.profile.profileView = null;
+    } else if ($scope.profile.isActiveUser(id) && $scope.profile.profileView === null) {
+      $scope.profile.profileView = "activeUser";
+    } else if (!$scope.profile.isActiveUser(id) && $scope.profile.profileView === "profileUser") {
+      $scope.profile.profileView = null;
+    } else {
+      $scope.profile.profileView = "profileUser";
+    }
+  };
+  $scope.profile.getUser = (id) => {
+    if ($scope.profile.isActiveUser(id)) {
+      $scope.profile.activeUser = $scope.user;
+      $scope.profile.activeUser.posts = $scope.profile.getUserPosts(id,$scope.profile.isActiveUser(id));
+    } else {
+      $http.get(`/users/${id}`).then( data => {
+        $scope.profile.profileUser = data.data;
+        $scope.profile.profileUser.posts = $scope.profile.getUserPosts(id,$scope.profile.isActiveUser(id));
+      });
+    };
+  };
+  $scope.profile.getUserPosts = (id,isActive) => {
+    var userPosts = [];
+    $http.get(`/users/${id}/posts`).then(function(data){
+      for (var i = 0; i < data.data.length; i++) {
+        userPosts.push({
           id: data.data[i].id,
           title: data.data[i].title,
           body: data.data[i].body,
@@ -97,8 +132,23 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
           media_url: data.data[i].media_url.split(','),
           points: data.data[i].points
         })
-      }
+      };
+      if (isActive) {
+        $scope.profile.activeUser.posts = userPosts;
+      } else {
+        $scope.profile.profileUser.posts = userPosts;
+      };
     });
+  };
+  $scope.profile.isActiveUser = (id) => {
+    if ($scope.user.id === id) {
+      return true;
+    } else {
+      return false;
+    };
+  };
+  $scope.profile.hideProfile = () => {
+    $scope.profile.profileView = null;
   };
 
   $scope.sign = {};
@@ -118,20 +168,15 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   $scope.submitSignIn = () => {
     var data = $scope.sign;
     UsersService.signIn(data.email, data.password, data.username, updateUserStatus);
-
     $scope.sign = {};
-
   }
 
   $scope.submitSignUp = () => {
     var data = $scope.sign;
     UsersService.signUp(data.email, data.password, data.username, updateUserStatus);
     $scope.profile.showProfile = true;
-
     $scope.sign = {};
-
   }
-
 
   $scope.signOut = () => {
     $scope.profile.showProfile = false;
@@ -167,14 +212,11 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   };
 
   $scope.subnav = {};
-  $scope.subnav.show = false;
-
-  // $scope.profile = {};
-  // $scope.profile.showProfile = false;
-  // $scope.profile.toggleShowProfile = function() {
-  //   console.log('function');
-  //   $scope.profile.showProfile = !$scope.profile.showProfile;
-  // };
+  if($scope.user){
+    $scope.subnav.show = true;
+  }else{
+    $scope.subnav.show = false;
+  }
 
   $scope.searchFeature = {
     showSearch: false,
@@ -208,6 +250,18 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
     post.points -= 1;
     $http.post(`/theboard/downvote/${type}/${post.id}`)
   };
+
+  $scope.getFriends = (id) => {
+    $http.get(`/friends/${id}`).then((data) => {
+      console.log(data);
+    })
+  }
+
+  $scope.addFriend = (id) => {
+    $http.post(`/friends/${id}/add`).then((data) => {
+      console.log(data);
+    })
+  }
 
 };
 makeBodyController.$inject = ['$scope','UsersService', 'apiInterceptor', 'NewCommentService', "NewPostService","$http"];

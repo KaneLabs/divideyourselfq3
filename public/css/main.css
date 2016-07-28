@@ -61,12 +61,9 @@ navbar input {
 }
 
 .sign {
-  float: right;
-  font-size: 0;
-  max-height: 40px;
-  overflow: hidden;
-  width: 200px;
+
 }
+
 .sign.open {
   max-height: 200px;
 }*/
@@ -318,7 +315,7 @@ main {
 
 /* Profile */
 .profile * {
-  margin: 2%;
+  margin: 1%;
 }
 .profile {
   position: fixed;
@@ -380,6 +377,19 @@ main {
   width: 90%;
   border-radius: 5px;
 }
+.close-profile-button {
+  text-align: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  border: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: black;
+  color: white;
+  cursor: pointer;
+}
 
 /* Footer */
 footer {
@@ -416,9 +426,14 @@ footer div:hover {background: black;}
   padding: 0;
 }
 .vote-container{
+  vertical-align: top;
   float: right;
 }
 
 .single-voting{
    margin-left: 33%;
+}
+
+.pointer {
+  cursor: pointer;
 }
