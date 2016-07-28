@@ -1,8 +1,8 @@
 
-exports.up = function(knex, Promise) {
+exports.up = (knex, Promise) => {
   return Promise.all([
     // Create 'users' table
-    knex.schema.createTable('users',function(table) {
+    knex.schema.createTable('users', (table) => {
       table.increments();
       table.integer('tribe_id').references('id').inTable('tribes').onDelete("CASCADE");
       table.string('email').unique().notNullable();
@@ -14,7 +14,7 @@ exports.up = function(knex, Promise) {
       table.string('profile_url').defaultTo('https://s3-us-west-2.amazonaws.com/divideyourself.com/images/1divide-logo.svg');
     }),
     // Create 'posts' table
-    knex.schema.createTable('posts', function(table) {
+    knex.schema.createTable('posts', (table) => {
       table.increments();
       table.integer('user_id').notNullable().references('id').inTable('users').onDelete("CASCADE");
       table.string('title').notNullable();
@@ -27,7 +27,7 @@ exports.up = function(knex, Promise) {
       table.integer('points').defaultTo(1);
     }),
     // Create 'comments' table
-    knex.schema.createTable('comments', function(table){
+    knex.schema.createTable('comments', (table) => {
       table.increments();
       table.integer('user_id').notNullable().references('id').inTable('users').onDelete("CASCADE");
       table.integer('post_id').notNullable().references('id').inTable('posts').onDelete("CASCADE");
@@ -36,20 +36,20 @@ exports.up = function(knex, Promise) {
       table.integer('points').defaultTo(1);
     }),
     // Create 'tribes' table
-    knex.schema.createTable('tribes', function(table) {
+    knex.schema.createTable('tribes', (table) => {
       table.increments();
       table.string('name').unique().notNullable();
       table.text('description');
     }),
     // Create 'posts_votes' table
-    // knex.schema.createTable('posts_votes',function(table) {
+    // knex.schema.createTable('posts_votes', (table) => {
     //   table.increments();
     //   table.integer('post_id').references('id').inTable('posts');
     //   table.integer('user_id').references('id').inTable('users');
     //   table.integer('rating');
     // }),
     // Create 'comments_votes' table
-    // knex.schema.createTable('comments_votes',function(table) {
+    // knex.schema.createTable('comments_votes', (table) => {
     //   table.increments();
     //   table.integer('comment_id').references('id').inTable('comments');
     //   table.integer('rating');
@@ -62,15 +62,16 @@ exports.up = function(knex, Promise) {
     }),
     knex.schema.createTable('users_friends', (table) => {
       table.increments();
-      table.integer('user_id').references('id').inTable('users').onDelete('CASCADE');
-      table.integer('friend_id').references('id').inTable('users').onDelete('CASCADE');
-      table.string('friend_name').references('username');
-      table.string('friend_img');
+      table.integer('user_id');
+      //Make this unique, stupid...
+      table.integer('friend_id');
+      table.string('friend_firstname');
+      table.string('profile_url');
     })
   ]);
 };
 
-exports.down = function(knex, Promise) {
+exports.down = (knex, Promise) => {
   return Promise.all([
     knex.raw('drop table if exists users cascade'),
     knex.raw('drop table if exists posts cascade'),
