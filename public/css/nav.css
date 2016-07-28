@@ -148,19 +148,24 @@ box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   /*padding: 10px;*/
   max-width: 150px;
 }
+
 .subnav-link:first-child {
   /*padding: 10px 20px;*/
 }
 
-
 .subnavSort {
   float: left;
 }
+
 .subnavSortDiv {
   display: inline-block;
-  height: 38px;
+  height: 28px;
 }
-
+.subnavSortDiv:hover {
+  cursor: pointer;
+  border-bottom: 2px solid white;
+  opacity: .85;
+}
 
 .subnavSort {
   color: white;
@@ -169,12 +174,12 @@ box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   float: left;
   padding: 10px;
 }
-.subnavSort span:hover {
+/*.subnavSort span:hover {
   cursor: pointer;
   color: lightgrey;
   border-bottom: 2px solid white;
   opacity: .85;
-}
+}*/
 .subnavIcon {
     float: right;
 }
