@@ -189,12 +189,12 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
 
   $scope.upvote = (id, type, post) => {
     post.points += 1;
-    $http.post(`/theboard/upvote/${type}/${id}`)
+    $http.post(`/theboard/upvote/${type}/${post.id}`)
   };
 
   $scope.downvote = (id, type, post) => {
     post.points -= 1;
-    $http.post(`/theboard/downvote/${type}/${id}`)
+    $http.post(`/theboard/downvote/${type}/${post.id}`)
   };
 
 };

@@ -403,7 +403,6 @@ footer div:hover {background: black;}
 }
 .vote-container{
   float: right;
-  display: inline-block;
 }
 
 .single-voting{
