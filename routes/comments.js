@@ -11,7 +11,11 @@ router.post("/create", (req, res) => {
       timestamp: req.body.timestamp,
       points: 1
     })
-    .then(() => res.send(null));
+    .returning('id')
+    .then((data) => {
+      console.log(data);
+      res.send(data)
+    })
 });
 
 router.post("/update", (req, res) => {
