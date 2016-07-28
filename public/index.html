@@ -30,8 +30,8 @@
   <div id="map-container">
     <div id="map"></div>
   </div>
-  <div class="newProfile" ng-show="signup.showNewProfile">
-    <form ng-submit="submitSignUp();signup.toggleNewProfile()">
+  <div class="newProfile" ng-show="signup.show">
+    <form ng-submit="submitSignUp();signup.toggle()">
       <h2>Create new Profile</h2>
       <input type="text" placeholder="User Name" ng-model="sign.username" required>
       <input type="text" placeholder="Email" ng-model="sign.email" required>
@@ -43,9 +43,9 @@
   </div>
   <main ui-view></main>
   <main dy-profile ng-show="profile.showProfile"></main>
-  <!-- <footer>
+  <footer>
     <div ng-click="postServ.toggleLock()" ng-show="!!user">New Post</div>
     <div ng-click="togglePosts()">Top Posts</div>
-  </footer> -->
+  </footer>
 </body>
 </html>
