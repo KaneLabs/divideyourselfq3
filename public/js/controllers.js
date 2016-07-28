@@ -65,13 +65,21 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   else mapConfig.onclick = mapClick;
 
   $scope.profile = {};
+  $scope.profile.activeUser = {};
+  $scope.profile.profileUser = {};
   $scope.profile.showProfile = false;
-  $scope.profile.toggleShowProfile = function() {
+  $scope.profile.toggleShowProfile = () => {
     $scope.profile.showProfile = !$scope.profile.showProfile;
   };
-  $scope.profile.getProfileUser = function(id) {
+  $scope.profile.getUser = (id) => {
+    $http.get(`/users/${id}`).then( data => {
+      console.log(data);
+    });
+    $scope.profile.getUserPosts(id);
+  };
+  $scope.profile.getUserPosts = (id) => {
     $scope.user.userPosts = [];
-    $http.get(`/users/${id}`).then(function(data){
+    $http.get(`/users/${id}/posts`).then(function(data){
       for (var i = 0; i < data.data.length; i++) {
         $scope.user.userPosts.push({
           id: data.data[i].id,
@@ -87,6 +95,7 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
       }
     });
   };
+
 
   $scope.sign = {};
   // $scope.openSign = type => {
