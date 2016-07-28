@@ -3,13 +3,13 @@
     <img src="https://s3-us-west-2.amazonaws.com/divideyourself.com/images/1divide-logo.svg" alt="" class="logo">
   </div>
 </div>
-<div class="theboardIcon">
+<div class="navIcon">
   <i class="material-icons navIcon" ng-click="">class</i>
 </div>
-<div class="changeLocIcon">
+<div class="navIcon">
   <i class="material-icons navIcon" ng-click="locationFeature.toggleShowChangeLoc()">control_point</i>
 </div>
-<div class="searchIcon">
+<div class="navIcon">
   <i class="material-icons navIcon" ng-click="searchFeature.toggleShowSearch()">search</i>
 </div>
 <div class='signinSignupContainer' ng-show="!user">
@@ -18,9 +18,8 @@
 </div>
 <!-- <div class="nav-link signout" ng-show="!!user" ng-click="profile.toggleShowProfile()">Profile</div> -->
 
-<div class="nav-link signout" ng-show="!!user" ng-click="profile.toggleShowProfile();profile.getProfileUser(user.id)">Profile</div>
+<div class="signout" ng-show="!!user" ng-click="profile.toggleShowProfile();profile.getProfileUser(user.id)">{{user.username || profile}}</div>
 
-<div class="nav-link signout" ng-show="!!user" ng-click="signOut()">Signout</div>
 <form class="sign" ng-submit="submitSignIn()"  name="signform" ng-show="signin.show" ng-if='!user'>
   <input ng-model="sign.email" type="text" placeholder="Enter Username or Email" required>
   <input ng-model="sign.password" type="password" placeholder="Password"  required>

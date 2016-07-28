@@ -13,17 +13,25 @@ body {
 ::-moz-scrollbar {display: none;}
 .material-icons {font-size: 20px; padding: 10px; cursor: pointer;}
 
+/*<<<<<<< HEAD
+=======*/
 /* Nav */
-navbar {
+/*navbar {
   height: 40px;
   background: #212121;
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 3;
-  box-shadow: 0px 0px 20px 5px rgba(0,0,0,.5);
   border-bottom: 2px solid #212121;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
+
+navbar:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
 navbar input {
   box-sizing: border-box;
   border: 0;
@@ -43,10 +51,17 @@ navbar input {
 }
 
 .signout {
-  border-left: 1px solid white;
   float: right;
   padding: 10px 20px;
+  color: white;
+  opacity: .85;
 }
+
+.signout:hover {
+  cursor: pointer;
+  border-bottom: 1px solid white;
+}
+
 .sign {
   float: right;
   font-size: 0;
@@ -56,7 +71,7 @@ navbar input {
 }
 .sign.open {
   max-height: 200px;
-}
+}*/
 
 /*.clear-sign {
   color: white;
@@ -78,7 +93,7 @@ navbar input {
   width: 0px;
 }*/
 
-.sign input, .sign button, .sign div {
+/*.sign input, .sign button, .sign div {
   box-sizing: border-box;
   font-size: 14px;
   height: 38px;
@@ -89,20 +104,21 @@ navbar input {
   padding: 10px;
   width: 100%;
 }
+>>>>>>> 12fc292cfbb3c17edf0f99bfb169434dada14aa2*/
 
 /* Main */
 main {
-  height: calc(100% - 80px);
+  height: calc(100% - 40px);
   overflow-y: scroll;
   position: relative;
   margin-top: 40px;
 }
 
 #map-container {
-  height: calc(100% - 80px);
+  height: calc(100% - 40px);
   width: 100%;
   position: fixed;
-  transition: .3s all;
+  /*transition: .3s all;*/
   z-index: 2;
   top: 40px;
 }
