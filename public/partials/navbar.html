@@ -3,21 +3,25 @@
     <img src="https://s3-us-west-2.amazonaws.com/divideyourself.com/images/1divide-logo.svg" alt="" class="logo">
   </div>
 </div>
-<div class="navIcon">
+<div class="navIconContainer">
   <i class="material-icons navIcon" ng-click="">class</i>
 </div>
-<div class="navIcon">
+<div class="navIconContainer">
   <i class="material-icons navIcon" ng-click="locationFeature.toggleShowChangeLoc()">control_point</i>
 </div>
-<div class="navIcon">
+<div class="navIconContainer">
   <i class="material-icons navIcon" ng-click="searchFeature.toggleShowSearch()">search</i>
 </div>
+
 <div class='signinSignupContainer' ng-show="!user">
   <div class="signinSignupDiv" ng-click="signup.toggle()"><span>Sign Up</span></div> /
   <div class="signinSignupDiv" ng-click="signin.toggle()"><span>Sign In</span></div>
+  <!-- <i class="material-icons menuArrow">arrow_drop_down</i> -->
 </div>
 
-<div class="signout" ng-show="!!user" ng-click="profile.toggle();profile.getUser(user.id)">{{user.username || profile}}</div>
+<i class="material-icons menuArrow" ng-click="profile.toggle()" ng-show="!!user">arrow_drop_down</i>
+<div class="user-signedin" ng-show="!!user" ng-click="profile.toggle();profile.getUser(user.id)">{{user.username || profile}}</div>
+
 
 <form class="sign" ng-submit="submitSignIn()"  name="signform" ng-show="signin.show">
   <input ng-model="sign.email" type="text" placeholder="Enter Username or Email" required>
