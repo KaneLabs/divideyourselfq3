@@ -210,5 +210,17 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
     $http.post(`/theboard/downvote/${type}/${post.id}`)
   };
 
+  $scope.getFriends = (id) => {
+    $http.get(`/friends/${id}`).then((data) => {
+      console.log(data);
+    })
+  }
+
+  $scope.addFriend = (id) => {
+    $http.post(`/friends/${id}/add`).then((data) => {
+      console.log(data);
+    })
+  }
+
 };
 makeBodyController.$inject = ['$scope','UsersService', 'apiInterceptor', 'NewCommentService', "NewPostService","$http"];
