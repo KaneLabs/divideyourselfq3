@@ -89,7 +89,10 @@ navbar input {
   width: 0px;
 }*/
 
-/*.sign input, .sign button, .sign div {
+/*.
+
+
+ input, .sign button, .sign div {
   box-sizing: border-box;
   font-size: 14px;
   height: 38px;

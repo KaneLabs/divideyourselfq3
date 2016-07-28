@@ -51,10 +51,7 @@ navbar input {
   overflow: hidden;
   width: 200px;*/
 }
-.sign.open {
-  margin-top: 2px;
-  max-height: 200px;
-}
+
 
 /*.clear-sign {
   color: white;
@@ -299,6 +296,7 @@ box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   opacity: .85;
 }
 
+
 .sidenav{
   position: absolute;
   right: 0;
@@ -349,15 +347,34 @@ hr {
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
+
 @media(max-width: 440px){
   .sidenav{
     width: 100%;
   }
+  .signin{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .signin *{
+    width: 100%;
+    display: block;
+  }
 }
 
-@media(min-width: 420px){
+@media(min-width: 441px){
   .sidenav{
     width: 140px;
+  }
+  .signin{
+    width: 440px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .signin *{
+    width: 100%;
+    display: block;
   }
 }
 

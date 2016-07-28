@@ -34,11 +34,11 @@
   <div class="newProfile" ng-show="signup.show">
     <form ng-submit="submitSignUp();signup.toggle()">
       <h2>Create new Profile</h2>
-      <input type="text" placeholder="User Name" ng-model="sign.username" required>
-      <input type="text" placeholder="Email" ng-model="sign.email" required>
-      <input type="password" placeholder="Password" class="lat" ng-model="sign.password" required>
-      <input type="password" placeholder="Confirm Password" class="lng" ng-model="sign.passwordconfirm" required>
-      <button class="submit" type="submit">Submit</button>
+      <input type="text" placeholder="User Name" ng-model="sign.username" required><br/>
+      <input type="text" placeholder="Email" ng-model="sign.email" required><br/>
+      <input type="password" placeholder="Password" class="lat" ng-model="sign.password" required><br/>
+      <input type="password" placeholder="Confirm Password" class="lng" ng-model="sign.passwordconfirm" required><br/>
+      <button class="submit" type="submit">Submit</button><br/>
       <button class="cancel" ng-click="signup.toggleNewProfile();openSign('up')">Cancel</button>
     </form>
   </div>
