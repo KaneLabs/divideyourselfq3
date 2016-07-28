@@ -27,7 +27,7 @@ exports.up = function(knex, Promise) {
       table.integer('points').defaultTo(1);
     }),
     // Create 'comments' table
-    knex.schema.createTable('comments', function(table) {
+    knex.schema.createTable('comments', function(table){
       table.increments();
       table.integer('user_id').notNullable().references('id').inTable('users').onDelete("CASCADE");
       table.integer('post_id').notNullable().references('id').inTable('posts').onDelete("CASCADE");
