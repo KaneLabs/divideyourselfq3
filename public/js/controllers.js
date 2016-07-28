@@ -1,17 +1,28 @@
-function HomeController($scope, $state, MapService){
+function HomeController($scope, $state, $http, MapService){
   $scope.linkBuilder = linkBuilder;
+  $scope.deletePost = post => deletePost($scope, $state, $http, MapService, post);
   MapService.setCenterHome();
   MapService.getPosts($scope, $state);
   mapConfig.onidle = () => MapService.getPosts($scope, $state);
 }
 
-function LocationController($scope, $state, $stateParams, MapService){
+function LocationController($scope, $state, $stateParams, $http, MapService){
   $scope.$parent.showPosts = false;
   $scope.togglePosts = $scope.$parent.togglePosts;
   $scope.linkBuilder = linkBuilder;
+  $scope.deletePost = post => deletePost($scope, $state, $http, MapService, post);
   MapService.setCenterLocation([$stateParams.state, $stateParams.city]);
   MapService.getPosts($scope, $state);
   mapConfig.onidle = () => MapService.getPosts($scope, $state);
+}
+
+function deletePost($scope, $state, $http, MapService, post){
+  post.marker.setMap(null);
+  post.marker = null;
+  $http.post("/posts/delete", {post: post, token: localStorage.userToken}).then(data => {
+    if(data.success) $scope.posts = $scope.posts.filter(e => e.id !== post.id);
+    MapService.getPosts($scope, $state);
+  });
 }
 
 function PostPageController($scope, $state, $stateParams, MapService){
@@ -30,6 +41,7 @@ function linkBuilder(post, backCheck){
 app.controller("BodyController", makeBodyController);
 function makeBodyController($scope, UsersService, apiInterceptor, NewCommentService, NewPostService, $http){
   if(localStorage.userToken) $scope.user = jwt_decode(localStorage.userToken).user;
+
   $scope.commServ = NewCommentService($scope);
   $scope.postServ = NewPostService($scope);
   $scope.newPost = {};
@@ -94,7 +106,6 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
       $scope.profile.profileView = "profileUser";
     }
   };
-
   $scope.profile.getUser = (id) => {
     if ($scope.profile.isActiveUser(id)) {
       $scope.profile.activeUser = $scope.user;
