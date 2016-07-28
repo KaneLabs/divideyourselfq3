@@ -56,6 +56,17 @@ router.post('/signup', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
+  knex('users')
+  .where({
+    id: req.params.id
+  })
+  .first()
+  .then( data => {
+    res.json(data);
+  });
+});
+
+router.get('/:id/posts', (req, res) => {
   knex('posts')
   .where('user_id', req.params.id)
   .then( data => {

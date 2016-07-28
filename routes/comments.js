@@ -8,9 +8,14 @@ router.post("/create", (req, res) => {
       user_id: req.body.user_id,
       post_id: req.body.post_id,
       comment: req.body.comment,
-      timestamp: req.body.timestamp
+      timestamp: req.body.timestamp,
+      points: 1
     })
-    .then(() => res.send(null));
+    .returning('id')
+    .then((data) => {
+      console.log(data);
+      res.send(data)
+    })
 });
 
 router.post("/update", (req, res) => {
