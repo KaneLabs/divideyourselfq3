@@ -1,54 +1,37 @@
-var Magic = (number, callback) => {
-  var argumentArray = [];
-  return data => {
-    argumentArray.push(data);
-    if(argumentArray.length === number) return callback(argumentArray);
-  }
-};
+function HomeController($scope, MapService){
+  $scope.linkBuilder = linkBuilder;
+  MapService.home.setCenter();
+  MapService.getPosts($scope);
+  mapConfig.onidle = () => MapService.getPosts($scope);
+}
 
-function LocationController($scope, $rootScope, $stateParams, $http){
-  if(window.location.pathname !== "/" && !parseFloat(loc[1])){
-    $http.get(`http://maps.googleapis.com/maps/api/geocode/json?address=${loc[2]},${loc[1]}`).then(data => {
-      if(data.data.results[0]) mapConfig.center = data.data.results[0].geometry.location;
-      if(map) map.setCenter(mapConfig.center);
-    });
-  }
+function LocationController($scope, $stateParams, MapService){
+  $scope.$parent.showPosts = false;
+  $scope.togglePosts = $scope.$parent.togglePosts;
+  $scope.linkBuilder = linkBuilder;
+  MapService.location.setCenter([$stateParams.state, $stateParams.city]);
+  MapService.getPosts($scope);
+  mapConfig.onidle = () => MapService.getPosts($scope);
+}
 
-  $scope.show = {post: null};
-  $scope.linkBuilder = (post, backCheck) => {
-    if(!post) return;
-    if(backCheck) return {state: post.lat, city: post.lng};
-    return {state: post.lat, city: post.lng, post: post.id};
-  };
-  map ? loadMap() : mapConfig.onload = loadMap;
+function PostPageController($scope, $stateParams, MapService){
+  $scope.linkBuilder = linkBuilder;
+  MapService.post.setCenter([$stateParams.state, $stateParams.city]);
+  MapService.getPosts($scope, $stateParams.post);
+  mapConfig.onidle = () => MapService.getPosts($scope, $stateParams.post);
+}
 
-  function loadMap(){
-    google.maps.event.addListener(map, "idle", () => {
-      loadPostsInBounds($http, data => {
-        if(!data.data.posts) return;
-        $scope.posts = data.data.posts.map(post => {
-          if($stateParams.post && post.id !== parseInt($stateParams.post)) return;
-          new google.maps.Marker({
-            position: {lat: parseFloat(post.lat), lng: parseFloat(post.lng)},
-            map: map,
-            title: post.title
-          });
-          post.media_url = post.media_url.split(",");
-          post.openImage = 0;
-          $scope.soloPost = $stateParams.post ? post : null;
-          $rootScope.isSolo = $stateParams.post ? true : false;
-          return post;
-        });
-      })
-    });
-    if(map) google.maps.event.trigger(map, "idle");
-  }
+function linkBuilder(post, backCheck){
+  if(!post) return;
+  if(backCheck) return {state: post.lat, city: post.lng};
+  return {state: post.lat, city: post.lng, post: post.id};
 }
 
 app.controller("BodyController", makeBodyController);
 function makeBodyController($scope, UsersService, apiInterceptor, NewCommentService, NewPostService, $http){
   $scope.commServ = NewCommentService($scope),
   $scope.postServ = NewPostService($scope);
+  $scope.ok = "ok";
   $scope.newPost = {};
   $scope.togglePosts = () => {
     $scope.profile.showProfile = false;
@@ -192,7 +175,7 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
       $scope.searchFeature.showSearch = false;
     }
   };
-  
+
   $scope.upvote = (id, type, post) => {
     post.points += 1;
     $http.post(`/theboard/upvote/${type}/${id}`)
