@@ -6,7 +6,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $http
     .state("home", {
       url: "/",
       templateUrl: "partials/home.html",
-      controller: LocationController
+      controller: HomeController
     })
     // .state("profile", {
     //   url: "/users/:userName",
@@ -21,7 +21,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $http
     .state("post", {
       url: "/:state/:city/:post",
       templateUrl: "partials/postPage.html",
-      controller: LocationController
+      controller: PostPageController
     });
     //TODO Add a profile page route with a resolve for UsersService.get(id)
 
