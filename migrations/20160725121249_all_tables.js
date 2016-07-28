@@ -62,10 +62,10 @@ exports.up = function(knex, Promise) {
     }),
     knex.schema.createTable('users_friends', (table) => {
       table.increments();
-      table.integer('user_id').references('id').inTable('users').onDelete('CASCADE');
-      table.integer('friend_id').references('id').inTable('users').onDelete('CASCADE');
-      table.string('friend_name').references('username');
-      table.string('friend_img');
+      table.integer('user_id');
+      table.integer('friend_id');
+      table.string('friend_username');
+      table.string('profile_url');
     })
   ]);
 };
