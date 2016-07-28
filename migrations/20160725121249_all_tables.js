@@ -24,7 +24,7 @@ exports.up = function(knex, Promise) {
       table.decimal('lat', 15, 10).notNullable();
       table.decimal('lng', 15, 10).notNullable();
       table.bigInteger('timestamp').notNullable();
-      table.integer('points').defaultTo(0);
+      table.integer('points').defaultTo(1);
     }),
     // Create 'comments' table
     knex.schema.createTable('comments', function(table) {
@@ -33,7 +33,7 @@ exports.up = function(knex, Promise) {
       table.integer('post_id').notNullable().references('id').inTable('posts');
       table.text('comment').notNullable();
       table.bigInteger('timestamp').notNullable();
-      table.integer('points').defaultTo(0);
+      table.integer('points').defaultTo(1);
     }),
     // Create 'tribes' table
     knex.schema.createTable('tribes', function(table) {

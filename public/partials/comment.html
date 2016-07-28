@@ -2,9 +2,12 @@
 <div class="comment-heading">
   <div class="comment-username" ng-click="getProfile(comment.user_id)">{{comment.username}}</div>
   <div class="comment-timestamp">{{comment.timestamp | dateFilter}}</div>
-  <!-- <div class="voting">
-    <i class="material-icons" ng-click="upvote(post.id, 'posts_comments', comment)">keyboard_arrow_up</i>
-    <i class="material-icons" ng-click="downvote(post.id, 'posts_comments', comment)">keyboard_arrow_down</i>
-  </div> -->
+  <div class="vote-container">
+    <div class="voting">
+      <span class="material-icons" ng-click="upvote(comment.id, 'comments', comment)">keyboard_arrow_up</span>
+      <span class="comment-respect">{{comment.points}}</span>
+      <span class="material-icons" ng-click="downvote(comment.id, 'comments', comment)">keyboard_arrow_down</span>
+    </div>
+  </div>
 </div>
 <div class="comment-comment">{{comment.comment}}</div>
