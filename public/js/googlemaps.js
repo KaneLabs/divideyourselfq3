@@ -9,9 +9,6 @@ function initMap(){
     mapTypeId: google.maps.MapTypeId.HYBRID,
     zoom: 13
   });
-  map.addListener("idle", () => {
-    console.log("idle");
-    mapConfig.onidle();
-  });
+  map.addListener("idle", () => mapConfig.onidle());
   if(mapConfig.onclick) map.addListener("click", mapConfig.onclick);
 };
