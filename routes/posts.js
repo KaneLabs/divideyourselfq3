@@ -1,6 +1,7 @@
 var express = require("express"),
   router = express.Router(),
-  knex = require('../db/knex');
+  knex = require('../db/knex'),
+  jwt = require("jsonwebtoken");
 
 router.post("/create", (req, res) => {
   knex('posts')
@@ -25,10 +26,15 @@ router.post("/update", (req, res) => {
 });
 
 router.post("/delete", (req, res) => {
-  // check if user has permission
-  knex("posts")
-    .where("id", req.body.id)
-    .del();
+  if(!req.body.post || !req.body.token) return res.json({success: false, message: "no token or id"});
+  jwt.verify(req.body.token, process.env.SECRET, (err, data) => {
+    if(err) return res.json({success: false, message: "error parsing token"});
+    if(data.user.id !== req.body.post.user_id) return res.json({success: false, message: "wrong user"});
+    knex("posts")
+      .where("id", req.body.post.id)
+      .del()
+      .then(() => res.json({success: true}));
+  });
 });
 
 module.exports = router;
