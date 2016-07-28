@@ -66,12 +66,35 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
 
 
   $scope.profile = {};
+  $scope.sideNav = {
+    show: false
+  };
   $scope.profile.activeUser = {};
   $scope.profile.profileUser = {};
+  $scope.profile.profileView = null;
   $scope.profile.showProfile = false;
-  $scope.profile.toggleShowProfile = () => {
-    $scope.profile.showProfile = !$scope.profile.showProfile;
+
+  $scope.profile.toggle = () => {
+    $scope.sideNav.show = !$scope.sideNav.show;
+    if($scope.sideNav.show === true){
+      $scope.subnav.show = false;
+    }else {
+      $scope.subnav.show = true;
+    }
+  }
+
+  $scope.profile.toggleProfile = (id) => {
+    if ($scope.profile.isActiveUser(id) && $scope.profile.profileView === "activeUser") {
+      $scope.profile.profileView = null;
+    } else if ($scope.profile.isActiveUser(id) && $scope.profile.profileView === null) {
+      $scope.profile.profileView = "activeUser";
+    } else if (!$scope.profile.isActiveUser(id) && $scope.profile.profileView === "profileUser") {
+      $scope.profile.profileView = null;
+    } else {
+      $scope.profile.profileView = "profileUser";
+    }
   };
+
   $scope.profile.getUser = (id) => {
     if ($scope.profile.isActiveUser(id)) {
       $scope.profile.activeUser = $scope.user;
@@ -112,6 +135,9 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
     } else {
       return false;
     };
+  };
+  $scope.profile.hideProfile = () => {
+    $scope.profile.profileView = null;
   };
 
   $scope.sign = {};
@@ -175,7 +201,11 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   };
 
   $scope.subnav = {};
-  $scope.subnav.show = false;
+  if($scope.user){
+    $scope.subnav.show = true;
+  }else{
+    $scope.subnav.show = false;
+  }
 
   $scope.searchFeature = {
     showSearch: false,

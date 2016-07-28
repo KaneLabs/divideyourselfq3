@@ -5,8 +5,8 @@ navbar {
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 3;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  z-index: 10;
+  /*box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);*/
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
   border-bottom: 2px solid #212121;
 }
@@ -33,25 +33,26 @@ navbar input {
   padding: 10px 20px;
 }
 
-.signout {
+.user-signedin {
   float: right;
-  padding: 10px 20px;
+  padding: 10px 5px 10px 20px;
   color: white;
   opacity: .85;
 }
 
-.signout:hover {
+.user-signedin:hover {
   cursor: pointer;
-  border-bottom: 1px solid white;
 }
+
 .sign {
-  float: right;
+  /*float: right;
   font-size: 0;
   max-height: 40px;
-  /*overflow: hidden;*/
-  width: 200px;
+  overflow: hidden;
+  width: 200px;*/
 }
 .sign.open {
+  margin-top: 2px;
   max-height: 200px;
 }
 
@@ -166,21 +167,25 @@ subnav input {
 
 .subnav {
   height: 38px;
-  background: rgb(80,80,80);
+  background: #303030;
   position: fixed;
-  top: 38px;
+  top: 42px;
   width: 100%;
   z-index: 3;
+  /*box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);*/
+  /*transition: all 0.3s cubic-bezier(.25,.8,.25,1);*/
+  /*transition: opacity .25s ease-in-out;*/
+
 }
 .subnav:hover {
-  box-shadow: 0px 0px 20px 5px rgba(0,0,0,.5);
+box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
 .searchbar {
-  height: 38px;
+  height: 40px;
   background-color: #303030;
   position: fixed;
-  top: 38px;
+  top: 42px;
   width: 100%;
   z-index: 4;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -201,7 +206,7 @@ subnav input {
 .logomark:hover {
   /*box-sizing: border-box;*/
   border-bottom: 2px solid white;
-  /*opacity: .85;*/
+  opacity: .85;
 }
 .nav-link-logo {
   float: left;
@@ -225,6 +230,10 @@ subnav input {
   /*float: left;*/
 }
 
+.navIconContainer {
+  display: inline-block;
+  height: 40px;
+}
 .navIcon {
   box-sizing: padding-box;
   display: inline-block;
@@ -234,6 +243,12 @@ subnav input {
   opacity: .85;
 }
 .navIcon:hover {
+  /*box-sizing: border-box;*/
+  border-bottom: 2px solid white;
+  opacity: .85;
+}
+
+.navIcon:selected {
   /*box-sizing: border-box;*/
   border-bottom: 2px solid white;
   opacity: .85;
@@ -267,6 +282,12 @@ subnav input {
   float: left;
   padding: 10px;
 }
+.subnavSort span:hover {
+  cursor: pointer;
+  color: lightgrey;
+  border-bottom: 2px solid white;
+  opacity: .85;
+}
 .subnavIcon {
     float: right;
 }
@@ -276,4 +297,41 @@ subnav input {
   color: white;
   vertical-align: top;
   opacity: .85;
+}
+
+.sidenav{
+  position: absolute;
+  right: 0;
+  top: 42px;
+  background-color: #303030;
+  z-index: 4;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  /*transition: all 0.3s cubic-bezier(.25,.8,.25,1);*/
+}
+
+.sidenav:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+@media(max-width: 440px){
+  .sidenav{
+    width: 100%;
+  }
+}
+
+@media(min-width: 420px){
+  .sidenav{
+    width: 140px;
+  }
+}
+
+
+.menuArrow {
+  box-sizing: padding-box;
+  display: inline-block;
+  color: white;
+  float: right;
+  vertical-align: top;
+  opacity: .85;
+  padding-left: 0;
 }
