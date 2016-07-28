@@ -1,0 +1,58 @@
+.post-comments-toggle {
+  padding: 10px;
+}
+
+.post-comments {
+  text-align: left;
+}
+.comment {
+  display: block;
+  border-top: 1px solid black;
+  padding: 5px 0px;
+}
+.comment-profile {
+  padding: 10px;
+  height: 40px;
+  width: 40px;
+}
+.comment-heading {
+  display: inline-block;
+  width: 120px;
+  height: 60px;
+}
+.comment-username, .comment-timestamp {
+  width: 60%;
+  font-size: 14px;
+}
+.comment-username {
+  font-weight: 500;
+  padding-top: 10px;
+}
+.comment-comment {
+  display: inline-block;
+  padding: 10px;
+  width: calc(100% - 220px);
+}
+.comment div {
+  vertical-align: top;
+}
+
+.newComment textarea {
+  box-sizing: border-box;
+  padding: 10px;
+  width: 100%;
+  border-top: 1px solid black;
+  border-bottom: 0;
+  border-left: 0;
+  border-right: 0;
+}
+.newComment button {
+  border-top: 1px solid black;
+  border-bottom: 0;
+  border-left: 0;
+  border-right: 0;
+  width: 100%;
+  display: block;
+  text-align: center;
+  padding: 10px;
+}
