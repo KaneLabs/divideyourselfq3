@@ -152,31 +152,19 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   };
 
   $scope.sign = {};
-  // $scope.openSign = type => {
-  //   $scope.sign.type = ($scope.sign.type === type) ? "" : type;
-  // };
-  // $scope.submitSign = () => {
-  //   // send data to server
-  //   var data = $scope.sign;
-  //   UsersService.sign(data.type, data.email, data.password, data.username, updateUserStatus);
-  //   if ($scope.sign.type === 'up') {
-  //     $scope.profile.showProfile = true;
-  //   }
-  //   $scope.sign = {};
-  // };
 
   $scope.submitSignIn = () => {
     var data = $scope.sign;
     UsersService.signIn(data.email, data.password, data.username, updateUserStatus);
     $scope.sign = {};
-  }
+  };
 
   $scope.submitSignUp = () => {
     var data = $scope.sign;
     UsersService.signUp(data.email, data.password, data.username, updateUserStatus);
     $scope.profile.showProfile = true;
     $scope.sign = {};
-  }
+  };
 
   $scope.signOut = () => {
     $scope.profile.showProfile = false;
@@ -216,7 +204,7 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
     $scope.subnav.show = true;
   }else{
     $scope.subnav.show = false;
-  }
+  };
 
   $scope.searchFeature = {
     showSearch: false,
@@ -226,14 +214,11 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
       $scope.locationFeature.showChangeLoc = false;
       $scope.signin.show = false;
       $scope.signup.show = false;
-
     }
   };
   $scope.locationFeature = {
     showChangeLoc: false,
     toggleShowChangeLoc: function(){
-      // console.log('function');
-
       $scope.locationFeature.showChangeLoc = !$scope.locationFeature.showChangeLoc;
       $scope.searchFeature.showSearch = false;
       $scope.signin.show = false;
@@ -243,25 +228,25 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
 
   $scope.upvote = (id, type, post) => {
     post.points += 1;
-    $http.post(`/theboard/upvote/${type}/${post.id}`)
+    $http.post(`/theboard/upvote/${type}/${post.id}`);
   };
 
   $scope.downvote = (id, type, post) => {
     post.points -= 1;
-    $http.post(`/theboard/downvote/${type}/${post.id}`)
+    $http.post(`/theboard/downvote/${type}/${post.id}`);
   };
 
   $scope.getFriends = (id) => {
     $http.get(`/friends/${id}`).then((data) => {
       console.log(data);
-    })
-  }
+    });
+  };
 
   $scope.addFriend = (id) => {
     $http.post(`/friends/${id}/add`).then((data) => {
       console.log(data);
-    })
-  }
+    });
+  };
 
 };
 makeBodyController.$inject = ['$scope','UsersService', 'apiInterceptor', 'NewCommentService', "NewPostService","$http"];
