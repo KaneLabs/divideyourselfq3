@@ -31,6 +31,18 @@ exports.seed = function(knex, Promise) {
           post_id: 2,
           comment: "rude af",
           timestamp: 1469412463124
+        }),
+        knex("comments").insert({
+          user_id: 2,
+          post_id: 6,
+          comment: "this is cool",
+          timestamp: 1469469344841
+        }),
+        knex("comments").insert({
+          user_id: 2,
+          post_id: 5,
+          comment: "this is cool",
+          timestamp: 1469469344841
         })
       ]);
     });

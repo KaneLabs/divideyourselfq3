@@ -24,6 +24,7 @@ exports.up = function(knex, Promise) {
       table.decimal('lat', 15, 10).notNullable();
       table.decimal('lng', 15, 10).notNullable();
       table.bigInteger('timestamp').notNullable();
+      table.integer('points').defaultTo(0);
     }),
     // Create 'comments' table
     knex.schema.createTable('comments', function(table) {
@@ -32,6 +33,7 @@ exports.up = function(knex, Promise) {
       table.integer('post_id').notNullable().references('id').inTable('posts');
       table.text('comment').notNullable();
       table.bigInteger('timestamp').notNullable();
+      table.integer('points').defaultTo(0);
     }),
     // Create 'tribes' table
     knex.schema.createTable('tribes', function(table) {
@@ -40,18 +42,18 @@ exports.up = function(knex, Promise) {
       table.text('description');
     }),
     // Create 'posts_votes' table
-    knex.schema.createTable('posts_votes',function(table) {
-      table.increments();
-      table.integer('post_id').references('id').inTable('posts');
-      table.integer('user_id').references('id').inTable('users');
-      table.integer('rating');
-    }),
+    // knex.schema.createTable('posts_votes',function(table) {
+    //   table.increments();
+    //   table.integer('post_id').references('id').inTable('posts');
+    //   table.integer('user_id').references('id').inTable('users');
+    //   table.integer('rating');
+    // }),
     // Create 'comments_votes' table
-    knex.schema.createTable('comments_votes',function(table) {
-      table.increments();
-      table.integer('comment_id').references('id').inTable('comments');
-      table.integer('rating');
-    }),
+    // knex.schema.createTable('comments_votes',function(table) {
+    //   table.increments();
+    //   table.integer('comment_id').references('id').inTable('comments');
+    //   table.integer('rating');
+    // }),
     // Create 'users_favorites' table
     knex.schema.createTable('users_favorites', function(table){
       table.increments();

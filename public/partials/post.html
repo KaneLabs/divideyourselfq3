@@ -7,8 +7,16 @@
     <div class="separator">of</div>
     <div class="post-usertribe">{{post.usertribe}}</div>
   </div>
-  <div class="post-respect">{{post.points || 0}} respect</div>
-  <div class="post-content">{{post.body}}</div>
+  <div class="vote-container">
+    <div class="voting">
+      <span class="material-icons voting" ng-click="upvote(post.id, 'posts', post)">keyboard_arrow_up</span>
+      <span class="post-respect">{{post.points || 0}} respect</span>
+      <span class="material-icons voting" ng-click="downvote(post.id, 'posts', post)">keyboard_arrow_down</span>
+    </div>
+  </div>
+  <div class="post-content">
+    {{post.body}}
+  </div>
   <div class="post-comments">
     <form class="newComment" ng-show="!!user" ng-submit="commServ.create(post)">
       <textarea rows="4" placeholder="Write a Comment" ng-model="post.newComment" required></textarea>

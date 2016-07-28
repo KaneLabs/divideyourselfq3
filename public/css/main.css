@@ -271,7 +271,9 @@ main.fixed {
   font-weight: 500;
 }
 
-.post-respect {float: right;}
+.post-respect {
+  float: right;
+}
 .post-content {
   clear: both;
   padding: 10px 10px 30px 10px;
@@ -296,7 +298,7 @@ main.fixed {
   height: 60px;
 }
 .comment-username, .comment-timestamp {
-  width: 100%;
+  width: 60%;
   font-size: 14px;
 }
 .comment-username {
@@ -423,4 +425,14 @@ footer div:hover {background: black;}
 .newPostActive footer div:first-child {
   color: black;
   background: white;
+}
+
+.voting{
+  width: 100%;
+  display:flex;
+  flex-flow: column;
+}
+.vote-container{
+  float: right;
+  display: inline-block;
 }
