@@ -1,13 +1,7 @@
-app.directive('dyProfile',function(){
-  return {
-    restrict: "AC",
-    templateUrl: "partials/profile.html",
-    // scope: {
-    //   user: "="
-    // },
-    controllers: "ProfileController"
-  };
-});
+app.directive('dyProfile', () => ({
+  templateUrl: "partials/profile.html",
+  controllers: "ProfileController"
+}));
 
 app.directive("navbar", () => ({
   templateUrl: "partials/navbar.html"
@@ -31,4 +25,8 @@ app.directive("carosel", () => ({
 
 app.directive("post", () => ({
   templateUrl: "partials/post.html"
+}));
+
+app.directive("dyFriends", () => ({
+  templateUrl: "partials/friends.html"
 }));

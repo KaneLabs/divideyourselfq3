@@ -14,10 +14,11 @@
     <img ng-src="{{ user.profile_url }}" alt="">
     <p>Profile</p>
   </div>
-  <div class="sidenav-user pointer" ng-click="profile.toggle()">
+  <div class="sidenav-user pointer" ng-click="friends.getFriends(user.id);friends.toggleShowFriends()">
     <i class="material-icons">people_outline</i>
     <p>Friends</p>
   </div>
+  <div dy-friends ng-show="friends.showFriends"></div>
   <hr>
   <div class="sidenav-user pointer" ng-click="profile.toggle();signOut()">
     <i class="material-icons">lock</i>
