@@ -28,3 +28,7 @@ app.directive("comment", () => ({
 app.directive("carosel", () => ({
   templateUrl: "partials/carosel.html"
 }));
+
+app.directive("post", () => ({
+  templateUrl: "partials/post.html"
+}));

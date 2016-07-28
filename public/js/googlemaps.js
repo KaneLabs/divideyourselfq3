@@ -1,6 +1,21 @@
-var map, mapConfig = {
-  center: {lat: 40.0149856, lng: -105.2705456}
-};
+var map,
+  loc = window.location.pathname.split("/"),
+  isHome = window.location.pathname === "/",
+  mapConfig = {
+    center: localStorage.center ? JSON.parse(localStorage.center) : {
+      lat: parseFloat(loc[1]) || 40.0149856,
+      lng: parseFloat(loc[2]) || -105.2705456
+    }
+  };
+
+if(isHome){
+  navigator.geolocation.getCurrentPosition(data => {
+    if(!data.coords) return;
+    mapConfig.center = {lat: data.coords.latitude, lng: data.coords.longitude};
+    if(map) map.setCenter(mapConfig.center);
+    localStorage.center = JSON.stringify(mapConfig.center);
+  })
+}
 
 function initMap(){
   map = new google.maps.Map(document.getElementById('map'), {
@@ -12,20 +27,8 @@ function initMap(){
   if(mapConfig.onclick) map.addListener("click", mapConfig.onclick);
 };
 
-function loadPostsInBounds($scope, $http){
+function loadPostsInBounds($http, cb){
   var bounds = map.getBounds();
-  $http.post("/api/locations", {minLat: bounds.f.f, maxLat: bounds.f.b, minLng: bounds.b.b, maxLng: bounds.b.f})
-    .then(data => {
-      if(!data.data.posts) return;
-      $scope.posts = data.data.posts.map(post => {
-        new google.maps.Marker({
-          position: {lat: parseFloat(post.lat), lng: parseFloat(post.lng)},
-          map: map,
-          title: post.title
-        });
-        post.media_url = post.media_url.split(",");
-        post.openImage = 0;
-        return post;
-      });
-    });
+  if(!bounds) return;
+  $http.post("/api/locations", {minLat: bounds.f.f, maxLat: bounds.f.b, minLng: bounds.b.b, maxLng: bounds.b.f}).then(cb);
 }

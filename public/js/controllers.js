@@ -1,29 +1,57 @@
-function LocationController($scope, $stateParams, $http){
-  var state = $stateParams.state || "Colorado",
-    city = $stateParams.city || "Boulder";
+var Magic = (number, callback) => {
+  var argumentArray = [];
+  return data => {
+    argumentArray.push(data);
+    if(argumentArray.length === number) return callback(argumentArray);
+  }
+};
 
-  $scope.location = {state, city};
+function LocationController($scope, $rootScope, $stateParams, $http){
+  if(window.location.pathname !== "/" && !parseFloat(loc[1])){
+    $http.get(`http://maps.googleapis.com/maps/api/geocode/json?address=${loc[2]},${loc[1]}`).then(data => {
+      if(data.data.results[0]) mapConfig.center = data.data.results[0].geometry.location;
+      if(map) map.setCenter(mapConfig.center);
+    });
+  }
 
-  $http.get(`http://maps.googleapis.com/maps/api/geocode/json?address=${city},${state}`).then(data => {
-    center = data.data.results[0].geometry.location;
-    if(map) map.setCenter(center);
-  });
-
+  $scope.show = {post: null};
+  $scope.linkBuilder = (post, backCheck) => {
+    if(!post) return;
+    if(backCheck) return {state: post.lat, city: post.lng};
+    return {state: post.lat, city: post.lng, post: post.id};
+  };
   map ? loadMap() : mapConfig.onload = loadMap;
 
   function loadMap(){
     google.maps.event.addListener(map, "idle", () => {
-      loadPostsInBounds($scope, $http);
+      loadPostsInBounds($http, data => {
+        if(!data.data.posts) return;
+        $scope.posts = data.data.posts.map(post => {
+          if($stateParams.post && post.id !== parseInt($stateParams.post)) return;
+          new google.maps.Marker({
+            position: {lat: parseFloat(post.lat), lng: parseFloat(post.lng)},
+            map: map,
+            title: post.title
+          });
+          post.media_url = post.media_url.split(",");
+          post.openImage = 0;
+          $scope.soloPost = $stateParams.post ? post : null;
+          $rootScope.isSolo = $stateParams.post ? true : false;
+          return post;
+        });
+      })
     });
+    if(map) google.maps.event.trigger(map, "idle");
   }
 }
 
 app.controller("BodyController", makeBodyController);
-function makeBodyController($scope, UsersService, apiInterceptor, NewCommentService, NewPostService){
+function makeBodyController($scope, UsersService, apiInterceptor, NewCommentService, NewPostService, $http){
   $scope.commServ = NewCommentService($scope),
   $scope.postServ = NewPostService($scope);
   $scope.newPost = {};
   $scope.togglePosts = () => {
+    $scope.profile.showProfile = false;
     $scope.showPosts = !$scope.showPosts;
     $scope.showNewPost = false;
   };
@@ -53,6 +81,29 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   if(map) map.addListener("click", mapClick);
   else mapConfig.onclick = mapClick;
 
+  $scope.profile = {};
+  $scope.profile.showProfile = false;
+  $scope.profile.toggleShowProfile = function() {
+    $scope.profile.showProfile = !$scope.profile.showProfile;
+  };
+  $scope.profile.getProfileUser = function(id) {
+    $scope.user.userPosts = [];
+    $http.get(`/users/${id}`).then(function(data){
+      for (var i = 0; i < data.data.length; i++) {
+        $scope.user.userPosts.push({
+          id: data.data[i].id,
+          title: data.data[i].title,
+          body: data.data[i].body,
+          type: data.data[i].type,
+          timestamp: data.data[i].timestamp,
+          lat: data.data[i].lat,
+          lng: data.data[i].lng,
+          media_url: data.data[i].media_url.split(',')
+        })
+      }
+    });
+  };
+
   $scope.sign = {};
   $scope.openSign = type => {
     $scope.sign.type = ($scope.sign.type === type) ? "" : type;
@@ -61,9 +112,14 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
     // send data to server
     var data = $scope.sign;
     UsersService.sign(data.type, data.email, data.password, data.username, updateUserStatus);
+    if ($scope.sign.type === 'up') {
+      $scope.profile.showProfile = true;
+    }
     $scope.sign = {};
   };
+
   $scope.signOut = () => {
+    $scope.profile.showProfile = false;
     $scope.user = null;
     localStorage.removeItem("userToken");
   };
@@ -83,12 +139,19 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
     $scope.signup.showNewProfile = !$scope.signup.showNewProfile;
   };
 
-  $scope.profile = {};
-  $scope.profile.showProfile = false;
-  $scope.profile.toggleShowProfile = function() {
-    console.log('function');
-    $scope.profile.showProfile = !$scope.profile.showProfile;
+  $scope.signin = {};
+  $scope.signin.show = false;
+  $scope.signin.toggle = function() {
+    $scope.signin.show = !$scope.signin.show;
   };
+
+
+  // $scope.profile = {};
+  // $scope.profile.showProfile = false;
+  // $scope.profile.toggleShowProfile = function() {
+  //   console.log('function');
+  //   $scope.profile.showProfile = !$scope.profile.showProfile;
+  // };
 
   $scope.searchFeature = {
     showSearch: false,
@@ -107,5 +170,6 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
     }
   };
 
+
 };
-makeBodyController.$inject = ['$scope','UsersService', 'apiInterceptor', 'NewCommentService', "NewPostService"];
+makeBodyController.$inject = ['$scope','UsersService', 'apiInterceptor', 'NewCommentService', "NewPostService","$http"];

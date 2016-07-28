@@ -1,6 +1,6 @@
 <img class="comment-profile" ng-src="{{comment.profile_url}}">
 <div class="comment-heading">
-  <div class="comment-username">{{comment.username}}</div>
+  <div class="comment-username" ng-click="getProfile(comment.user_id)">{{comment.username}}</div>
   <div class="comment-timestamp">{{comment.timestamp | dateFilter}}</div>
 </div>
 <div class="comment-comment">{{comment.comment}}</div>

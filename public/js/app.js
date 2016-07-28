@@ -8,11 +8,11 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $http
       templateUrl: "partials/home.html",
       controller: LocationController
     })
-    .state("state", {
-      url: "/:state",
-      templateUrl: "partials/home.html",
-      controller: LocationController
-    })
+    // .state("profile", {
+    //   url: "/users/:userName",
+    //   templateUrl: "partials/profile.html",
+    //   controller: ProfileController
+    // })
     .state("city", {
       url: "/:state/:city",
       templateUrl: "partials/home.html",
@@ -20,7 +20,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $http
     })
     .state("post", {
       url: "/:state/:city/:post",
-      templateUrl: "partials/home.html",
+      templateUrl: "partials/postPage.html",
       controller: LocationController
     });
     //TODO Add a profile page route with a resolve for UsersService.get(id)
