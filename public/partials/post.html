@@ -7,6 +7,10 @@
     <div class="separator" ng-show="soloPost.usertribe">of</div>
     <div class="post-usertribe" ng-show="soloPost.usertribe">{{post.usertribe}}</div>
   </div>
+  <div class="post-actions" ng-show="user.id === post.user_id">
+    <div class="post-edit">Edit</div>
+    <div class="post-delete" ng-click="deletePost(post)">Delete</div>
+  </div>
   <div class="vote-container">
     <div class="voting">
       <span class="material-icons voting" ng-click="upvote(post.id, 'posts', post)">keyboard_arrow_up</span>
