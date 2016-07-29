@@ -41,7 +41,7 @@
       <input type="password" placeholder="Password" class="lat" ng-model="sign.password" required>
       <input type="password" placeholder="Confirm Password" class="lng" ng-model="sign.passwordconfirm" required>
       <button class="submit" type="submit">Submit</button>
-      <button class="cancel" ng-click="signup.toggleNewProfile();openSign('up')">Cancel</button>
+      <div class="cancel" ng-click="signup.toggle()">Cancel</div>
     </form>
   </div>
   <main ui-view></main>
