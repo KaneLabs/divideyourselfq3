@@ -13,11 +13,11 @@ module.exports = app => {
       if(data.connect){
         if(fromUserSocket) fromUserSocket.ws.close();
         openSockets.forEach(userSocket => {
-          userSocket.ws.send(JSON.stringify({online: true, fromUser: data.fromUser}), err => {
+          userSocket.ws.send(JSON.stringify({online: true, fromUser: data.fromUser, center: data.center}), err => {
             console.log(err);
           });
         });
-        openSockets.push({ws: ws, username: data.fromUser});
+        openSockets.push({ws: ws, username: data.fromUser, center: data.center});
       }
       else if(toUserSocket){
         toUserSocket.ws.send(JSON.stringify({
@@ -31,7 +31,9 @@ module.exports = app => {
     });
 
     ws.on('close', () => {
-      var fromUser = openSockets.find(e => e.ws === ws).username;
+      var fromUserSocket = openSockets.find(e => e.ws === ws)
+      if(!fromUserSocket) return
+      var fromUser = fromUserSocket.username;
       openSockets = openSockets.filter(e => e.ws !== ws);
       openSockets.forEach(userSocket => {
         userSocket.ws.send(JSON.stringify({offline: true, fromUser: fromUser}), err => {
@@ -43,7 +45,7 @@ module.exports = app => {
     ws.send(JSON.stringify({connect: true, message: "Chat Enabled"}));
 
     openSockets.forEach(userSocket => {
-      ws.send(JSON.stringify({online: true, fromUser: userSocket.username}), err => {
+      ws.send(JSON.stringify({online: true, fromUser: userSocket.username, center: userSocket.center}), err => {
         console.log(err);
       });
     });

@@ -1,13 +1,15 @@
 var x;
 
 app.factory("ChatService", () => $scope => {
-  var chat = new WebSocket(`ws://${window.location.hostname}:3000`);
+  var host = location.origin.replace(/^http/, 'ws'),
+    chat = new WebSocket(host);
 
   $scope.messages = localStorage.messages ? JSON.parse(localStorage.messages) : [];
 
   chat.onmessage = e => {
     var data = JSON.parse(e.data),
       sender = $scope.messages.find(e => e.username === data.fromUser);
+    console.log(e.data);
     if(data.connect) return console.log(data.message);
     console.log(data);
     if(data.fromUser && !sender){
@@ -18,8 +20,23 @@ app.factory("ChatService", () => $scope => {
       };
       $scope.messages.push(sender);
     }
-    if(data.online) sender.live = true;
-    if(data.offline) sender.live = false;
+    if(data.online){
+      sender.live = true;
+      if(data.center) sender.marker = new google.maps.Marker({
+        icon: "mapicons/dude.png",
+        position: JSON.parse(data.center),
+        map: map,
+        title: data.fromUser
+      });
+      else console.log(data);
+    }
+    if(data.offline){
+      sender.live = false;
+      if(sender.marker){
+        sender.marker.setMap(null);
+        sender.marker = null;
+      }
+    }
     if(data.message) sender.log.push({
       fromUser: data.fromUser,
       message: data.message,

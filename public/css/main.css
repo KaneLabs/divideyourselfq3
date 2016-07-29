@@ -181,6 +181,7 @@ main {
   max-height: 100%;
   max-width: 100%;
   transition: .2s all;
+  opacity: 0;
 }
 
 .post-image.open {

@@ -27,21 +27,21 @@
   <script src="js/chat.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBQxTdpV5zVD6Yt-DufELYVrJrnz7JuMo&callback=initMap" defer></script>
 </head>
-<body ng-controller="BodyController" ng-class="{showPosts: showPosts, showNewPost: showNewPost}">
+<body ng-controller="BodyController" ng-class="{showPosts: showPosts, showNewPost: showNewPost, newPostActive: newPostActive, showSignup: signup.show}">
   <navbar></navbar>
   <subnav></subnav>
   <div id="map-container">
     <div id="map"></div>
   </div>
-  <div class="newProfile" ng-show="signup.show">
+  <div class="newProfile">
     <form ng-submit="submitSignUp();signup.toggle()">
       <h2>Create new Profile</h2>
-      <input type="text" placeholder="User Name" ng-model="sign.username" required><br/>
-      <input type="text" placeholder="Email" ng-model="sign.email" required><br/>
-      <input type="password" placeholder="Password" class="lat" ng-model="sign.password" required><br/>
-      <input type="password" placeholder="Confirm Password" class="lng" ng-model="sign.passwordconfirm" required><br/>
-      <button class="submit" type="submit">Submit</button><br/>
-      <button class="cancel" ng-click="signup.toggleNewProfile();openSign('up')">Cancel</button>
+      <input type="text" placeholder="User Name" ng-model="sign.username" required>
+      <input type="text" placeholder="Email" ng-model="sign.email" required>
+      <input type="password" placeholder="Password" class="lat" ng-model="sign.password" required>
+      <input type="password" placeholder="Confirm Password" class="lng" ng-model="sign.passwordconfirm" required>
+      <button class="submit" type="submit">Submit</button>
+      <div class="cancel" ng-click="signup.toggle()">Cancel</div>
     </form>
   </div>
   <main ui-view></main>

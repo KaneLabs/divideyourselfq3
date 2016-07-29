@@ -49,7 +49,7 @@ app.factory("NewPostService", $http => $scope => ({
       post.openImage = 0;
       post.comments = [];
       posts.push(post);
-      loadPostsInBounds($scope, $http);
+      mapConfig.onidle();
     });
     $scope.toggleNewPost();
   }
@@ -122,6 +122,7 @@ app.factory("MapService", $http => {
         $scope.posts = data.data.posts.map(post => {
           if(post_id && post.id !== post_id) return;
           post.marker = new google.maps.Marker({
+            icon: "mapicons/view.png",
             position: {lat: parseFloat(post.lat), lng: parseFloat(post.lng)},
             map: map,
             title: post.title
@@ -136,3 +137,36 @@ app.factory("MapService", $http => {
     }
   }
 });
+
+app.factory('TribeService', $http => {
+  return {
+    getAll: () => {
+      $http.get('/tribes').then( (data) => {
+        //Display stuff
+        console.log(data);
+      })
+    },
+
+    getMine: () => {
+      $http.get('/tribes/' + $scope.user.tribe_id).then( (data) => {
+        console.log(data);
+      });
+    },
+
+    join: (id) => {
+      //Join tribe by id
+      $http.get(`/tribes/join/${id}`)
+    },
+
+    leave: () => {
+      //Leave my tribe
+      $http.get('/tribes/leave/' + $scope.user.tribe_id);
+      $scope.user.tribe_id = null;
+    },
+
+    delete: () => {
+      // Optional config argument goes after URL
+      $http.delete('/tribes/delete' + $scope.user.tribe_id);
+    }
+  }
+})
