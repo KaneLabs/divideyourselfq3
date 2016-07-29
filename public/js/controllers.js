@@ -238,11 +238,8 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   function updateUserStatus(data){
     localStorage.userToken = data.token;
     $scope.user = data.user;
-<<<<<<< HEAD
     $scope.friends.getFriends($scope.user.id)
-=======
     $scope.subnav.show = true;
->>>>>>> c0a0d2a4604a36e688303376aa883610994a2f9d
     chatMagic();
   };
 
@@ -362,12 +359,7 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
           $scope.isFriend = false;
         }
       }
-<<<<<<< HEAD
     }
-=======
-      return false;
-    };
->>>>>>> c0a0d2a4604a36e688303376aa883610994a2f9d
   };
 
   $scope.tribe = TribeService;
