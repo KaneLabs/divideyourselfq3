@@ -3,28 +3,35 @@
   <input type="text" placeholder="Change Location" ng-show="locationFeature.showChangeLoc === true"  class="searchbar">
 </div>
 
-<div class="subnav" ng-show="subnav.show">
-  <div class="subnavSort">Sort by : <span>Date </span><span ng-click="togglePosts()">Rating </span><span>Trending</span></div>
+<div class="subnavBar" ng-show="subnav.show">
+  <div class="subnavSort">Sort by :
+    <div class="subnavSortDiv">
+      <span>Date </span>
+    </div>
+    <div class="subnavSortDiv">
+      <span ng-click="togglePosts()">Rating </span>
+    </div>
+    <div class="subnavSortDiv">
+      <span>Trending</span>
+    </div>
+  </div>
   <div class="subnavIcon">
     <i class="material-icons addPostIcon" ng-click="activateNewPost();toggleNewPost()">add</i>
   </div>
 </div>
 <aside class="sidenav" ng-show='sideNav.show'>
-  <p ng-click="profile.toggleProfile(user.id);profile.getUser(user.id)">Profile</p>
+  <div class="sidenav-user pointer" ng-click="profile.toggle();profile.toggleProfile(user.id);profile.getUser(user.id)">
+    <img ng-src="{{ user.profile_url }}" alt="">
+    <p>Profile</p>
+  </div>
+  <div class="sidenav-user pointer" ng-click="friends.toggleShowFriends()">
+    <i class="material-icons">people_outline</i>
+    <p>Friends ({{ friends.friendsList.length | number}})</p>
+  </div>
+  <div dy-friends ng-show="friends.showFriends"></div>
+  <hr>
+  <div class="sidenav-user pointer" ng-click="profile.toggle();signOut()">
+    <i class="material-icons">lock</i>
+    <p>Signout</p>
+  </div>
 </aside>
-
-
-
-
-<!-- <div class="subnav-link" ui-sref="home">Divide Yourself</div> -->
-<!-- <input type="text" placeholder="Search Posts" ng-model="search"> -->
-<!-- <div class="subnav-link signout" ng-show="!!user" >View posts by </div>
-<div class="subnav-link signout" ng-show="!!user" ng-click="signOut()">Signout</div> -->
-<!-- <form class="sign" ng-submit="submitSign()" ng-class="{open: !!sign.type}" name="signform" ng-hide="!!user">
-  <div class="subnav-link" ng-click="openSign('up')" ng-class="{hide: sign.type === 'in'}">Signup</div>
-  <div class="subnav-link" ng-click="openSign('in')" ng-class="{hide: sign.type === 'up'}">Signin</div>
-  <i class="material-icons clear-sign" ng-click="sign.type = '';">clear</i>
-  <input type="text" placeholder="{{sign.type === 'in' ? 'Username or Email' : 'Email'}}" ng-model="sign.email" required>
-  <input type="password" placeholder="Password" ng-model="sign.password" required>
-  <button type="submit">Submit</button>
-</form> -->

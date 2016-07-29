@@ -15,11 +15,11 @@
 
 <div class='signinSignupContainer' ng-show="!user">
   <div class="signinSignupDiv" ng-click="signup.toggle()"><span>Sign Up</span></div> /
-  <div class="signinSignupDiv" ng-click="signin.toggle()"><span>Sign In</span></div>
+  <div class="signinSignupDiv" ng-click="signin.toggle();friends.getFriends(user.id)"><span>Sign In</span></div>
 </div>
 
-<i class="material-icons menuArrow" ng-click="profile.toggle()" ng-show="!!user">arrow_drop_down</i>
-<div class="user-signedin" ng-show="!!user" ng-click="profile.toggle();profile.getUser(user.id)">{{user.username || profile}}</div>
+<i class="material-icons menuArrow" ng-click="profile.toggle();profile.getUser(user.id);friends.getFriends(user.id)" ng-show="!!user">arrow_drop_down</i>
+<div class="user-signedin" ng-show="!!user" ng-click="profile.toggle();profile.getUser(user.id);friends.getFriends(user.id)">{{user.username || profile}}</div>
 
 <form class="sign" ng-submit="submitSignIn()"  name="signform" ng-show="signin.show" ng-if='!user'>
   <input ng-model="sign.email" type="text" placeholder="Enter Username or Email" required>
