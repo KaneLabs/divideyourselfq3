@@ -245,6 +245,8 @@ box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   opacity: .85;
   float: right;
 }
+
+
 .signinSignupDiv {
   height: 30px;
   display: inline-block;
@@ -332,6 +334,18 @@ hr {
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
+.signin button {
+  height: 40px;
+  background: #43A047;
+}
+
+.signin * {
+
+}
+
+.signin {
+  margin-top: 40px;
+}
 
 @media(max-width: 440px){
   .sidenav{

@@ -139,13 +139,101 @@ exports.seed = function(knex, Promise) {
         knex('posts').insert({
           user_id: 3,
           title: 'Wolfe\'s Neck Woods',
-          body: 'Great coastal hikes in a this state park.',
+          body: 'Great coastal hikes in this state park.',
           media_url: 'http://www.freeportusa.com/wp-content/uploads/2012/07/Wolf-Neck-17.jpg',
           lat: 43.822700,
           lng: -70.087624,
           type: 'board',
           timestamp: Date.now() - 28462,
           points: 289
+        }),
+        knex("posts").insert({
+          user_id: 2,
+          title: "Almagre Mountain",
+          body: "Looks like the big elf statues from Lord of the Rings",
+          media_url: "https://lh4.googleusercontent.com/-ceZrg8a-TXc/VzT2oFLveVI/AAAAAAAAEFI/93mg4wKanMkcHpBZ8dukWxp3xNcuLXLQgCL0B/w907-h424-no/CathedralRocksAutumn.jpg",
+          lat: 38.780872,
+          lng: -105.031987,
+          type: "board",
+          timestamp: Date.now() - 65109,
+          points: 12
+        }),
+        knex("posts").insert({
+          user_id: 1,
+          title: "Cow Mountain",
+          body: "I'd rather have a cow than a mountain.",
+          media_url: "http://www.mountainphotographer.com/wp-content/uploads/2008/07/cowcreeksample.jpg",
+          lat: 38.6810382,
+          lng: -105.0386468,
+          type: "board",
+          timestamp: Date.now() - 10294,
+          points: 821
+        }),
+        knex("posts").insert({
+          user_id: 4,
+          title: "Walmart Super Center in Falcon",
+          body: "It's got twice as much shit produced by twice as many chinese children.",
+          media_url: "https://lh3.googleusercontent.com/-NUaDqMKDSPg/VuCr6y-pRKI/AAAAAAAAADM/xcXc9fHpk1AXg84ZiWl48lL1t5_dSRydACL0B/w908-h606-no/photo.jpg",
+          lat: 38.9354128,
+          lng: -104.6212255,
+          type: "board",
+          timestamp: Date.now() - 41591,
+          points: 2
+        }),
+        knex("posts").insert({
+          user_id: 3,
+          title: "Grand Lake",
+          body: "It's a grand lake, but not a great lake.",
+          media_url: "https://static.panoramio.com.storage.googleapis.com/photos/large/113274329.jpg",
+          lat: 40.2473806,
+          lng: -105.8382626,
+          type: "board",
+          timestamp: Date.now() - 12973,
+          points: 50
+        }),
+        knex("posts").insert({
+          user_id: 2,
+          title: "Mt. Elbert",
+          body: "Elbert should have come up with a better name but his ego got in the way.",
+          media_url: "https://upload.wikimedia.org/wikipedia/commons/1/1e/Mt._Elbert.jpg",
+          lat: 38.992061,
+          lng: -106.5970281,
+          type: "board",
+          timestamp: Date.now() - 12873,
+          points: 272
+        }),
+        knex("posts").insert({
+          user_id: 1,
+          title: "Mt. Harvard",
+          body: "The closest most people in the midwest will get to Harvard.",
+          media_url: "http://coloradoguy.com/mount-harvard/mount-harvard-colorado-summit.jpg",
+          lat: 38.9244389,
+          lng: -106.3205788,
+          type: "board",
+          timestamp: Date.now() - 90108,
+          points: 63
+        }),
+        knex("posts").insert({
+          user_id: 2,
+          title: "Mt. Rosa",
+          body: "This mountain lead the mountain rights movement of '92.",
+          media_url: "http://actionmatrix.com/Trails/Rosa/Images/Rosa018_Summit.jpg",
+          lat: 38.7541526,
+          lng: -104.9655381,
+          type: "board",
+          timestamp: Date.now() - 18315,
+          points: 72
+        }),
+        knex("posts").insert({
+          user_id: 3,
+          title: "Mt. Evans",
+          body: "This mountain should have said no to the Fantastic Four movie.",
+          media_url: "https://cdn-co.milespartnership.com/sites/default/master/files/mountevansbyway2_MI.jpg",
+          lat: 39.5248291,
+          lng: -105.7445384,
+          type: "board",
+          timestamp: Date.now() - 86123,
+          points: 81
         }),
         knex('posts').insert({
           user_id: 5,

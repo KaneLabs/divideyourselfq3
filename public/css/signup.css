@@ -2,7 +2,7 @@
   transition: .2s all;
   font-size: 0;
   position: fixed;
-  top: 200px;
+  top: 100px;
   width: 100%;
   z-index: 2;
   display: none;
@@ -15,7 +15,7 @@
 .newProfile form {
   margin: 0 auto;
   pointer-events: auto;
-  width: 90%;
+  width: 100%;
   max-width: 600px;
 }
 .newProfile input, .newProfile textarea {
@@ -39,15 +39,15 @@
   padding: 10px;
   width: 50%;
   color: white;
-  background: red;
+  background: #B71C1C;
 }
 .newProfile .submit {
   color: white;
-  background: green;
+  background: #43A047;
 }
 .newProfile h2 {
   font-size: 24px;
-  background: rgb(20,20,20);
+  background: #424242;
   color: white;
   margin: 0;
   padding: 10px;
