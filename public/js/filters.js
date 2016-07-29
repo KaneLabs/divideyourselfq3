@@ -16,5 +16,6 @@ app.filter("dateFilter", () => input => {
   if(timeSince > one.day) return pluralize("day");
   if(timeSince > one.hour) return pluralize("hour");
   if(timeSince > one.minute) return pluralize("minute");
+  if(timeSince > one.second) return pluralize("second");
   return "just now";
 });
