@@ -174,8 +174,8 @@ main {
 .post-image {
   position: absolute;
   top: 0;
-  max-height: 100%;
-  max-width: 100%;
+  width: 100%;
+  background: rgba(255,255,255,0.95);
   transition: .2s all;
   opacity: 0;
 }
