@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="css/signup.css">
   <link rel="stylesheet" href="css/nav.css">
   <link rel="stylesheet" href="css/comments.css">
+  <link rel="stylesheet" href="css/chat.css">
   <link rel="stylesheet" href="css/friends.css">
   <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
@@ -23,6 +24,7 @@
   <script src="js/services.js"></script>
   <script src="js/filters.js"></script>
   <script src="js/interceptors.js"></script>
+  <script src="js/chat.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBQxTdpV5zVD6Yt-DufELYVrJrnz7JuMo&callback=initMap" defer></script>
 </head>
 <body ng-controller="BodyController" ng-class="{showPosts: showPosts, showNewPost: showNewPost, newPostActive: newPostActive}">
@@ -44,5 +46,6 @@
   </div>
   <main ui-view></main>
   <main dy-profile></main>
+  <chat class="chat"></chat>
 </body>
 </html>

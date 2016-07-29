@@ -1,0 +1,55 @@
+.chat {
+  position: fixed;
+  bottom: -5px;
+  right: 0;
+  z-index: 3;
+  width: 100%;
+}
+
+.chat-dude {
+  display: inline-block;
+  background: white;
+  width: 220px;
+}
+
+.chat-messages {
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+.chat-message {
+  border-top: 1px solid black;
+}
+
+.chat-title {
+  background: rgb(20,20,20);
+  color: white;
+  padding: 10px;
+  vertical-align: bottom;
+  cursor: pointer;
+}
+
+.chat-input {
+  padding: 10px;
+  box-sizing: border-box;
+  width: calc(100%);
+}
+.chat-submit {display: none;}
+
+.message-from, .message-timestamp, .message-message {
+  padding: 5px;
+}
+
+.message-from {
+  float: left;
+  font-weight: 700;
+  display: block;
+}
+
+.message-timestamp {
+  float: right;
+}
+
+.message-message {
+  clear: both;
+}
