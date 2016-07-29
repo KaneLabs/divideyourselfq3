@@ -252,9 +252,11 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
 
   $scope.friends = {};
   $scope.friends.getFriends = (id) => {
-    $http.get(`/friends/${id}`).then( data => {
-      $scope.friends.friendsList = data.data;
-    });
+    if($scope.user){
+      $http.get(`/friends/${id}`).then( data => {
+        $scope.friends.friendsList = data.data;
+      });
+    }
   };
   $scope.friends.showFriends = false;
   $scope.friends.toggleShowFriends = () => {
