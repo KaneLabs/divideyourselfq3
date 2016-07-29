@@ -13,7 +13,9 @@ module.exports = app => {
       if(data.connect){
         if(fromUserSocket) fromUserSocket.ws.close();
         openSockets.forEach(userSocket => {
-          userSocket.ws.send(JSON.stringify({online: true, fromUser: data.fromUser}));
+          userSocket.ws.send(JSON.stringify({online: true, fromUser: data.fromUser}), err => {
+            console.log(err);
+          });
         });
         openSockets.push({ws: ws, username: data.fromUser});
       }
@@ -22,7 +24,9 @@ module.exports = app => {
           fromUser: data.fromUser,
           message: data.message,
           timestamp: data.timestamp
-        }));
+        }), err => {
+          console.log(err);
+        });
       }
     });
 
@@ -30,14 +34,18 @@ module.exports = app => {
       var fromUser = openSockets.find(e => e.ws === ws).username;
       openSockets = openSockets.filter(e => e.ws !== ws);
       openSockets.forEach(userSocket => {
-        userSocket.ws.send(JSON.stringify({offline: true, fromUser: fromUser}));
+        userSocket.ws.send(JSON.stringify({offline: true, fromUser: fromUser}), err => {
+          console.log(err);
+        });
       });
     });
 
     ws.send(JSON.stringify({connect: true, message: "Chat Enabled"}));
 
     openSockets.forEach(userSocket => {
-      ws.send(JSON.stringify({online: true, fromUser: userSocket.username}));
+      ws.send(JSON.stringify({online: true, fromUser: userSocket.username}), err => {
+        console.log(err);
+      });
     });
   });
 
