@@ -262,4 +262,4 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   };
 
 };
-// makeBodyController.$inject = ['$scope','UsersService', 'apiInterceptor', 'NewCommentService', "NewPostService","$http"];
+makeBodyController.$inject = ['$scope','UsersService', 'apiInterceptor', 'NewCommentService', "NewPostService","$http", "ChatService"];
