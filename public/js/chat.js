@@ -9,7 +9,6 @@ var Magic = (number, callback) => {
 var magicCenter;
 
 app.factory("ChatService", () => $scope => {
-  if(!$scope.user) return;
   var host = location.origin.replace(/^http/, 'ws'),
     chat = {}
 
