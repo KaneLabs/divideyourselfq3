@@ -34,6 +34,7 @@ router.post('/:id', (req, res) => {
     .returning('*')
     .then((inserted) => {
       // console.log("ADDED: ", inserted);
+      console.log(user.user);
       knex('users_friends')
         .insert({
           user_id: req.params.id,
@@ -43,7 +44,7 @@ router.post('/:id', (req, res) => {
         })
         .returning('*')
         .then( result => {
-          console.log(data);
+          console.log(result);
           res.send(data);
         });
     });
