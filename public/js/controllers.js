@@ -110,6 +110,7 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
     $scope.sideNav.show = !$scope.sideNav.show;
     if($scope.sideNav.show === true){
       $scope.subnav.show = false;
+      $scope.friends.showFriends = false;
     }else {
       $scope.subnav.show = true;
     }
@@ -124,7 +125,7 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
       $scope.profile.profileView = null;
     } else {
       $scope.profile.profileView = "profileUser";
-    }
+    };
   };
   $scope.profile.getUser = (id) => {
     if ($scope.profile.isActiveUser(id)) {
@@ -199,6 +200,7 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   };
 
   $scope.getProfile = (id) => {
+    console.log("getProfile(id): ", id);
     UsersService.get(id);
   };
 

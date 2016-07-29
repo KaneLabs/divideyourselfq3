@@ -8,11 +8,6 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $http
       templateUrl: "partials/home.html",
       controller: HomeController
     })
-    // .state("profile", {
-    //   url: "/users/:userName",
-    //   templateUrl: "partials/profile.html",
-    //   controller: ProfileController
-    // })
     .state("city", {
       url: "/:state/:city",
       templateUrl: "partials/home.html",
@@ -23,7 +18,6 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $http
       templateUrl: "partials/postPage.html",
       controller: PostPageController
     });
-    //TODO Add a profile page route with a resolve for UsersService.get(id)
 
   $httpProvider.interceptors.push('apiInterceptor');
   $locationProvider.html5Mode(true);
