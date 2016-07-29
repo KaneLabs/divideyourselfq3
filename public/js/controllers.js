@@ -252,7 +252,6 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   $scope.friends.getFriends = (id) => {
     $http.get(`/friends/${id}`).then( data => {
       $scope.friends.friendsList = data.data;
-      console.log($scope.friends.friendsList);
     });
   };
   $scope.friends.showFriends = false;
