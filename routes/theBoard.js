@@ -1,8 +1,8 @@
 var express = require('express');
-var router = express.Router();
-var knex = require('../db/knex.js');
-var jwt = require('jsonwebtoken');
-require('dotenv').config();
+    router = express.Router(),
+    knex = require('../db/knex.js'),
+    jwt = require('jsonwebtoken');
+    require('dotenv').load();
 
 router.post('/upvote/:type/:id', (req, res) => {
   var token = req.headers.authorization.split(' ')[1];
