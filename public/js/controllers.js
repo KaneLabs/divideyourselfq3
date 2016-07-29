@@ -62,7 +62,7 @@ function linkBuilder(post, backCheck){
 }
 
 app.controller("BodyController", makeBodyController);
-function makeBodyController($scope, UsersService, apiInterceptor, NewCommentService, NewPostService, $http, ChatService, TribeService){
+function makeBodyController($scope, UsersService, apiInterceptor, NewCommentService, NewPostService, $http, ChatService, TribeService, $state){
   if(localStorage.userToken) $scope.user = jwt_decode(localStorage.userToken).user;
 
   $scope.chat = ChatService($scope);
@@ -245,12 +245,23 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
     }
   };
   $scope.locationFeature = {
+
     showChangeLoc: false,
     toggleShowChangeLoc: function(){
       $scope.locationFeature.showChangeLoc = !$scope.locationFeature.showChangeLoc;
       $scope.searchFeature.showSearch = false;
       $scope.signin.show = false;
       $scope.signup.show = false;
+    },
+    goTo: function(){
+      var state = $scope.locationFeature.state;
+      var city = $scope.locationFeature.city;
+      $state.go('city', {state: $scope.locationFeature.state, city: $scope.locationFeature.city}, {reload: true, location: true})
+      document.location.reload(true);
+        .then(function (result) {
+      })
+      .catch(function (err) {
+      });
     }
   };
 
@@ -292,4 +303,4 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   $scope.tribe = TribeService;
 
 };
-makeBodyController.$inject = ['$scope','UsersService', 'apiInterceptor', 'NewCommentService', "NewPostService","$http", "ChatService", 'TribeService'];
+makeBodyController.$inject = ['$scope','UsersService', 'apiInterceptor', 'NewCommentService', "NewPostService","$http", "ChatService", 'TribeService', "$state"];
