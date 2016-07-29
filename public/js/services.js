@@ -143,6 +143,14 @@ app.factory('TribeService', $http => {
       $http.get('/tribes').then( (data) => {
         console.log(data);
       })
-    }
+    },
+
+    getMine: () => {
+      //Get my tribe info/users
+    },
+
+    joinTribe: (name) => {
+      //Join tribe by name
+    })
   }
 })
