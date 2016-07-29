@@ -219,6 +219,19 @@ main {
   clear: both;
   padding: 10px 10px 30px 10px;
 }
+.close-post-button {
+  position: static;
+  float: right;
+  z-index: 3;
+  top: 0;
+  right: 0;
+  background: rgba(60,60,60,0.9);
+  color: rgba(255,255,255,0.87);
+  border: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 10px;
+}
 
 /* Profile */
 .profile * {

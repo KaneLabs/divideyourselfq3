@@ -91,6 +91,7 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
     $scope.sideNav.show = !$scope.sideNav.show;
     if($scope.sideNav.show === true){
       $scope.subnav.show = false;
+      $scope.friends.showFriends = false;
     }else {
       $scope.subnav.show = true;
     }
