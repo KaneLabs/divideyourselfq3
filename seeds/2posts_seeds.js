@@ -162,7 +162,7 @@ exports.seed = function(knex, Promise) {
           user_id: 3,
           title: 'Rock-climbing at Bradbury Mountain',
           body: 'Love this state park. It\'s only about 20 minutes from Portland and has lots of granite walls that are great for climbing.',
-          media_url: 'http://peterrichardsphotography.com/wp-content/uploads/2015/09/Peter_Richards_50images__20.jpg',
+          media_url: 'https://www.mountainproject.com/images/8/75/106860875_medium_ab9a0f.jpg',
           lat: 43.902578,
           lng: -70.182274,
           type: 'board',
