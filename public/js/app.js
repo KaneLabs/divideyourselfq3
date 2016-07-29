@@ -23,7 +23,6 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $http
       templateUrl: "partials/postPage.html",
       controller: PostPageController
     });
-    //TODO Add a profile page route with a resolve for UsersService.get(id)
 
   $httpProvider.interceptors.push('apiInterceptor');
   $locationProvider.html5Mode(true);

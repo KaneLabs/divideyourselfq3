@@ -113,6 +113,72 @@ exports.seed = function(knex, Promise) {
           type: 'board',
           timestamp: Date.now() - 28392,
           points: 4
+        }),
+        knex('posts').insert({
+          user_id: 3,
+          title: 'Burnt Head, Monhegan Island',
+          body: 'Spectacular views an easy .25-mile from the town',
+          media_url: 'http://static1.squarespace.com/static/555110b9e4b02fc9d3e15891/t/55bcf8fbe4b07309dc56522f/1438447871397/',
+          lat: 43.759653,
+          lng: -69.313388,
+          type: 'board',
+          timestamp: Date.now() - 38492,
+          points: 247
+        }),
+        knex('posts').insert({
+          user_id: 3,
+          title: 'Cadillac Mountain Sunrise',
+          body: 'Cadillac Mountain has a reputation as the first place in the continental United States to see the sun rise. This is actually true for about half of the year, during the fall and winter. During the Spring and Summer, Mars Hill--about 150 miles to the northeast, sees the first sunrise. But Cadillac Mountain is still a beautiful place to be in the morning.',
+          media_url: 'https://c1.staticflickr.com/9/8448/7956521252_25fe984da9_b.jpg',
+          lat: 44.352581,
+          lng: -68.225104,
+          type: 'board',
+          timestamp: Date.now() - 26491,
+          points: 421
+        }),
+        knex('posts').insert({
+          user_id: 3,
+          title: 'Surfing in Higgins Beach',
+          body: 'This is a classic beach break in Maine. Access is through a residential neighborhood and parking is strictly policed. You\'ll want to park about a half-mile up the road and be prepared for a walk. If you are surfing between October and May, the parking is a lot easier (and the surf is better, too).',
+          media_url: 'https://s-media-cache-ak0.pinimg.com/736x/87/7c/68/877c686020b2be97a6b3238815df47a6.jpg',
+          lat: 43.561816,
+          lng: -70.275256,
+          type: 'board',
+          timestamp: Date.now() - 26794,
+          points: 304
+        }),
+        knex('posts').insert({
+          user_id: 3,
+          title: 'Mt. Katahdin',
+          body: 'This is the end of the road for the Appalachian Trail and is located near the Hundred-Mile Wilderness.',
+          media_url: 'https://marinomnom.files.wordpress.com/2015/07/mt-katahdin-6.jpg',
+          lat: 45.904400,
+          lng: -68.921565,
+          type: 'board',
+          timestamp: Date.now() - 24892,
+          points: 279
+        }),
+        knex('posts').insert({
+          user_id: 3,
+          title: 'Rock-climbing at Bradbury Mountain',
+          body: 'Love this state park. It\'s only about 20 minutes from Portland and has lots of granite walls that are great for climbing.',
+          media_url: 'https://www.mountainproject.com/images/8/75/106860875_medium_ab9a0f.jpg',
+          lat: 43.902578,
+          lng: -70.182274,
+          type: 'board',
+          timestamp: Date.now() - 24692,
+          points: 124
+        }),
+        knex('posts').insert({
+          user_id: 3,
+          title: 'Wolfe\'s Neck Woods',
+          body: 'Great coastal hikes in a this state park.',
+          media_url: 'http://www.freeportusa.com/wp-content/uploads/2012/07/Wolf-Neck-17.jpg',
+          lat: 43.822700,
+          lng: -70.087624,
+          type: 'board',
+          timestamp: Date.now() - 28462,
+          points: 289
         })
       ]);
     });

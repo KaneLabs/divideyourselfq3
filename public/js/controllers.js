@@ -1,20 +1,38 @@
+var Magic = (number, callback) => {
+  var argumentArray = [];
+  return data => {
+    argumentArray.push(data);
+    if(argumentArray.length === number) return callback(argumentArray);
+  };
+};
+
 function HomeController($scope, $state, $http, MapService){
   $scope.linkBuilder = linkBuilder;
   $scope.deletePost = post => deletePost($scope, $state, $http, MapService, post);
   MapService.setCenterHome();
   MapService.getPosts($scope, $state);
   mapConfig.onidle = () => MapService.getPosts($scope, $state);
-}
+  $scope.searchFilter = (input) => {
+    return Object.keys(input).map(key => input[key]).reduce((check, e) => {
+      if(check) return check;
+      if(typeof e === "string" && e.toLowerCase().indexOf($scope.$parent.search.toLowerCase()) > -1) return true;
+      return false;
+    }, false);
+  };
+};
 
 function LocationController($scope, $state, $stateParams, $http, MapService){
   $scope.$parent.showPosts = false;
   $scope.togglePosts = $scope.$parent.togglePosts;
   $scope.linkBuilder = linkBuilder;
   $scope.deletePost = post => deletePost($scope, $state, $http, MapService, post);
+  MapService.getLocation(() => {
+    if(magicCenter) magicCenter();
+  });
   MapService.setCenterLocation([$stateParams.state, $stateParams.city]);
   MapService.getPosts($scope, $state);
   mapConfig.onidle = () => MapService.getPosts($scope, $state);
-}
+};
 
 function deletePost($scope, $state, $http, MapService, post){
   post.marker.setMap(null);
@@ -23,14 +41,17 @@ function deletePost($scope, $state, $http, MapService, post){
     if(data.success) $scope.posts = $scope.posts.filter(e => e.id !== post.id);
     MapService.getPosts($scope, $state);
   });
-}
+};
 
 function PostPageController($scope, $state, $stateParams, MapService){
   $scope.linkBuilder = linkBuilder;
+  MapService.getLocation(() => {
+    if(magicCenter) magicCenter();
+  });
   MapService.setCenterPost([$stateParams.state, $stateParams.city]);
   MapService.getPosts($scope, $state, $stateParams.post);
   mapConfig.onidle = () => MapService.getPosts($scope, $state, $stateParams.post);
-}
+};
 
 function BoardController($scope, $state, $http) {
   $scope.view = {};
@@ -59,13 +80,18 @@ function linkBuilder(post, backCheck){
   if(!post) return;
   if(backCheck) return {state: post.lat, city: post.lng};
   return {state: post.lat, city: post.lng, post: post.id};
-}
+};
 
 app.controller("BodyController", makeBodyController);
 function makeBodyController($scope, UsersService, apiInterceptor, NewCommentService, NewPostService, $http, ChatService, TribeService){
   if(localStorage.userToken) $scope.user = jwt_decode(localStorage.userToken).user;
 
-  $scope.chat = ChatService($scope);
+  var chatMagic = Magic(1, () => {
+    $scope.chat = ChatService($scope);
+  });
+
+  if($scope.user) chatMagic();
+
   $scope.commServ = NewCommentService($scope);
   $scope.postServ = NewPostService($scope);
   $scope.newPost = {};
@@ -95,7 +121,7 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   function mapClick(e){
     $scope.toggleNewPost(e);
     $scope.$apply();
-  }
+  };
 
   if(map) map.addListener("click", mapClick);
   else mapConfig.onclick = mapClick;
@@ -116,10 +142,11 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
       $scope.subnav.show = false;
       $scope.locationFeature.showChangeLoc = false;
       $scope.searchFeature.showSearch = false;
+      $scope.friends.showFriends = false;
     }else {
       $scope.subnav.show = true;
-    }
-  }
+    };
+  };
 
   $scope.profile.toggleProfile = (id) => {
     if ($scope.profile.isActiveUser(id) && $scope.profile.profileView === "activeUser") {
@@ -130,7 +157,7 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
       $scope.profile.profileView = null;
     } else {
       $scope.profile.profileView = "profileUser";
-    }
+    };
   };
   $scope.profile.getUser = (id) => {
     if ($scope.profile.isActiveUser(id)) {
@@ -157,7 +184,7 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
           lng: data.data[i].lng,
           media_url: data.data[i].media_url.split(','),
           points: data.data[i].points
-        })
+        });
       };
       if (isActive) {
         $scope.profile.activeUser.posts = userPosts;
@@ -195,6 +222,11 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   $scope.signOut = () => {
     $scope.profile.showProfile = false;
     $scope.user = null;
+    $scope.messages = $scope.messages.reduce((a, e) => {
+      if(e.marker) e.marker.setMap(null);
+      return a;
+    }, []);
+    $scope.chat.close();
     localStorage.removeItem("userToken");
     $scope.subnav.show = false;
   };
@@ -203,9 +235,11 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
     localStorage.userToken = data.token;
     $scope.user = data.user;
     $scope.subnav.show = true;
+    chatMagic();
   };
 
   $scope.getProfile = (id) => {
+    console.log("getProfile(id): ", id);
     UsersService.get(id);
   };
 
@@ -264,17 +298,7 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
     $http.post(`/theboard/downvote/${type}/${post.id}`);
   };
 
-  $scope.getFriends = (id) => {
-    $http.get(`/friends/${id}`).then((data) => {
-      console.log(data);
-    });
-  };
 
-  $scope.addFriend = (id) => {
-    $http.post(`/friends/${id}/add`).then((data) => {
-      console.log(data);
-    });
-  };
 
   $scope.friends = {};
   $scope.friends.getFriends = (id) => {
@@ -282,14 +306,43 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
       $http.get(`/friends/${id}`).then( data => {
         $scope.friends.friendsList = data.data;
       });
-    }
+    };
   };
+
+  $scope.friends.addFriend = (id) => {
+    $http.post(`/friends/${id}`).then( data => {
+      $scope.friends.friendsList.push(data)
+      console.log($scope.friends.friendsList.indexOf(data));
+    });
+  };
+
+  $scope.friends.removeFriend = (id) => {
+    $http.delete(`/friends/${id}`).then( data => {
+      console.log($scope.friends.friendsList.indexOf(data.data[0]));
+      $scope.friends.friendsList.splice($scope.friends.friendsList.indexOf(data.data[0]), 1)
+      $scope.profile.toggleProfile(id);
+      console.log($scope.friends.friendsList.indexOf(data.data[0]));
+    });
+  };
+
   $scope.friends.showFriends = false;
   $scope.friends.toggleShowFriends = () => {
     $scope.friends.showFriends = !$scope.friends.showFriends;
   };
 
+  $scope.friends.isFriend = (id) => {
+    if ($scope.friends.friendsList) {
+      for (var i = 0; i < $scope.friends.friendsList.length; i++) {
+        if ($scope.friends.friendsList[i].friend_id) {
+          return true;
+        }
+      }
+      return false;
+    };
+  };
+
   $scope.tribe = TribeService;
+  $scope.search = '';
 
 };
 makeBodyController.$inject = ['$scope','UsersService', 'apiInterceptor', 'NewCommentService', "NewPostService","$http", "ChatService", 'TribeService'];

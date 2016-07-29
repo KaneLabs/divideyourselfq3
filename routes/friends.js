@@ -17,7 +17,7 @@ router.get('/:id', (req, res) => {
   });
 });
 
-router.post('/:id/add', (req, res) => {
+router.post('/:id', (req, res) => {
   var user = jwt.decode(req.headers.authorization.split(' ')[1]);
   var newFriend;
   knex('users')
@@ -33,7 +33,7 @@ router.post('/:id/add', (req, res) => {
     })
     .returning('*')
     .then((inserted) => {
-      console.log("ADDED: ", inserted);
+      // console.log("ADDED: ", inserted);
       knex('users_friends')
         .insert({
           user_id: req.params.id,
@@ -41,13 +41,25 @@ router.post('/:id/add', (req, res) => {
           friend_firstname: user.user.firstname,
           profile_url: user.user.profile_url
         })
+        .returning('*')
         .then( data => {
-          console.log(data);
+          // console.log(data);
           res.send(data[0]);
-        })
-    })
-  })
+        });
+    });
+  });
 });
 
+router.delete('/:id', (req, res) => {
+  var user = jwt.decode(req.headers.authorization.split(' ')[1]).user;
+  knex('users_friends')
+  .where('user_id', user.id)
+  .andWhere('friend_id', req.params.id)
+  .del()
+  .returning('*')
+  .then( data => {
+    res.send(data);
+  });
+});
 
 module.exports = router;
