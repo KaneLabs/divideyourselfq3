@@ -39,28 +39,6 @@ exports.seed = function(knex, Promise) {
         }),
         knex('posts').insert({
           user_id: 4,
-          title: 'Boulder Post 5',
-          body: 'The Devils thumb is an easily viewable rock formation in Boulder, CO. The trail starts at NCAR',
-          media_url: 'http://www.airphotona.com/stockimg/images/07106.jpg,http://www.colorado-hiking.net/pix_sc/devthumtrailstart.gif',
-          lat: 40.006172,
-          lng: -105.287785,
-          type: 'board',
-          timestamp: 1469412343124,
-          points: -3
-        }),
-        knex('posts').insert({
-          user_id: 1,
-          title: 'Boulder Post 7',
-          body: 'The Devils thumb is an easily viewable rock formation in Boulder, CO. The trail starts at NCAR',
-          media_url: 'http://www.airphotona.com/stockimg/images/07106.jpg,http://www.colorado-hiking.net/pix_sc/devthumtrailstart.gif',
-          lat: 40.012137,
-          lng: -105.290107,
-          type: 'board',
-          timestamp: 1469412343124,
-          points: 1
-        }),
-        knex('posts').insert({
-          user_id: 4,
           title: 'Everest Basecamp',
           body: 'Morning Helicopter Flight',
           media_url: 'http://peterrichardsphotography.com/wp-content/uploads/2015/09/Peter_Richards_50images__491.jpg',
