@@ -40,20 +40,8 @@ exports.up = (knex, Promise) => {
       table.increments();
       table.string('name').unique().notNullable();
       table.text('description');
+      table.string('leader');
     }),
-    // Create 'posts_votes' table
-    // knex.schema.createTable('posts_votes', (table) => {
-    //   table.increments();
-    //   table.integer('post_id').references('id').inTable('posts');
-    //   table.integer('user_id').references('id').inTable('users');
-    //   table.integer('rating');
-    // }),
-    // Create 'comments_votes' table
-    // knex.schema.createTable('comments_votes', (table) => {
-    //   table.increments();
-    //   table.integer('comment_id').references('id').inTable('comments');
-    //   table.integer('rating');
-    // }),
     // Create 'users_favorites' table
     knex.schema.createTable('users_favorites', (table) => {
       table.increments();
