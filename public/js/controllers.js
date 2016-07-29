@@ -249,18 +249,36 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   };
 
   $scope.friends.addFriend = (id) => {
-    $http.post(`/friends/${id}/`).then( data => {
+    $http.post(`/friends/${id}`).then( data => {
       $scope.friends.friendsList.push(data)
+      console.log($scope.friends.friendsList.indexOf(data));
     });
   };
 
   $scope.friends.removeFriend = (id) => {
-    $http.delete(`/friends/${id}/delete`)
+    $http.delete(`/friends/${id}`).then( data => {
+      console.log($scope.friends.friendsList.indexOf(data.data[0]));
+      $scope.friends.friendsList.splice($scope.friends.friendsList.indexOf(data.data[0]), 1)
+      $scope.profile.toggleProfile(id);
+      console.log($scope.friends.friendsList.indexOf(data.data[0]));
+
+    })
   }
 
   $scope.friends.showFriends = false;
   $scope.friends.toggleShowFriends = () => {
     $scope.friends.showFriends = !$scope.friends.showFriends;
+  };
+
+  $scope.friends.isFriend = (id) => {
+    if ($scope.friends.friendsList) {
+      for (var i = 0; i < $scope.friends.friendsList.length; i++) {
+        if ($scope.friends.friendsList[i].friend_id) {
+          return true;
+        }
+      }
+      return false;
+    }
   };
 
   $scope.tribe = TribeService;

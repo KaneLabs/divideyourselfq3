@@ -31,7 +31,10 @@
     <button ng-click="profile.hideProfile()" class="close-profile-button">X</button>
     <div class="profile-details">
       <div class='profile-img'>
-        <h3>{{ profile.profileUser.firstname }} {{ profile.profileUser.lastname }} <dy-add-friend ng-click="friends.addFriend(profile.profileUser.id)"></dy-add-friend></h3>
+        <h3>{{ profile.profileUser.firstname }} {{ profile.profileUser.lastname }}
+          <dy-add-friend ng-click="friends.addFriend(profile.profileUser.id)" ng-hide="friends.isFriend(profile.id)"></dy-add-friend>
+          <dy-remove-friend ng-click="friends.removeFriend(profile.profileUser.id)" ng-show="friends.isFriend(profile.id)"></dy-remove-friend>
+        </h3>
         <img ng-src="{{ profile.profileUser.profile_url }}" alt="">
         <h3>{{ profile.profileUser.username }}</h3>
       </div>

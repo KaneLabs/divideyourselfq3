@@ -33,4 +33,8 @@ app.directive("dyFriends", () => ({
 
 app.directive("dyAddFriend", () =>({
   templateUrl: "partials/addFriend.html"
-}))
+}));
+
+app.directive("dyRemoveFriend", () => ({
+  templateUrl: "partials/removeFriend.html"
+}));
