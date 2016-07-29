@@ -363,3 +363,18 @@ footer div:hover {
 .pointer {
   cursor: pointer;
 }
+
+.postClear {
+  text-align: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  border: none;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background: black;
+  color: white;
+  cursor: pointer;
+  z-index: 100;
+}
