@@ -262,7 +262,7 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   $scope.friends.toggleShowFriends = () => {
     $scope.friends.showFriends = !$scope.friends.showFriends;
   };
-  
+
   $scope.tribe = TribeService;
 
 };

@@ -5,11 +5,11 @@
   top: 200px;
   width: 100%;
   z-index: 2;
-  opacity: 0;
+  display: none;
 }
 
 .showSignup .newProfile {
-  opacity: 1;
+  display: block;
 }
 
 .newProfile form {
@@ -30,6 +30,14 @@
   width: 50%;
 }
 .newProfile .cancel {
+  border: 0;
+  cursor: pointer;
+  font-size: 12px;
+  text-align: center;
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 10px;
+  width: 50%;
   color: white;
   background: red;
 }
