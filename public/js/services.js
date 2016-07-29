@@ -136,3 +136,11 @@ app.factory("MapService", $http => {
     }
   }
 });
+
+app.factory('TribeService', $http => {
+  getAll: () => {
+    $http.get('/tribes').then( (data) => {
+      console.log(data);
+    })
+  }
+})
