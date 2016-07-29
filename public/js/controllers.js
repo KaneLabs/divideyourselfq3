@@ -39,8 +39,10 @@ function linkBuilder(post, backCheck){
 }
 
 app.controller("BodyController", makeBodyController);
-function makeBodyController($scope, UsersService, apiInterceptor, NewCommentService, NewPostService, $http){
+function makeBodyController($scope, UsersService, apiInterceptor, NewCommentService, NewPostService, $http, ChatService){
   if(localStorage.userToken) $scope.user = jwt_decode(localStorage.userToken).user;
+
+  $scope.chat = ChatService($scope);
 
   $scope.commServ = NewCommentService($scope);
   $scope.postServ = NewPostService($scope);
@@ -254,7 +256,6 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   $scope.friends.getFriends = (id) => {
     $http.get(`/friends/${id}`).then( data => {
       $scope.friends.friendsList = data.data;
-      console.log($scope.friends.friendsList);
     });
   };
   $scope.friends.showFriends = false;
@@ -263,4 +264,4 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   };
 
 };
-makeBodyController.$inject = ['$scope','UsersService', 'apiInterceptor', 'NewCommentService', "NewPostService","$http"];
+makeBodyController.$inject = ['$scope','UsersService', 'apiInterceptor', 'NewCommentService', "NewPostService","$http", "ChatService"];
