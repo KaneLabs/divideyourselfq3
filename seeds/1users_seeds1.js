@@ -45,7 +45,7 @@ exports.seed = (knex, Promise) => {
           id: 5,
           firstname: 'Conor',
           lastname: 'Kingston',
-          username: 'conor',
+          username: 'FreddyNitrate',
           password: '$2a$08$KmvTUOmxgKVWEO13fsZ68uXiGupfJjY/5xOgLG.oo58Cg6LOowwAa',
           email: 'conor@divideyourself.com',
           tribe_id: 1

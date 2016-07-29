@@ -190,6 +190,11 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   $scope.signOut = () => {
     $scope.profile.showProfile = false;
     $scope.user = null;
+    $scope.messages = $scope.messages.reduce((a, e) => {
+      if(e.marker) e.marker.setMap(null);
+      return a;
+    }, []);
+    $scope.chat.close();
     localStorage.removeItem("userToken");
   };
 
@@ -259,17 +264,7 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
     $http.post(`/theboard/downvote/${type}/${post.id}`);
   };
 
-  $scope.getFriends = (id) => {
-    $http.get(`/friends/${id}`).then((data) => {
-      console.log(data);
-    });
-  };
 
-  $scope.addFriend = (id) => {
-    $http.post(`/friends/${id}/add`).then((data) => {
-      console.log(data);
-    });
-  };
 
   $scope.friends = {};
   $scope.friends.getFriends = (id) => {
@@ -277,11 +272,40 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
       $http.get(`/friends/${id}`).then( data => {
         $scope.friends.friendsList = data.data;
       });
-    }
+    };
   };
+
+  $scope.friends.addFriend = (id) => {
+    $http.post(`/friends/${id}`).then( data => {
+      $scope.friends.friendsList.push(data)
+      console.log($scope.friends.friendsList.indexOf(data));
+    });
+  };
+
+  $scope.friends.removeFriend = (id) => {
+    $http.delete(`/friends/${id}`).then( data => {
+      console.log($scope.friends.friendsList.indexOf(data.data[0]));
+      $scope.friends.friendsList.splice($scope.friends.friendsList.indexOf(data.data[0]), 1)
+      $scope.profile.toggleProfile(id);
+      console.log($scope.friends.friendsList.indexOf(data.data[0]));
+
+    })
+  }
+
   $scope.friends.showFriends = false;
   $scope.friends.toggleShowFriends = () => {
     $scope.friends.showFriends = !$scope.friends.showFriends;
+  };
+
+  $scope.friends.isFriend = (id) => {
+    if ($scope.friends.friendsList) {
+      for (var i = 0; i < $scope.friends.friendsList.length; i++) {
+        if ($scope.friends.friendsList[i].friend_id) {
+          return true;
+        }
+      }
+      return false;
+    }
   };
 
   $scope.tribe = TribeService;
