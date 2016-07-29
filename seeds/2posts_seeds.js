@@ -28,9 +28,9 @@ exports.seed = function(knex, Promise) {
         }),
         knex('posts').insert({
           user_id: 3,
-          title: 'Another Posts in Boulder',
-          body: 'There is great rock climbing in rattlesnake gulch trail in Boulder, CO',
-          media_url: 'http://www.thetrailgirl.com/wp-content/uploads/2012/04/onthetrail.jpg,http://www.thetrailgirl.com/wp-content/uploads/2012/04/pano11.jpg',
+          title: 'Another Great View',
+          body: 'A short hike up the trail reveals this great view.',
+          media_url: 'https://res.cloudinary.com/dmuipy77o/image/upload/a_0/v1469822649/IMG_0045_zqr3wf.jpg',
           lat: 40.002490,
           lng: -105.285039,
           type: 'board',
@@ -47,17 +47,6 @@ exports.seed = function(knex, Promise) {
           type: 'board',
           timestamp: 1469412343124,
           points: -3
-        }),
-        knex('posts').insert({
-          user_id: 1,
-          title: 'Boulder Post 6',
-          body: 'There is great rock climbing in rattlesnake gulch trail in Boulder, CO',
-          media_url: 'http://www.thetrailgirl.com/wp-content/uploads/2012/04/onthetrail.jpg,http://www.thetrailgirl.com/wp-content/uploads/2012/04/pano11.jpg',
-          lat: 40.011133,
-          lng: -105.284901,
-          type: 'board',
-          timestamp: 1469469244841,
-          points: 1230
         }),
         knex('posts').insert({
           user_id: 1,
