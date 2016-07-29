@@ -21,15 +21,15 @@
 </div>
 
 <!-- Display different users -->
-<div class="profile" ng-show="profile.profileView === 'profileUser'">
+<div class="profile" ng-if="profile.profileView === 'profileUser'">
   <button ng-click="profile.hideProfile()" class="close-profile-button">X</button>
   <div class="profile-details">
     <img ng-src="{{ profile.profileUser.profile_url }}" alt="">
     <div class='user-details'>
       <h3>
         {{ profile.profileUser.firstname }} {{ profile.profileUser.lastname }}
-        <dy-add-friend ng-click="friends.addFriend(profile.profileUser.id)" ng-hide="friends.isFriend(profile.id)"></dy-add-friend>
-        <dy-remove-friend ng-click="friends.removeFriend(profile.profileUser.id)" ng-hide="!friends.isFriend(profile.id)"></dy-remove-friend>
+        <dy-add-friend ng-click="friends.addFriend(profile.profileUser.id);friends.isFriend(profile.id);" ng-show="!isFriend"></dy-add-friend>
+        <dy-remove-friend ng-click="friends.removeFriend(profile.profileUser.id);friends.isFriend(profile.id);" ng-show="isFriend"></dy-remove-friend>
       </h3>
       <h3>{{ profile.profileUser.username }}</h3>
       <h4>{{ profile.profileUser.email }}</h4>
