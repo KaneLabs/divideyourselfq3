@@ -13,93 +13,6 @@ body {
 ::-moz-scrollbar {display: none;}
 .material-icons {font-size: 20px; padding: 10px; cursor: pointer;}
 
-/* Nav */
-/*navbar {
-  height: 40px;
-  background: #212121;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 3;
-  border-bottom: 2px solid #212121;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-}
-
-navbar:hover {
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-}
-
-navbar input {
-  box-sizing: border-box;
-  border: 0;
-  height: 39px;
-  padding: 10px;
-  width: calc(100% - 351px);
-}
-.nav-link {
-  color: white;
-  cursor: pointer;
-  display: inline-block;
-  padding: 10px;
-  max-width: 150px;
-}
-.nav-link:first-child {
-  padding: 10px 20px;
-}
-
-.signout {
-  float: right;
-  padding: 10px 20px;
-  color: white;
-  opacity: .85;
-}
-
-.signout:hover {
-  cursor: pointer;
-  border-bottom: 1px solid white;
-}
-
-.sign {
-
-}
-
-.sign.open {
-  max-height: 200px;
-}*/
-
-/*.clear-sign {
-  color: white;
-  float: right;
-  vertical-align: top;
-}
-
-.sign .nav-link {
-  border-left: 1px solid white;
-  overflow: hidden;
-  padding: 12px;
-  text-align: center;
-  transition: .2s all;
-  width: 50%;
-}
-.sign .nav-link.hide {
-  border: 0;
-  padding: 10px 0px;
-  width: 0px;
-}*/
-
-/*.sign input, .sign button, .sign div {
-  box-sizing: border-box;
-  font-size: 14px;
-  height: 38px;
-}
-
-.sign input, .sign button {
-  box-sizing: border-box;
-  padding: 10px;
-  width: 100%;
-}*/
-
 /* Main */
 main {
   height: calc(100% - 40px);
@@ -203,12 +116,10 @@ main {
   pointer-events: none;
   z-index: 2;
 }
-
 .backFromPost {
   position: fixed;
   z-index: 2;
 }
-
 .post-container {
   position: relative;
   max-width: 900px;
@@ -217,7 +128,6 @@ main {
   margin: 0 auto;
   padding: 40px 0;
 }
-
 .post {
   display: block;
   border-radius: 5px;
@@ -228,7 +138,6 @@ main {
   background: white;
   border-radius: 0px 0px 5px 5px;
 }
-
 .carosel {
   border-radius: 5px 5px 0px 0px;
   background: rgba(20,20,20,.8);
@@ -247,14 +156,13 @@ main {
   top: 0;
   height: 100%;
   z-index: 1;
-  opacity: 0;
+  opacity: 1;
 }
 .carosel i {
   text-shadow: 1px 1px black, 1px -1px black, -1px 1px black, -1px -1px black;
   color: rgb(220,220,220);
   font-size: 60px;
 }
-
 .carosel:hover .next-image, .carosel:hover .prev-image {
   opacity: 1;
 }
@@ -263,14 +171,15 @@ main {
 }
 .next-image {right: 0;}
 .prev-image {left: 0;}
+
 .post-image {
   position: absolute;
   top: 0;
   max-height: 100%;
   max-width: 100%;
-  opacity: 0;
   transition: .2s all;
 }
+
 .post-image.open {
   margin: 0 auto;
   position: relative;
@@ -321,14 +230,14 @@ main {
   position: fixed;
   display: flex;
   flex-flow: row wrap;
-  top: 15%;
-  left: 10%;
+  top: 14%;
+  left: 2%;
   margin: 0 auto;
   z-index: 3;
-  width: 80%;
-  height: 70%;
+  width: 96%;
+  height: 82%;
   background: white;
-  opacity: 0.9;
+  opacity: 1;
   border-radius: 5px;
   overflow-y: scroll;
   box-shadow: 0px 0px 20px 5px rgba(0,0,0,.5);
@@ -360,12 +269,10 @@ main {
   width: 100%;
   flex-flow: row wrap;
   justify-content: space-around;
-  border-top: 2px solid black;
 }
 .post-preview {
-  border: 1px solid black;
   box-shadow: 0px 0px 20px 3px rgba(0,0,0,.5);
-  width: 100%;
+  width: 48%;
   text-align: center;
   display: flex;
   flex-flow: column;
@@ -373,8 +280,10 @@ main {
   align-items: center;
   border-radius: 5px;
 }
+
 .post-preview img {
-  width: 90%;
+  margin-top: 0;
+  width: 100%;
   border-radius: 5px;
 }
 .close-profile-button {
@@ -399,7 +308,7 @@ footer {
   background: rgb(20,20,20);
   box-sizing: border-box;
   font-size: 0;
-  height: 40px;
+  height: 20px;
   z-index: 3;
   box-shadow: 0px 0px 20px 5px rgba(0,0,0,.5);
 }
@@ -413,12 +322,13 @@ footer div {
   height: 100%;
   padding: 10px;
 }
-footer div:hover {background: black;}
+footer div:hover {
+  background: black;
+}
 .newPostActive footer div:first-child {
   color: black;
   background: white;
 }
-
 .voting{
   width: 100%;
   display:flex;
@@ -429,11 +339,9 @@ footer div:hover {background: black;}
   vertical-align: top;
   float: right;
 }
-
 .single-voting{
    margin-left: 33%;
 }
-
 .pointer {
   cursor: pointer;
 }
