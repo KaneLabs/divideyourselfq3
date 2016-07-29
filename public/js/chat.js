@@ -21,7 +21,9 @@ app.factory("ChatService", () => $scope => {
     chat.socket = new WebSocket(host);
     chat.socket.onopen = onOpen;
     chat.socket.onmessage = onMessage;
-    chat.socket.onclose = () => startChat(chat);
+    chat.socket.onclose = () => {
+      if($scope.user) startChat(chat);
+    };
   }
 
   function onOpen(){
@@ -82,6 +84,7 @@ app.factory("ChatService", () => $scope => {
   }
 
   return {
+    close : () => chat.socket.close(),
     send: convo => {
       console.log("Sending Data", message);
       var toUser = convo.username,
