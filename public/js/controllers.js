@@ -191,7 +191,7 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
     $scope.profile.showProfile = false;
     $scope.user = null;
     $scope.messages = $scope.messages.reduce((a, e) => {
-      e.marker.setMap(null);
+      if(e.marker) e.marker.setMap(null);
       return a;
     }, []);
     $scope.chat.close();
