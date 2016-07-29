@@ -147,7 +147,7 @@ exports.seed = function(knex, Promise) {
           timestamp: Date.now() - 28462,
           points: 289
         }),
-        knex("post").insert({
+        knex("posts").insert({
           user_id: 2,
           title: "Almagre Mountain",
           body: "Looks like the big elf statues from Lord of the Rings",
@@ -158,7 +158,7 @@ exports.seed = function(knex, Promise) {
           timestamp: Date.now() - 65109,
           points: 12
         }),
-        knex("post").insert({
+        knex("posts").insert({
           user_id: 1,
           title: "Cow Mountain",
           body: "I'd rather have a cow than a mountain.",
@@ -169,7 +169,7 @@ exports.seed = function(knex, Promise) {
           timestamp: Date.now() - 10294,
           points: 821
         }),
-        knex("post").insert({
+        knex("posts").insert({
           user_id: 4,
           title: "Walmart Super Center in Falcon",
           body: "It's got twice as much shit produced by twice as many chinese children.",
@@ -180,7 +180,7 @@ exports.seed = function(knex, Promise) {
           timestamp: Date.now() - 41591,
           points: 2
         }),
-        knex("post").insert({
+        knex("posts").insert({
           user_id: 3,
           title: "Grand Lake",
           body: "It's a grand lake, but not a great lake.",
@@ -191,7 +191,7 @@ exports.seed = function(knex, Promise) {
           timestamp: Date.now() - 12973,
           points: 50
         }),
-        knex("post").insert({
+        knex("posts").insert({
           user_id: 2,
           title: "Mt. Elbert",
           body: "Elbert should have come up with a better name but his ego got in the way.",
@@ -202,7 +202,7 @@ exports.seed = function(knex, Promise) {
           timestamp: Date.now() - 12873,
           points: 272
         }),
-        knex("post").insert({
+        knex("posts").insert({
           user_id: 1,
           title: "Mt. Harvard",
           body: "The closest most people in the midwest will get to Harvard.",
@@ -213,7 +213,7 @@ exports.seed = function(knex, Promise) {
           timestamp: Date.now() - 90108,
           points: 63
         }),
-        knex("post").insert({
+        knex("posts").insert({
           user_id: 2,
           title: "Mt. Rosa",
           body: "This mountain lead the mountain rights movement of '92.",
@@ -224,7 +224,7 @@ exports.seed = function(knex, Promise) {
           timestamp: Date.now() - 18315,
           points: 72
         }),
-        knex("post").insert({
+        knex("posts").insert({
           user_id: 3,
           title: "Mt. Evans",
           body: "This mountain should have said no to the Fantastic Four movie.",
@@ -233,7 +233,8 @@ exports.seed = function(knex, Promise) {
           lng: -105.7445384,
           type: "board",
           timestamp: Date.now() - 86123,
-          points: 81,
+          points: 81
+        }),
         knex('posts').insert({
           user_id: 5,
           title: 'Seven Falls',
