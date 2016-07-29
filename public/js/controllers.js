@@ -201,6 +201,7 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   function updateUserStatus(data){
     localStorage.userToken = data.token;
     $scope.user = data.user;
+    $scope.friends.getFriends($scope.user.id)
     chatMagic();
   };
 
@@ -268,6 +269,9 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
 
   $scope.friends = {};
   $scope.friends.getFriends = (id) => {
+    if ($scope.friends.friendsList) {
+      return
+    }
     if($scope.user){
       $http.get(`/friends/${id}`).then( data => {
         $scope.friends.friendsList = data.data;
@@ -276,19 +280,18 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   };
 
   $scope.friends.addFriend = (id) => {
+    $scope.friends.getFriends($scope.user.id)
     $http.post(`/friends/${id}`).then( data => {
-      $scope.friends.friendsList.push(data)
-      console.log($scope.friends.friendsList.indexOf(data));
+      $scope.friends.friendsList.push(data.data[0])
     });
   };
 
   $scope.friends.removeFriend = (id) => {
     $http.delete(`/friends/${id}`).then( data => {
-      console.log($scope.friends.friendsList.indexOf(data.data[0]));
-      $scope.friends.friendsList.splice($scope.friends.friendsList.indexOf(data.data[0]), 1)
+      $scope.friends.friendsList = $scope.friends.friendsList.filter(e => {
+        return e.friend_id != data.data[0].friend_id
+      })
       $scope.profile.toggleProfile(id);
-      console.log($scope.friends.friendsList.indexOf(data.data[0]));
-
     })
   }
 
@@ -301,7 +304,7 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
     if ($scope.friends.friendsList) {
       for (var i = 0; i < $scope.friends.friendsList.length; i++) {
         if ($scope.friends.friendsList[i].friend_id) {
-          return true;
+          return true
         }
       }
       return false;

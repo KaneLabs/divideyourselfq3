@@ -172,7 +172,7 @@ exports.seed = function(knex, Promise) {
         knex('posts').insert({
           user_id: 3,
           title: 'Wolfe\'s Neck Woods',
-          body: 'Great coastal hikes in a this state park.',
+          body: 'Great coastal hikes in this state park.',
           media_url: 'http://www.freeportusa.com/wp-content/uploads/2012/07/Wolf-Neck-17.jpg',
           lat: 43.822700,
           lng: -70.087624,
