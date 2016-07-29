@@ -6,10 +6,15 @@ var express = require("express"),
 router.get('/:id', (req, res) => {
   knex('users_friends')
   .where('user_id', req.params.id)
+
   .then((data) => {
-    console.log(data);
+
+    // knex("users")
+    //   .where()
+    //   .select("username", "id", "profile_url")
+
     res.send(data)
-  })
+  });
 });
 
 router.post('/:id/add', (req, res) => {
@@ -25,11 +30,22 @@ router.post('/:id/add', (req, res) => {
       friend_id: req.params.id,
       friend_firstname: newFriend.firstname,
       profile_url: newFriend.profile_url
-    }).returning('*')
+    })
+    .returning('*')
     .then((inserted) => {
       console.log("ADDED: ", inserted);
+      knex('users_friends')
+        .insert({
+          user_id: req.params.id,
+          friend_id: user.user.id,
+          friend_firstname: user.user.firstname,
+          profile_url: user.user.profile_url
+        })
+        .then( data => {
+          console.log(data);
+          res.send(data[0]);
+        })
     })
-    res.send(data[0]);
   })
 });
 
