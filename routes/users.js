@@ -1,9 +1,9 @@
 var express = require('express');
-var router = express.Router();
-var knex = require('../db/knex');
-var bcrypt = require('bcrypt');
-var jwt = require('jsonwebtoken');
-require('dotenv').config();
+    router = express.Router(),
+    knex = require('../db/knex'),
+    bcrypt = require('bcrypt'),
+    jwt = require('jsonwebtoken');
+    require('dotenv').load();
 
 /* GET users listing. */
 router.get('/', (req, res) => {
