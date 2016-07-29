@@ -3,15 +3,15 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var dotenv = require('dotenv');
-dotenv.load();
+require('dotenv').load();
 
-var users = require('./routes/users');
-var theBoard = require('./routes/theBoard');
-var locations = require("./routes/locations");
-var comments = require("./routes/comments");
-var posts = require("./routes/posts");
-var friends = require('./routes/friends')
+var users = require('./routes/users'),
+    theBoard = require('./routes/theBoard'),
+    locations = require("./routes/locations"),
+    comments = require("./routes/comments"),
+    posts = require("./routes/posts"),
+    friends = require('./routes/friends'),
+    tribes = require('./routes/tribes');
 
 // MVPlus
 // var knowledge = require('./routes/knowledge');
@@ -33,6 +33,7 @@ app.use("/locations", locations);
 app.use("/comments", comments);
 app.use("/posts", posts);
 app.use("/friends", friends);
+app.use("/tribes", tribes);
 
 app.use("*", (req, res) => res.sendFile(__dirname + "/public/index.html"));
 
