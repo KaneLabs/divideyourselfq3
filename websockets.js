@@ -31,7 +31,9 @@ module.exports = app => {
     });
 
     ws.on('close', () => {
-      var fromUser = openSockets.find(e => e.ws === ws).username;
+      var fromUserSocket = openSockets.find(e => e.ws === ws)
+      if(!fromUserSocket) return
+      var fromUser = fromUserSocket.username;
       openSockets = openSockets.filter(e => e.ws !== ws);
       openSockets.forEach(userSocket => {
         userSocket.ws.send(JSON.stringify({offline: true, fromUser: fromUser}), err => {

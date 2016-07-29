@@ -27,13 +27,13 @@
   <script src="js/chat.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBQxTdpV5zVD6Yt-DufELYVrJrnz7JuMo&callback=initMap" defer></script>
 </head>
-<body ng-controller="BodyController" ng-class="{showPosts: showPosts, showNewPost: showNewPost, newPostActive: newPostActive}">
+<body ng-controller="BodyController" ng-class="{showPosts: showPosts, showNewPost: showNewPost, newPostActive: newPostActive, showSignup: signup.show}">
   <navbar></navbar>
   <subnav></subnav>
   <div id="map-container">
     <div id="map"></div>
   </div>
-  <div class="newProfile" ng-show="signup.show">
+  <div class="newProfile">
     <form ng-submit="submitSignUp();signup.toggle()">
       <h2>Create new Profile</h2>
       <input type="text" placeholder="User Name" ng-model="sign.username" required>
