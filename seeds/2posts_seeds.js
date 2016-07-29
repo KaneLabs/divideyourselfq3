@@ -28,9 +28,9 @@ exports.seed = function(knex, Promise) {
         }),
         knex('posts').insert({
           user_id: 3,
-          title: 'Another Posts in Boulder',
-          body: 'There is great rock climbing in rattlesnake gulch trail in Boulder, CO',
-          media_url: 'http://www.thetrailgirl.com/wp-content/uploads/2012/04/onthetrail.jpg,http://www.thetrailgirl.com/wp-content/uploads/2012/04/pano11.jpg',
+          title: 'Another Great View',
+          body: 'A short hike up the trail reveals this great view.',
+          media_url: 'https://res.cloudinary.com/dmuipy77o/image/upload/a_0/v1469822649/IMG_0045_zqr3wf.jpg',
           lat: 40.002490,
           lng: -105.285039,
           type: 'board',
@@ -47,17 +47,6 @@ exports.seed = function(knex, Promise) {
           type: 'board',
           timestamp: 1469412343124,
           points: -3
-        }),
-        knex('posts').insert({
-          user_id: 1,
-          title: 'Boulder Post 6',
-          body: 'There is great rock climbing in rattlesnake gulch trail in Boulder, CO',
-          media_url: 'http://www.thetrailgirl.com/wp-content/uploads/2012/04/onthetrail.jpg,http://www.thetrailgirl.com/wp-content/uploads/2012/04/pano11.jpg',
-          lat: 40.011133,
-          lng: -105.284901,
-          type: 'board',
-          timestamp: 1469469244841,
-          points: 1230
         }),
         knex('posts').insert({
           user_id: 1,
@@ -266,7 +255,72 @@ exports.seed = function(knex, Promise) {
           lng: -105.7445384,
           type: "board",
           timestamp: Date.now() - 86123,
-          points: 81
+          points: 81,
+        knex('posts').insert({
+          user_id: 5,
+          title: 'Seven Falls',
+          body: 'Beautiful oasis that cuts through Sonoran Desert landscape.',
+          media_url: 'https://res.cloudinary.com/dmuipy77o/image/upload/v1469822745/IMG_0067_au1yso.jpg',
+          lat: 32.32659,
+          lng: -110.76588,
+          type: 'board',
+          timestamp: Date.now() - 26921,
+          points: 128
+        }),
+        knex('posts').insert({
+          user_id: 5,
+          title: 'Marshall\'s Gulch',
+          body: 'Small hut built from fallen pine trunks built at the top of a small peak.',
+          media_url: 'https://res.cloudinary.com/dmuipy77o/image/upload/v1469822718/IMG_0060_gp4oqt.jpg',
+          lat: 32.42605,
+          lng: -110.76484,
+          type: 'board',
+          timestamp: Date.now() - 26719,
+          points: 92
+        }),
+        knex('posts').insert({
+          user_id: 5,
+          title: 'Sabino Canyon National Park',
+          body: 'Water can be found here almost year-round and thousands of saguaros guide your path.',
+          media_url: 'https://res.cloudinary.com/dmuipy77o/image/upload/v1469822601/IMG_0024_qwzy0f.jpg',
+          lat: 32.20553,
+          lng: -110.62477,
+          type: 'board',
+          timestamp: Date.now() - 23709,
+          points: 14
+        }),
+        knex('posts').insert({
+          user_id: 5,
+          title: 'Butterfly Trailhead',
+          body: 'This view is just a mile into the trail and provides a great view of the whole city below.',
+          media_url: 'http://res.cloudinary.com/dmuipy77o/image/upload/v1469822491/IMG_0029_gk5u1z.jpg',
+          lat: 32.42981,
+          lng: -110.72536,
+          type: 'board',
+          timestamp: Date.now() - 25178,
+          points: 21
+        }),
+        knex('posts').insert({
+          user_id: 5,
+          title: 'Sunset in Tucson',
+          body: 'Low clouds mean colorful sunsets in the southwest.',
+          media_url: 'https://res.cloudinary.com/dmuipy77o/image/upload/v1469822543/IMG_0513_bxyhhl.jpg',
+          lat: 32.25201,
+          lng: -110.88569,
+          type: 'board',
+          timestamp: Date.now() - 27132,
+          points: 235
+        }),
+        knex('posts').insert({
+          user_id: 5,
+          title: 'Sedona Sunset',
+          body: 'The red rocks glow in the red light cast by the sunset near the vortexes',
+          media_url: 'https://res.cloudinary.com/dmuipy77o/image/upload/v1469822673/IMG_0109_di7v05.jpg',
+          lat: 34.87036,
+          lng: -111.77481,
+          type: 'board',
+          timestamp: Date.now() - 25132,
+          points: 12
         })
       ]);
     });
