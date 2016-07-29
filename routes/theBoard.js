@@ -4,6 +4,17 @@ var express = require('express');
     jwt = require('jsonwebtoken');
     require('dotenv').load();
 
+
+router.get('/posts', (req,res) => {
+  knex('posts')
+  .orderBy('points', 'desc')
+  .limit(16)
+  .then(function (data) {
+    res.json(data)
+  })
+})
+
+
 router.post('/upvote/:type/:id', (req, res) => {
   var token = req.headers.authorization.split(' ')[1];
   // console.log(req.params.type, req.params.id);

@@ -2,6 +2,6 @@
 <div ng-click="togglePosts()" class="backFromPost" ng-show="$parent.showPosts"></div>
 <div id="content">
   <div class="post-container">
-    <post ng-repeat="post in posts | orderBy: '-points' | filter: search" class="post"></post>
+    <post ng-repeat="post in posts | orderBy: '-points' | filter:searchFilter" class="post"></post>
   </div>
 </div>

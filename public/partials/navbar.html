@@ -4,7 +4,9 @@
   </div>
 </div>
 <div class="navIconContainer">
-  <i class="material-icons navIcon" ng-click="">class</i>
+  <a ui-sref="theboard">
+    <i class="material-icons navIcon" ng-click="">class</i>
+  </a>
 </div>
 <div class="navIconContainer">
   <i class="material-icons navIcon" ng-click="locationFeature.toggleShowChangeLoc()">control_point</i>
@@ -21,7 +23,7 @@
 <i class="material-icons menuArrow" ng-click="profile.toggle();profile.getUser(user.id);friends.getFriends(user.id)" ng-show="!!user">arrow_drop_down</i>
 <div class="user-signedin" ng-show="!!user" ng-click="profile.toggle();profile.getUser(user.id);friends.getFriends(user.id)">{{user.username || profile}}</div>
 
-<form class="sign" ng-submit="submitSignIn()"  name="signform" ng-show="signin.show" ng-if='!user'>
+<form class="signin" ng-submit="submitSignIn()"  name="signform" ng-show="signin.show" ng-if='!user'>
   <input ng-model="sign.email" type="text" placeholder="Enter Username or Email" required>
   <input ng-model="sign.password" type="password" placeholder="Password"  required>
   <button type="submit">Submit</button>

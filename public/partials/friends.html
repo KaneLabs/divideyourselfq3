@@ -1,5 +1,8 @@
 <div class="friends">
   <hr>
+  <div ng-show="friends.friendsList.length === 0">
+    <h4 style="text-align: center;">Get some friends!</h4>
+  </div>
   <div class="friend" ng-repeat="friend in friends.friendsList">
     <img ng-src="{{ friend.profile_url }}" alt="">
     <h4 ng-click="profile.toggle();profile.toggleProfile(friend.friend_id);profile.getUser(friend.friend_id);friends.isFriend(friend.friend_id)" class="pointer">{{ friend.friend_firstname }}</h4>

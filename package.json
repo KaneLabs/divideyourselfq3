@@ -16,6 +16,7 @@
     "jsonwebtoken": "^7.1.6",
     "knex": "^0.11.9",
     "morgan": "~1.6.1",
+    "ng-masonry": "^1.0.3",
     "pg": "^6.0.3",
     "serve-favicon": "~2.3.0",
     "ws": "^1.1.1"
