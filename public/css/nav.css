@@ -38,43 +38,7 @@ navbar input {
 .user-signedin:hover {
   cursor: pointer;
 }
-<<<<<<< HEAD
 
-.sign {
-  /*float: right;
-  font-size: 0;
-  max-height: 40px;
-  overflow: hidden;
-  width: 200px;*/
-}
-
-
-/*.clear-sign {
-  color: white;
-  float: right;
-  vertical-align: top;
-}
-
-.sign .nav-link {
-  border-left: 1px solid white;
-  overflow: hidden;
-  padding: 12px;
-  text-align: center;
-  transition: .2s all;
-  width: 50%;
-}
-.sign .nav-link.hide {
-  border: 0;
-  padding: 10px 0px;
-  width: 0px;
-}*/
-
-=======
-.sign.open {
-  margin-top: 2px;
-  max-height: 200px;
-}
->>>>>>> 26e0de144c32da18c66034d45e2485b866e97d97
 .sign input, .sign button, .sign div {
   box-sizing: border-box;
   font-size: 14px;
@@ -302,12 +266,12 @@ box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   float: left;
   padding: 10px;
 }
-.subnavSort span:hover {
+/*.subnavSort span:hover {
   cursor: pointer;
   color: lightgrey;
   border-bottom: 2px solid white;
   opacity: .85;
-}
+}*/
 .subnavIcon {
     float: right;
 }
