@@ -141,16 +141,31 @@ app.factory('TribeService', $http => {
   return {
     getAll: () => {
       $http.get('/tribes').then( (data) => {
+        //Display stuff
         console.log(data);
       })
     },
 
     getMine: () => {
-      //Get my tribe info/users
+      $http.get('/tribes/' + $scope.user.tribe_id).then( (data) => {
+        console.log(data);
+      });
     },
 
-    joinTribe: (name) => {
-      //Join tribe by name
-    })
+    join: (id) => {
+      //Join tribe by id
+      $http.get(`/tribes/join/${id}`)
+    },
+
+    leave: () => {
+      //Leave my tribe
+      $http.get('/tribes/leave/' + $scope.user.tribe_id);
+      $scope.user.tribe_id = null;
+    },
+
+    delete: () => {
+      // Optional config argument goes after URL
+      $http.delete('/tribes/delete' + $scope.user.tribe_id);
+    }
   }
 })
