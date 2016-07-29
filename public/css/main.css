@@ -180,7 +180,6 @@ main {
   transition: .2s all;
   opacity: 0;
 }
-
 .post-image.open {
   margin: 0 auto;
   position: relative;
@@ -202,7 +201,6 @@ main {
 .post-title, .post-username, .post-usertribe {
   font-weight: 500;
 }
-
 .post-actions {
   float: left;
   clear: both;
@@ -217,7 +215,6 @@ main {
 .post-delete {
   padding: 5px;
 }
-
 .post-content {
   clear: both;
   padding: 10px 10px 30px 10px;
@@ -273,15 +270,15 @@ main {
 }
 .post-preview {
   box-shadow: 0px 0px 20px 3px rgba(0,0,0,.5);
-  width: 48%;
+  width: 46%;
   text-align: center;
   display: flex;
   flex-flow: column;
   justify-content: center;
   align-items: center;
   border-radius: 5px;
+  padding: 2px;
 }
-
 .post-preview img {
   margin-top: 0;
   width: 100%;
