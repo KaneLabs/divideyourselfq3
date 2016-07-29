@@ -1,6 +1,12 @@
 <div>
   <input type="text" placeholder="Search Posts" ng-show="searchFeature.showSearch === true" ng-model="search"  class="searchbar">
-  <input type="text" placeholder="Change Location" ng-show="locationFeature.showChangeLoc === true"  class="searchbar">
+  <div ng-show="locationFeature.showChangeLoc === true" class="searchbar" ng-submit="">
+    <form ng-submit="locationFeature.goTo();ocationFeature.goTo();">
+      <input ng-model="locationFeature.state" type="text" placeholder="Enter State"   class="location-searchbar-first">
+      <input ng-model="locationFeature.city" type="text" placeholder="Enter Location" class="location-searchbar-last">
+      <button class="location-submit" type="submit" >Go!</button>
+    </form>
+  </div>
 </div>
 
 <div class="subnavBar" ng-show="subnav.show">

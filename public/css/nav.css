@@ -109,6 +109,56 @@ navbar input {
   outline: none;
 }
 
+
+.location-searchbar-first {
+  height: 40px;
+  background-color: #303030;
+  position: fixed;
+  top: 42px;
+  left: 0;
+  width: 100px;
+  z-index: 4;
+  /*transition: all 0.3s cubic-bezier(.25,.8,.25,1);*/
+}
+.location-searchbar-last {
+  height: 40px;
+  background-color: #303030;
+  position: fixed;
+  top: 42px;
+  left: 100px;
+  width: 100px;
+  z-index: 4;
+  /*transition: all 0.3s cubic-bezier(.25,.8,.25,1);*/
+}
+.location-searchbar:focus, .location-searchbar-first:focus, .location-searchbar-last:focus{
+  outline: none;
+}
+
+.location-submit{
+    color: white;
+    opacity: .85;
+    background-color: #525252;
+    position: fixed;
+    right: 6px;
+    top: 46px;
+    height: 30px;
+    width: 100px;
+    z-index: 4;
+    border: none;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    /*padding-left: 10px;*/
+}
+.location-submit:hover{
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+.location-submit:focus{
+  outline: 1px solid #212121;
+  opacity: .85;
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+
 subnav input {
   box-sizing: border-box;
   border: 0;
