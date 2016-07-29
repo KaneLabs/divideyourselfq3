@@ -69,6 +69,50 @@ exports.seed = function(knex, Promise) {
           type: 'board',
           timestamp: 1469412343124,
           points: 1
+        }),
+        knex('posts').insert({
+          user_id: 4,
+          title: 'Everest Basecamp',
+          body: 'Morning Helicopter Flight',
+          media_url: 'http://peterrichardsphotography.com/wp-content/uploads/2015/09/Peter_Richards_50images__491.jpg',
+          lat: 28.0072,
+          lng: 86.8594,
+          type: 'board',
+          timestamp: Date.now() - 123972,
+          points: 40
+        }),
+        knex('posts').insert({
+          user_id: 4,
+          title: 'Summit at Jackson Hole',
+          body: 'More fun than a cable-car',
+          media_url: 'http://peterrichardsphotography.com/wp-content/uploads/2015/09/Peter_Richards_50images__361.jpg',
+          lat: 43.597467,
+          lng: -110.868530,
+          type: 'board',
+          timestamp: Date.now() - 43829,
+          points: 26
+        }),
+        knex('posts').insert({
+          user_id: 4,
+          title: 'Break time',
+          body: 'Trying to stay in the shade',
+          media_url: 'http://peterrichardsphotography.com/wp-content/uploads/2015/09/Peter_Richards_50images__18.jpg',
+          lat: -7.132851,
+          lng: 35.855008,
+          type: 'board',
+          timestamp: Date.now() - 39204,
+          points: 33
+        }),
+        knex('posts').insert({
+          user_id: 4,
+          title: 'Northern Lights',
+          body: 'Worth the trip',
+          media_url: 'http://peterrichardsphotography.com/wp-content/uploads/2015/09/Peter_Richards_50images__20.jpg',
+          lat: 64.143788,
+          lng: -16.465073,
+          type: 'board',
+          timestamp: Date.now() - 28392,
+          points: 4
         })
       ]);
     });
