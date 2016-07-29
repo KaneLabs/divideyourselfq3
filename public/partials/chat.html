@@ -1,4 +1,4 @@
-<div class="chat-dude" ng-repeat="convo in messages">
+<div class="chat-dude" ng-repeat="convo in messages | filter:{live: true}">
   <div class="chat-messages" ng-show="convo.isOpen">
     <div class="chat-message" ng-repeat="message in convo.log">
       <div class="message-from">{{message.fromUser}}</div>
