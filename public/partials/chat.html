@@ -5,8 +5,8 @@
       <div class="message-timestamp">{{message.timestamp | date:'mediumTime'}}</div>
       <div class="message-message">{{message.message}}</div>
     </div>
-    <form class="chat-form" ng-submit="chat.send(convo.username, convo.input)">
-      <input class="chat-input" ng-model="convo.input" required>
+    <form class="chat-form" ng-submit="chat.send(convo)">
+      <input class="chat-input" ng-model="convo.input" placeholder="Type a message..." required>
       <button class="chat-submit" type="submit"></button>
     </form>
   </div>
