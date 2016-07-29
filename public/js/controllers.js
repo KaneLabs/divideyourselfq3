@@ -3,7 +3,7 @@ var Magic = (number, callback) => {
   return data => {
     argumentArray.push(data);
     if(argumentArray.length === number) return callback(argumentArray);
-  }
+  };
 };
 
 function HomeController($scope, $state, $http, MapService){
@@ -12,7 +12,14 @@ function HomeController($scope, $state, $http, MapService){
   MapService.setCenterHome();
   MapService.getPosts($scope, $state);
   mapConfig.onidle = () => MapService.getPosts($scope, $state);
-}
+  $scope.searchFilter = (input) => {
+    return Object.keys(input).map(key => input[key]).reduce((check, e) => {
+      if(check) return check;
+      if(typeof e === "string" && e.toLowerCase().indexOf($scope.$parent.search.toLowerCase()) > -1) return true;
+      return false;
+    }, false);
+  };
+};
 
 function LocationController($scope, $state, $stateParams, $http, MapService){
   $scope.$parent.showPosts = false;
@@ -25,7 +32,7 @@ function LocationController($scope, $state, $stateParams, $http, MapService){
   MapService.setCenterLocation([$stateParams.state, $stateParams.city]);
   MapService.getPosts($scope, $state);
   mapConfig.onidle = () => MapService.getPosts($scope, $state);
-}
+};
 
 function deletePost($scope, $state, $http, MapService, post){
   post.marker.setMap(null);
@@ -34,7 +41,7 @@ function deletePost($scope, $state, $http, MapService, post){
     if(data.success) $scope.posts = $scope.posts.filter(e => e.id !== post.id);
     MapService.getPosts($scope, $state);
   });
-}
+};
 
 function PostPageController($scope, $state, $stateParams, MapService){
   $scope.linkBuilder = linkBuilder;
@@ -44,13 +51,13 @@ function PostPageController($scope, $state, $stateParams, MapService){
   MapService.setCenterPost([$stateParams.state, $stateParams.city]);
   MapService.getPosts($scope, $state, $stateParams.post);
   mapConfig.onidle = () => MapService.getPosts($scope, $state, $stateParams.post);
-}
+};
 
 function linkBuilder(post, backCheck){
   if(!post) return;
   if(backCheck) return {state: post.lat, city: post.lng};
   return {state: post.lat, city: post.lng, post: post.id};
-}
+};
 
 app.controller("BodyController", makeBodyController);
 function makeBodyController($scope, UsersService, apiInterceptor, NewCommentService, NewPostService, $http, ChatService, TribeService){
@@ -91,7 +98,7 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   function mapClick(e){
     $scope.toggleNewPost(e);
     $scope.$apply();
-  }
+  };
 
   if(map) map.addListener("click", mapClick);
   else mapConfig.onclick = mapClick;
@@ -113,8 +120,8 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
       $scope.friends.showFriends = false;
     }else {
       $scope.subnav.show = true;
-    }
-  }
+    };
+  };
 
   $scope.profile.toggleProfile = (id) => {
     if ($scope.profile.isActiveUser(id) && $scope.profile.profileView === "activeUser") {
@@ -152,7 +159,7 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
           lng: data.data[i].lng,
           media_url: data.data[i].media_url.split(','),
           points: data.data[i].points
-        })
+        });
       };
       if (isActive) {
         $scope.profile.activeUser.posts = userPosts;
@@ -288,9 +295,8 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
       $scope.friends.friendsList.splice($scope.friends.friendsList.indexOf(data.data[0]), 1)
       $scope.profile.toggleProfile(id);
       console.log($scope.friends.friendsList.indexOf(data.data[0]));
-
-    })
-  }
+    });
+  };
 
   $scope.friends.showFriends = false;
   $scope.friends.toggleShowFriends = () => {
@@ -305,10 +311,11 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
         }
       }
       return false;
-    }
+    };
   };
 
   $scope.tribe = TribeService;
+  $scope.search = '';
 
 };
 makeBodyController.$inject = ['$scope','UsersService', 'apiInterceptor', 'NewCommentService', "NewPostService","$http", "ChatService", 'TribeService'];
