@@ -112,7 +112,7 @@ app.factory("MapService", $http => {
         if(map) map.panTo(mapConfig.center);
       }
       else {
-        $http.get(`http://maps.googleapis.com/maps/api/geocode/json?address=${loc[2]},${loc[1]}`).then(data => {
+        $http.get(`http://maps.googleapis.com/maps/api/geocode/json?address=${loc[1]},${loc[0]}`).then(data => {
           if(data.data.results[0]) mapConfig.center = data.data.results[0].geometry.location;
           if(map) map.panTo(mapConfig.center);
         });

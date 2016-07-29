@@ -38,10 +38,7 @@ navbar input {
 .user-signedin:hover {
   cursor: pointer;
 }
-.sign.open {
-  margin-top: 2px;
-  max-height: 200px;
-}
+
 .sign input, .sign button, .sign div {
   box-sizing: border-box;
   font-size: 14px;
@@ -75,6 +72,56 @@ navbar input {
 .searchbar:focus {
   outline: none;
 }
+
+
+.location-searchbar-first {
+  height: 40px;
+  background-color: #303030;
+  position: fixed;
+  top: 42px;
+  left: 0;
+  width: 100px;
+  z-index: 4;
+  /*transition: all 0.3s cubic-bezier(.25,.8,.25,1);*/
+}
+.location-searchbar-last {
+  height: 40px;
+  background-color: #303030;
+  position: fixed;
+  top: 42px;
+  left: 100px;
+  width: 100px;
+  z-index: 4;
+  /*transition: all 0.3s cubic-bezier(.25,.8,.25,1);*/
+}
+.location-searchbar:focus, .location-searchbar-first:focus, .location-searchbar-last:focus{
+  outline: none;
+}
+
+.location-submit{
+    color: white;
+    opacity: .85;
+    background-color: #525252;
+    position: fixed;
+    right: 6px;
+    top: 46px;
+    height: 30px;
+    width: 100px;
+    z-index: 4;
+    border: none;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    /*padding-left: 10px;*/
+}
+.location-submit:hover{
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+.location-submit:focus{
+  outline: 1px solid #212121;
+  opacity: .85;
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
 
 subnav input {
   box-sizing: border-box;
@@ -212,6 +259,30 @@ box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   border-bottom: 2px solid white;
 }
 
+.subnavSort {
+  color: white;
+  vertical-align: top;
+  opacity: .85;
+  float: left;
+  padding: 10px;
+}
+/*.subnavSort span:hover {
+  cursor: pointer;
+  color: lightgrey;
+  border-bottom: 2px solid white;
+  opacity: .85;
+}*/
+.subnavIcon {
+    float: right;
+}
+.addPostIcon {
+  box-sizing: border-box;
+  display: inline-block;
+  color: white;
+  vertical-align: top;
+  opacity: .85;
+}
+
 .sidenav{
   position: absolute;
   right: 0;
@@ -261,15 +332,34 @@ hr {
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
+
 @media(max-width: 440px){
   .sidenav{
     width: 100%;
   }
+  .signin{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .signin *{
+    width: 100%;
+    display: block;
+  }
 }
 
-@media(min-width: 420px){
+@media(min-width: 441px){
   .sidenav{
     width: 140px;
+  }
+  .signin{
+    width: 440px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .signin *{
+    width: 100%;
+    display: block;
   }
 }
 .menuArrow {

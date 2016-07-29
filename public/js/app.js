@@ -17,8 +17,12 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $http
       url: "/:state/:city/:post",
       templateUrl: "partials/postPage.html",
       controller: PostPageController
-    });
-
+    })
+    .state("theboard", {
+      url: "/theboard",
+      templateUrl: "partials/theboard.html",
+      controller: BoardController
+    })
   $httpProvider.interceptors.push('apiInterceptor');
   $locationProvider.html5Mode(true);
 });
