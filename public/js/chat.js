@@ -39,15 +39,16 @@ app.factory("ChatService", () => $scope => {
   };
 
   var service = {
-    send: (toUser, message) => {
-      var conversation = $scope.messages.find(e => e.username === toUser),
+    send: convo => {
+      var toUser = convo.username,
+        message = convo.input,
+        conversation = $scope.messages.find(e => e.username === toUser),
         fromUser = $scope.user.username,
-        // message = $scope.messageInputs[toUser],
         timestamp = Date.now();
       if(!conversation || !conversation.live) return console.log(`User '${toUser}' is offline`);
       conversation.log.push({fromUser, message, timestamp});
       chat.send(JSON.stringify({toUser, fromUser, message, timestamp}));
-      $scope.$apply();
+      convo.input = "";
     }
   };
   x = service;
