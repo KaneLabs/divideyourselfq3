@@ -43,7 +43,6 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   if(localStorage.userToken) $scope.user = jwt_decode(localStorage.userToken).user;
 
   $scope.chat = ChatService($scope);
-
   $scope.commServ = NewCommentService($scope);
   $scope.postServ = NewPostService($scope);
   $scope.newPost = {};
@@ -262,7 +261,7 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   $scope.friends.toggleShowFriends = () => {
     $scope.friends.showFriends = !$scope.friends.showFriends;
   };
-  
+
   $scope.tribe = TribeService;
 
 };

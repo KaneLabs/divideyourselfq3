@@ -1,13 +1,15 @@
 var x;
 
 app.factory("ChatService", () => $scope => {
-  var chat = new WebSocket(`ws://${window.location.hostname}:3000`);
+  var host = location.origin.replace(/^http/, 'ws'),
+    chat = new WebSocket(host);
 
   $scope.messages = localStorage.messages ? JSON.parse(localStorage.messages) : [];
 
   chat.onmessage = e => {
     var data = JSON.parse(e.data),
       sender = $scope.messages.find(e => e.username === data.fromUser);
+    console.log(e.data);
     if(data.connect) return console.log(data.message);
     console.log(data);
     if(data.fromUser && !sender){
