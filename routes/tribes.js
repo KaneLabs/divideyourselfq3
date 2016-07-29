@@ -12,7 +12,13 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
+  var token = jwt.decode(req.headers.authorization.split(' ')[1], process.env.SECRET);
   // Get my all users in my tribe
+  knex('tribes')
+  .where('id', token.user.tribe_id)
+  .then( (data) => {
+    console.log(data);
+  })
 });
 
 router.get('/join/:id', (req, res) => {
