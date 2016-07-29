@@ -9,6 +9,7 @@ app.factory("ChatService", () => $scope => {
   chat.onmessage = e => {
     var data = JSON.parse(e.data),
       sender = $scope.messages.find(e => e.username === data.fromUser);
+    console.log(e.data);
     if(data.connect) return console.log(data.message);
     console.log(data);
     if(data.fromUser && !sender){

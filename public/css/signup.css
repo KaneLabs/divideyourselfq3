@@ -1,10 +1,17 @@
 .newProfile {
+  transition: .2s all;
   font-size: 0;
   position: fixed;
   top: 200px;
   width: 100%;
   z-index: 2;
+  opacity: 0;
 }
+
+.showSignup .newProfile {
+  opacity: 1;
+}
+
 .newProfile form {
   margin: 0 auto;
   pointer-events: auto;
