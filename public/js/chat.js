@@ -1,7 +1,8 @@
 var x;
 
 app.factory("ChatService", () => $scope => {
-  var chat = new WebSocket(`ws://${window.location.hostname}:3000`);
+  var port = window.location.hostname === "localhost" ? "3000" : "80",
+    chat = new WebSocket(`ws://${window.location.hostname}:${port}`);
 
   $scope.messages = localStorage.messages ? JSON.parse(localStorage.messages) : [];
 
