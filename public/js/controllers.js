@@ -128,6 +128,7 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
     };
   };
   $scope.profile.getUser = (id) => {
+    console.log("GET USER ID: ", id);
     if ($scope.profile.isActiveUser(id)) {
       $scope.profile.activeUser = $scope.user;
       $scope.profile.activeUser.posts = $scope.profile.getUserPosts(id,$scope.profile.isActiveUser(id));
@@ -282,7 +283,8 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   $scope.friends.addFriend = (id) => {
     $scope.friends.getFriends($scope.user.id)
     $http.post(`/friends/${id}`).then( data => {
-      $scope.friends.friendsList.push(data.data[0])
+      console.log(data);
+      $scope.friends.friendsList.push(data.data)
     });
   };
 
@@ -299,15 +301,22 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   $scope.friends.toggleShowFriends = () => {
     $scope.friends.showFriends = !$scope.friends.showFriends;
   };
-
+  $scope.isFriend = false;
   $scope.friends.isFriend = (id) => {
-    if ($scope.friends.friendsList) {
-      for (var i = 0; i < $scope.friends.friendsList.length; i++) {
-        if ($scope.friends.friendsList[i].friend_id) {
-          return true
+    $scope.friends.getFriends($scope.user.id)
+    console.log($scope.friends.friendsList);
+    if ($scope.friends.friendsList){
+      var list = $scope.friends.friendsList;
+      console.log(list);
+      for (var i = 0; i < list.length; i++) {
+        if (list[i].friend_id === id) {
+          console.log("Found him");
+          $scope.isFriend = true;
+          return
+        } else {
+          $scope.isFriend = false;
         }
       }
-      return false;
     }
   };
 

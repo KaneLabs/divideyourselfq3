@@ -42,9 +42,9 @@ router.post('/:id', (req, res) => {
           profile_url: user.user.profile_url
         })
         .returning('*')
-        .then( data => {
-          // console.log(data);
-          res.send(data[0]);
+        .then( result => {
+          console.log(data);
+          res.send(data);
         });
     });
   });
