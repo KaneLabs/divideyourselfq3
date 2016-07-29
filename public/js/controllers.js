@@ -11,6 +11,9 @@ function LocationController($scope, $state, $stateParams, $http, MapService){
   $scope.togglePosts = $scope.$parent.togglePosts;
   $scope.linkBuilder = linkBuilder;
   $scope.deletePost = post => deletePost($scope, $state, $http, MapService, post);
+  MapService.getLocation(() => {
+    if(magicCenter) magicCenter();
+  });
   MapService.setCenterLocation([$stateParams.state, $stateParams.city]);
   MapService.getPosts($scope, $state);
   mapConfig.onidle = () => MapService.getPosts($scope, $state);
@@ -27,6 +30,9 @@ function deletePost($scope, $state, $http, MapService, post){
 
 function PostPageController($scope, $state, $stateParams, MapService){
   $scope.linkBuilder = linkBuilder;
+  MapService.getLocation(() => {
+    if(magicCenter) magicCenter();
+  });
   MapService.setCenterPost([$stateParams.state, $stateParams.city]);
   MapService.getPosts($scope, $state, $stateParams.post);
   mapConfig.onidle = () => MapService.getPosts($scope, $state, $stateParams.post);

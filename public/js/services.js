@@ -79,6 +79,17 @@ app.factory("NewCommentService", $http => $scope => ({
 
 app.factory("MapService", $http => {
   return {
+    getLocation: cb => {
+      var isStored = localStorage.center && parseInt(localStorage.centerttl) > Date.now();
+      if(isStored) return cb(JSON.parse(localStorage.center));
+      navigator.geolocation.getCurrentPosition(data => {
+        if(!data.coords) return;
+        var loc = {lat: data.coords.latitude, lng: data.coords.longitude};
+        localStorage.center = JSON.stringify(loc);
+        localStorage.centerttl = Date.now() + (1000 * 60 * 15);
+        cb(loc);
+      });
+    },
     setCenterHome: () => {
       var isStored = localStorage.center && parseInt(localStorage.centerttl) > Date.now();
       if(isStored) mapConfig.center = JSON.parse(localStorage.center);
@@ -89,14 +100,15 @@ app.factory("MapService", $http => {
           if(map) map.panTo(mapConfig.center);
           localStorage.center = JSON.stringify(mapConfig.center);
           localStorage.centerttl = Date.now() + (1000 * 60 * 15);
+          if(magicCenter) magicCenter();
         });
       }
       if(map) map.panTo(mapConfig.center);
     },
-    setCenterLocation: () => {
-      var loc = window.location.pathname.split("/");
-      if(parseFloat(loc[1])){
-        mapConfig.center = {lat: parseFloat(loc[1]), lng: parseFloat(loc[2])};
+    setCenterLocation: loc => {
+      if(!loc) loc = window.location.pathname.split("/").slice(1);
+      if(parseFloat(loc[0])){
+        mapConfig.center = {lat: parseFloat(loc[0]), lng: parseFloat(loc[1])};
         if(map) map.panTo(mapConfig.center);
       }
       else {
