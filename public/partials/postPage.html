@@ -28,7 +28,7 @@
         </div>
         <div class="post-content">{{soloPost.body}}</div>
         <div class="post-comments-toggle" ng-click="soloPost.commentsClosed = !soloPost.commentsClosed">
-          {{soloPost.commentsClosed ? 'Hide' : 'Show'}} {{soloPost.comments.length}} Comment{{soloPost.comments.length === 1 ? '' : 's'}}
+          {{soloPost.commentsClosed ? 'Show' : 'Hide'}} {{soloPost.comments.length}} Comment{{soloPost.comments.length === 1 ? '' : 's'}}
         </div>
         <div class="post-comments" ng-show="!soloPost.commentsClosed">
           <form class="newComment" ng-show="!!user" ng-submit="commServ.create(soloPost)">
