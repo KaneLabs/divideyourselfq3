@@ -293,6 +293,7 @@ main {
   height: 20px;
   border-radius: 10px;
   border: none;
+  /*z-index: 3;*/
   position: absolute;
   right: 0;
   top: 0;
