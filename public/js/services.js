@@ -122,6 +122,7 @@ app.factory("MapService", $http => {
         $scope.posts = data.data.posts.map(post => {
           if(post_id && post.id !== post_id) return;
           post.marker = new google.maps.Marker({
+            icon: "mapicons/view.png",
             position: {lat: parseFloat(post.lat), lng: parseFloat(post.lng)},
             map: map,
             title: post.title
