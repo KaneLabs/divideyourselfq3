@@ -32,6 +32,29 @@ function PostPageController($scope, $state, $stateParams, MapService){
   mapConfig.onidle = () => MapService.getPosts($scope, $state, $stateParams.post);
 }
 
+function BoardController($scope, $state, $http) {
+  $scope.view = {};
+  $scope.view.msg = 'hello';
+  $scope.view.boardPosts = [];
+
+  $http.get("/theboard/posts").then(data => {
+    console.log(data.data);
+    for (var i = 0; i < data.data.length; i++) {
+      $scope.view.boardPosts.push({
+        id: data.data[i].id,
+        title: data.data[i].title,
+        body: data.data[i].body,
+        type: data.data[i].type,
+        timestamp: data.data[i].timestamp,
+        lat: data.data[i].lat,
+        lng: data.data[i].lng,
+        media_url: data.data[i].media_url.split(','),
+        points: data.data[i].points
+      })
+    }
+  })
+}
+
 function linkBuilder(post, backCheck){
   if(!post) return;
   if(backCheck) return {state: post.lat, city: post.lng};
@@ -173,11 +196,13 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
     $scope.profile.showProfile = false;
     $scope.user = null;
     localStorage.removeItem("userToken");
+    $scope.subnav.show = false;
   };
 
   function updateUserStatus(data){
     localStorage.userToken = data.token;
     $scope.user = data.user;
+    $scope.subnav.show = true;
   };
 
   $scope.getProfile = (id) => {
