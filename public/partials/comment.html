@@ -7,7 +7,7 @@
       <span class="material-icons" ng-click="downvote(comment.id, 'comments', comment)">keyboard_arrow_down</span>
     </div>
   </div>
-  <div class="comment-username" ng-click="profile.toggleProfile(comment.user_id);profile.getUser(comment.user_id)">{{comment.username}}</div>
+  <div class="comment-username pointer" ng-click="profile.toggleProfile(comment.user_id);profile.getUser(comment.user_id)">{{comment.username}}</div>
   <div class="comment-timestamp">{{comment.timestamp | dateFilter}}</div>
 </div>
 <div class="comment-comment">{{comment.comment}}</div>
