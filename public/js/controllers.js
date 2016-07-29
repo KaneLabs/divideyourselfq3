@@ -1,3 +1,11 @@
+var Magic = (number, callback) => {
+  var argumentArray = [];
+  return data => {
+    argumentArray.push(data);
+    if(argumentArray.length === number) return callback(argumentArray);
+  }
+};
+
 function HomeController($scope, $state, $http, MapService){
   $scope.linkBuilder = linkBuilder;
   $scope.deletePost = post => deletePost($scope, $state, $http, MapService, post);
@@ -48,7 +56,12 @@ app.controller("BodyController", makeBodyController);
 function makeBodyController($scope, UsersService, apiInterceptor, NewCommentService, NewPostService, $http, ChatService, TribeService){
   if(localStorage.userToken) $scope.user = jwt_decode(localStorage.userToken).user;
 
-  $scope.chat = ChatService($scope);
+  var chatMagic = Magic(1, () => {
+    $scope.chat = ChatService($scope);
+  });
+
+  if($scope.user) chatMagic();
+
   $scope.commServ = NewCommentService($scope);
   $scope.postServ = NewPostService($scope);
   $scope.newPost = {};
@@ -182,6 +195,7 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   function updateUserStatus(data){
     localStorage.userToken = data.token;
     $scope.user = data.user;
+    chatMagic();
   };
 
   $scope.getProfile = (id) => {
