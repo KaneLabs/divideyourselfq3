@@ -105,7 +105,7 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
       $scope.profile.profileView = null;
     } else {
       $scope.profile.profileView = "profileUser";
-    }
+    };
   };
   $scope.profile.getUser = (id) => {
     if ($scope.profile.isActiveUser(id)) {
@@ -179,6 +179,7 @@ function makeBodyController($scope, UsersService, apiInterceptor, NewCommentServ
   };
 
   $scope.getProfile = (id) => {
+    console.log("getProfile(id): ", id);
     UsersService.get(id);
   };
 

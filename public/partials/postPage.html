@@ -15,7 +15,7 @@
         <div class="post-heading">
           <a ui-sref="post(linkBuilder(soloPost))" class="post-title">{{soloPost.title}}</a>
           <div class="separator">by</div>
-          <div class="post-username">{{soloPost.username}}</div>
+          <div class="post-username" ng-click="profile.toggleProfile(soloPost.user_id);profile.getUser(soloPost.user_id)">{{soloPost.username}}</div>
           <div class="separator" ng-show="soloPost.usertribe">of</div>
           <div class="post-usertribe" ng-show="soloPost.usertribe">{{soloPost.usertribe}}</div>
         </div>
